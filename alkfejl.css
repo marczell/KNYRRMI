@@ -1,0 +1,13 @@
+.buttonbase {
+	-fx-text-alignment:center; -fx-font-family:verdana; -fx-background-color:tan; -fx-font-size:14px; -fx-border-color:sienna; -fx-border-style:solid; -fx-border-width:2px;
+	}
+.region {
+    -fx-background-color:rgb(245,235,240); -fx-border-color:mediumslateblue; -fx-border-style:solid; -fx-border-width:3px;
+}
+.textinputcontrol {
+	-fx-font-family:verdana; -fx-font-size:14px;
+}
+
+.shape{
+	-fx-stroke:mediumslateblue; -fx-stroke-width:2px;
+}

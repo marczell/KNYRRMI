@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.Erteklista_modController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Kilépés">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Bezárás" />
+            <MenuItem mnemonicParsing="false" text="Kijelentkezés" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onScrollFinished="#listaKivalasztasAction" prefHeight="600.0" prefWidth="800.0" styleClass="region" stylesheets="@../alkfejl.css" VBox.vgrow="ALWAYS">
+      <children>
+            <Label layoutX="23.0" layoutY="14.0" prefHeight="48.0" prefWidth="164.0" text="KNYR RENDSZER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="CtrlErtekTorles" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="508.0" mnemonicParsing="false" onAction="#ertekTorlesAction" prefHeight="30.0" prefWidth="120.0" styleClass="buttonbase" stylesheets="@../alkfejl.css" text="Inaktiválás" textAlignment="CENTER" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="450.0">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="176.0" layoutY="28.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="ÉRTÉKLISTÁK MÓDOSÍTÁSA" AnchorPane.topAnchor="28.0" />
+            <Label layoutX="72.0" layoutY="134.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="Új elem rögzítése" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0" />
+            <Label layoutX="72.0" layoutY="184.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="Értéklista" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="150.0" />
+            <Label layoutX="367.0" layoutY="184.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="Új elem" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="150.0" />
+            <TextField fx:id="UjErtek" layoutX="527.0" layoutY="180.0" prefWidth="200.0" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="145.0" />
+            <Label layoutX="88.0" layoutY="428.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="Kapcsolattartó adatai" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="310.0" />
+            <Label layoutX="92.0" layoutY="463.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="Értéklista" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="350.0" />
+            <Label layoutX="392.0" layoutY="465.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="Inaktiválandó elem" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="350.0" />
+            <Line endX="650.0" layoutX="51.0" layoutY="152.0" startX="-50.0" strokeWidth="2.0" styleClass="shape" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" />
+            <Line endX="650.0" layoutX="92.0" layoutY="447.0" startX="-50.0" styleClass="shape" AnchorPane.topAnchor="300.0" />
+            <Button fx:id="CtrlErteklistaVissza" alignment="CENTER" contentDisplay="CENTER" layoutX="452.0" layoutY="522.0" mnemonicParsing="false" onAction="#visszaAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" stylesheets="@../alkfejl.css" text="Vissza" textAlignment="CENTER" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="CtrlUjErtekMentes" alignment="CENTER" contentDisplay="CENTER" layoutX="685.0" layoutY="250.0" mnemonicParsing="false" onAction="#ujErtekMentes" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" stylesheets="@../alkfejl.css" text="Mentés" textAlignment="CENTER" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="220.0">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
+            <ChoiceBox fx:id="ErtekLista1" layoutX="173.0" layoutY="149.0" prefWidth="200.0" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="145.0" />
+            <ChoiceBox fx:id="ErtekLista2" layoutX="231.0" layoutY="347.0" onMouseClicked="#listaKivalasztasAction" onMouseReleased="#listaKivalasztasAction" onScrollFinished="#listaKivalasztasAction" prefWidth="200.0" AnchorPane.leftAnchor="161.0" AnchorPane.topAnchor="345.0" />
+            <ChoiceBox fx:id="OsszesErtek" layoutX="172.0" layoutY="356.0" prefWidth="200.0" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="345.0" />
+            <Line endX="650.0" layoutX="102.0" layoutY="312.0" startX="-50.0" styleClass="shape" AnchorPane.topAnchor="530.0" />
+            <Label layoutX="595.0" layoutY="65.0" styleClass="textinputcontrol" stylesheets="@alkfejl.css" />
+            <Label fx:id="uzenet" layoutX="326.0" layoutY="65.0" styleClass="textinputcontrol" stylesheets="@alkfejl.css" />
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@BasicApplication.css" />
+  </stylesheets>
+</VBox>

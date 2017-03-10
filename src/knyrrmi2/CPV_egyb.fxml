@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.CPV_egybController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Kilépés">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Bezárás" />
+            <MenuItem mnemonicParsing="false" text="Kijelentkezés" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="region" stylesheets="@../../alkfejl.css" VBox.vgrow="ALWAYS">
+      <children>
+            <Label layoutX="23.0" layoutY="14.0" prefHeight="48.0" prefWidth="164.0" text="KNYR RENDSZER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="CtrlCpvEgybe" alignment="CENTER" contentDisplay="CENTER" layoutX="581.0" layoutY="54.0" mnemonicParsing="false" onAction="#lekerdezesAction" prefHeight="30.0" prefWidth="140.0" styleClass="buttonbase" stylesheets="@../alkfejl.css" text="Egybeszámítás" textAlignment="CENTER" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="176.0" layoutY="28.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="CPV EGYBESZÁMÍTÁS" />
+            <Label layoutX="72.0" layoutY="401.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="Időszak" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="100.0" />
+            <DatePicker fx:id="CtrlCpvTol" layoutX="232.0" layoutY="406.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="95.0" />
+            <DatePicker fx:id="CtrlCpvIg" layoutX="503.0" layoutY="316.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="95.0" />
+            <Label layoutX="447.0" layoutY="303.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="-tól" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="100.0" />
+            <Label layoutX="698.0" layoutY="300.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="-ig" AnchorPane.leftAnchor="530.0" AnchorPane.topAnchor="100.0" />
+            <TableView fx:id="cpvEgybenTable" layoutX="9.0" layoutY="173.0" prefHeight="389.0" prefWidth="437.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="170.0">
+              <columns>
+                <TableColumn fx:id="cpvEgybNev" prefWidth="209" text="CPV" />
+                <TableColumn fx:id="cpvEgybErtek" prefWidth="225" text="Összeg" />
+              </columns>
+            </TableView>
+            <Button fx:id="CtrlCpvVissza" alignment="CENTER" contentDisplay="CENTER" layoutX="561.0" layoutY="36.0" mnemonicParsing="false" onAction="#visszaAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" stylesheets="@../alkfejl.css" text="Vissza" textAlignment="CENTER" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="hibaLabel" layoutX="130.0" layoutY="131.0" />
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@BasicApplication.css" />
+  </stylesheets>
+</VBox>

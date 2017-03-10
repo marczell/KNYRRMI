@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="region" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.FomenuController">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="1000.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Kilépés">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Bezárás" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label layoutX="23.0" layoutY="14.0" prefHeight="48.0" prefWidth="164.0" text="KNYR RENDSZER" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <styleClass>
+            <String fx:value="textinputcontrol" />
+            <String fx:value="textinputcontrol" />
+         </styleClass>
+      </Label>
+      <Button fx:id="CtrlSzerzfel" alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="122.0" mnemonicParsing="false" onAction="#szerzodoFelRogziteseAction" prefHeight="30.0" prefWidth="240.0" text="Szerződő fél kezelés" textAlignment="CENTER" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="120.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+         <styleClass>
+            <String fx:value="buttonbase" />
+            <String fx:value="buttonbase" />
+         </styleClass>
+      </Button>
+      <Button fx:id="CtrlSzerz" layoutX="75.0" layoutY="203.0" mnemonicParsing="false" onAction="#szerzodesRogziteseAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Szerződés rögzítése" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="220.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="CtrlCpv" layoutX="75.0" layoutY="277.0" mnemonicParsing="false" onAction="#cpvEgybeszamitasAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="CPV egybeszámítás" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="320.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="CtrlProjekt" layoutX="75.0" layoutY="337.0" mnemonicParsing="false" onAction="#projektEgybenszamitasAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Projekt egybeszámítás" textAlignment="CENTER" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="370.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="CtrlKeres" layoutX="75.0" layoutY="397.0" mnemonicParsing="false" onAction="#keresesAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Keresés" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="420.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="CtrlErtek" layoutX="75.0" layoutY="457.0" mnemonicParsing="false" onAction="#erteklistakAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Értéklisták" textAlignment="CENTER" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="470.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+      <TextArea layoutX="356.0" layoutY="126.0" prefHeight="250.0" prefWidth="450.0" styleClass="textinputcontrol" text="Üdvözöljük a Közbeszerzési Szerződésnyilvántartó Rendszerben!&#10;Válasszon a menüpontok közül!" wrapText="true" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="120.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="ctrlKozbesz" layoutX="75.0" layoutY="170.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="240.0" text="Közbeszerzés rögzítése" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="170.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="CtrlSzerzmod" layoutX="75.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Szerződésmódosítás rögzítése" AnchorPane.topAnchor="270.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

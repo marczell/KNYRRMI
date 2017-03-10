@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.SzerzfelrogzitesController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Kilépés">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Bezárás" />
+            <MenuItem mnemonicParsing="false" text="Kijelentkezés" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Label layoutX="23.0" layoutY="14.0" prefHeight="48.0" prefWidth="164.0" text="KNYR RENDSZER" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="176.0" layoutY="28.0" text="SZERZŐDŐ FÉL RÖGZÍTÉSE" />
+            <Label fx:id="uzenet" layoutX="516.0" layoutY="28.0" prefHeight="17.0" prefWidth="194.0" textFill="RED" />
+            <Label layoutX="72.0" layoutY="88.0" text="Szerződő fél" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="70.0" />
+            <TextField fx:id="SzerzFel" layoutX="217.0" layoutY="84.0" prefHeight="25.0" prefWidth="250.0" promptText="Szerződő fél neve" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="65.0" />
+            <Line endX="850.0" layoutX="95.0" layoutY="106.0" startX="-50.0" strokeWidth="2.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="105.0" />
+            <Label layoutX="72.0" layoutY="134.0" text="Székhely" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0" />
+            <Label layoutX="72.0" layoutY="184.0" styleClass="textinputcontrol" text="Város" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="150.0" />
+            <TextField fx:id="Varos" layoutX="143.0" layoutY="180.0" promptText="Város" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="145.0" />
+            <Label layoutX="465.0" layoutY="150.0" text="Irányítószám" AnchorPane.leftAnchor="550.0" />
+            <TextField fx:id="Irszam" layoutX="585.0" layoutY="145.0" promptText="1111" AnchorPane.leftAnchor="710.0" />
+            <Label layoutX="72.0" layoutY="235.0" text="Közterület" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="200.0" />
+            <TextField fx:id="Koterulet" layoutX="186.0" layoutY="231.0" promptText="Köterület neve és jellege" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="195.0" />
+            <Label layoutX="465.0" layoutY="200.0" styleClass="textinputcontrol" text="Házszám" AnchorPane.leftAnchor="550.0" />
+            <TextField fx:id="Hazszam" layoutX="585.0" layoutY="195.0" promptText="Házszám" AnchorPane.leftAnchor="710.0" />
+            <Label layoutX="72.0" layoutY="280.0" styleClass="textinputcontrol" text="Telefonszám" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="250.0" />
+            <TextField fx:id="Telszam" layoutX="165.0" layoutY="276.0" promptText="0614224242" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="245.0" />
+            <Label layoutX="465.0" layoutY="250.0" styleClass="textinputcontrol" text="Fax szám" AnchorPane.leftAnchor="550.0" />
+            <TextField fx:id="Faxszam" layoutX="585.0" layoutY="245.0" promptText="0614224242" AnchorPane.leftAnchor="710.0" />
+            <Label layoutX="81.0" layoutY="327.0" styleClass="textinputcontrol" text="E-mail" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="300.0" />
+            <TextField fx:id="Email" layoutX="170.0" layoutY="332.0" prefWidth="250.0" promptText="valaki@example.hu" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="295.0" />
+            <Label layoutX="85.0" layoutY="376.0" styleClass="textinputcontrol" text="Cégjegyzék-szám" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="350.0" />
+            <TextField fx:id="Cegjszam" layoutX="203.0" layoutY="372.0" promptText="22-22-666666" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="345.0" />
+            <Label layoutX="465.0" layoutY="350.0" styleClass="textinputcontrol" text="Adószám" AnchorPane.leftAnchor="550.0" />
+            <TextField fx:id="Adoszam" layoutX="585.0" layoutY="345.0" promptText="88888888-1-22" AnchorPane.leftAnchor="710.0" />
+            <Line endX="850.0" layoutX="92.0" layoutY="447.0" startX="-50.0" strokeWidth="2.0" styleClass="shape" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="395.0" />
+            <Label layoutX="88.0" layoutY="428.0" styleClass="textinputcontrol" text="Kapcsolattartó adatai" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="400.0" />
+            <Label layoutX="92.0" layoutY="463.0" styleClass="textinputcontrol" text="Kapcsolattartó neve" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="440.0" />
+            <TextField fx:id="Kapcstartnev" layoutX="218.0" layoutY="463.0" promptText="Név" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="435.0" />
+            <Label layoutX="92.0" layoutY="513.0" styleClass="textinputcontrol" text="Kapcsolattartó e-mail" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="490.0" />
+            <TextField fx:id="Kapcstarttelszam" layoutX="665.0" layoutY="435.0" prefWidth="159.0" promptText="06304224242" AnchorPane.leftAnchor="710.0" />
+            <Label layoutX="465.0" layoutY="440.0" styleClass="textinputcontrol" text="Kapcsolattartó telefonszám" AnchorPane.leftAnchor="550.0" />
+            <TextField fx:id="Kapcstartemail" layoutX="312.0" layoutY="512.0" prefWidth="250.0" promptText="valaki@example.hu" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="485.0" />
+            <Button fx:id="CtrlSzerzfelKereses" alignment="CENTER" contentDisplay="CENTER" layoutX="598.0" layoutY="620.0" mnemonicParsing="false" onAction="#mentesAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Keresés" textAlignment="CENTER">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="CtrlSzerzfelMentes" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="508.0" mnemonicParsing="false" onAction="#mentesAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Mentés" textAlignment="CENTER" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="620.0">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="CtrlSzerzfelVissza" alignment="CENTER" contentDisplay="CENTER" layoutX="452.0" layoutY="522.0" mnemonicParsing="false" onAction="#visszaAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Vissza" textAlignment="CENTER" AnchorPane.leftAnchor="840.0" AnchorPane.topAnchor="620.0">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
+            <TableView layoutX="54.0" layoutY="520.0" prefHeight="90.0" prefWidth="886.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn prefWidth="75.0" text="Column X" />
+                  <TableColumn prefWidth="75.0" text="Column X" />
+              </columns>
+            </TableView>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
