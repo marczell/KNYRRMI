@@ -29,8 +29,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="176.0" layoutY="28.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="PROJEKT EGYBESZÁMÍTÁS" AnchorPane.leftAnchor="176.0" AnchorPane.topAnchor="28.0" />
-            <Label fx:id="hibaLabel" layoutX="562.0" layoutY="100.0" />
+            <Label layoutX="176.0" layoutY="30.0" styleClass="textinputcontrol" stylesheets="@../alkfejl.css" text="PROJEKT EGYBESZÁMÍTÁS" AnchorPane.leftAnchor="176.0" AnchorPane.topAnchor="30.0" />
+            <Label fx:id="hibaLabel" layoutX="537.0" layoutY="100.0" prefHeight="17.0" prefWidth="25.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="40.0" />
             <Button fx:id="CtrlPrEgybe" alignment="CENTER" contentDisplay="CENTER" layoutX="678.0" layoutY="25.0" mnemonicParsing="false" onAction="#lekerdezesAction" prefHeight="30.0" prefWidth="140.0" styleClass="buttonbase" text="Egybeszámítás" textAlignment="CENTER" AnchorPane.leftAnchor="678.0" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="Verdana" size="14.0" />
@@ -55,7 +55,4 @@
       </children>
     </AnchorPane>
   </children>
-  <stylesheets>
-    <URL value="@BasicApplication.css" />
-  </stylesheets>
 </VBox>
