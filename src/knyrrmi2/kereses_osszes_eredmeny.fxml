@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.KeresesController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Felhasználói fiók">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Bezárás" />
+                        <MenuItem mnemonicParsing="false" text="Kijelentkezés" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="region" VBox.vgrow="ALWAYS">
+            <children>
+                <Label layoutX="23.0" layoutY="14.0" prefHeight="48.0" prefWidth="164.0" text="KNYR RENDSZER" AnchorPane.leftAnchor="20.0">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="176.0" layoutY="31.0" styleClass="textinputcontrol" text="KERESÉS EREDMÉNYE" AnchorPane.leftAnchor="170.0" />
+            <Label fx:id="uzenet" layoutX="260.0" layoutY="32.0" />
+                <Button fx:id="CtrlKozbeszKeresesVissza" alignment="CENTER" contentDisplay="CENTER" layoutX="844.0" layoutY="26.0" mnemonicParsing="false" onAction="#keresesVissza" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Vissza" textAlignment="CENTER" AnchorPane.leftAnchor="844.0" AnchorPane.topAnchor="26.0">
+                    <font>
+                        <Font name="Verdana" size="14.0" />
+                    </font>
+                </Button>
+                <TableView fx:id="KozbeszerzesekTable" layoutX="36.0" layoutY="73.0" prefHeight="474.0" prefWidth="964.0">
+                    <columns>
+                        <TableColumn fx:id="KözbeszSorszamKozbeszKereses" prefWidth="75.0" text="Közbeszerzés sorszáma" />
+                        <TableColumn fx:id="KozbeszAzonKozbeszKeres" prefWidth="151.0" text="Közbeszerzési eljárás azonosító" />
+                        <TableColumn fx:id="BeszNevKozbeszKeres" prefWidth="92.0" text="Beszerzés neve" />
+                        <TableColumn fx:id="KozbeszFajtKozbeszKeres" minWidth="5.0" prefWidth="82.0" text="Közbeszerzés fajtája" />
+                        <TableColumn fx:id="SzerzFajtKozbeszKeres" prefWidth="96.0" text="Szerződés fajtája" />
+                        <TableColumn fx:id="CPVKozbeszKeres" prefWidth="67.0" text="CPV kód" />
+                        <TableColumn fx:id="ProjektKozbeszKeres" prefWidth="103.0" text="Projekt" />
+                        <TableColumn fx:id="KozbeszKezdetKozbeszKereses" prefWidth="97.0" text="Közbeszerzési eljárás kezdete" />
+                        <TableColumn fx:id="KozbeszVegeKozbeszKereses" prefWidth="102.0" text="Közbeszerzési eljárás vége" />
+                        <TableColumn fx:id="BecsultErtKozbeszKereses" prefWidth="98.0" text="Becsült értek" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
