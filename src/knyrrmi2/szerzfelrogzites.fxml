@@ -76,7 +76,7 @@
                   <Font name="Verdana" size="14.0" />
                </font>
             </Button>
-            <TableView layoutX="54.0" layoutY="520.0" prefHeight="90.0" prefWidth="886.0">
+            <TableView fx:id="SzerzfelTable" layoutX="54.0" layoutY="520.0" prefHeight="90.0" prefWidth="886.0">
               <columns>
                 <TableColumn fx:id="Szerzfel" prefWidth="126.0" text="Szerződő fél" />
                 <TableColumn fx:id="Varos" prefWidth="77.0" text="Város" />

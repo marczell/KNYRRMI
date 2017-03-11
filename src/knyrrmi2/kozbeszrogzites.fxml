@@ -54,6 +54,25 @@
             <Label layoutX="555.0" layoutY="322.0" text="Közbeszerzési eljárás vége" wrapText="true" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="340.0" />
             <DatePicker fx:id="KozbeszVegeKozbesz" layoutX="698.0" layoutY="318.0" AnchorPane.leftAnchor="710.0" AnchorPane.topAnchor="337.0" />
             <Line endX="850.0" layoutX="89.0" layoutY="326.0" startX="-50.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="380.0" />
+            <Button fx:id="CtrlEgybeszamitas" alignment="CENTER" contentDisplay="CENTER" layoutX="791.0" layoutY="400.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" styleClass="buttonbase" text="Egybeszámítás" textAlignment="CENTER">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="40.0" layoutY="400.0" text="Projekt egybeszámítás eredménye" />
+            <TableView fx:id="ProjektTable" layoutX="43.0" layoutY="430.0" prefHeight="48.0" prefWidth="250.0">
+              <columns>
+                <TableColumn fx:id="Projekt" prefWidth="143.0" text="Projekt" />
+                <TableColumn fx:id="ProjektOsszeg" prefWidth="106.0" text="Összeg" />
+              </columns>
+            </TableView>
+            <Label layoutX="40.0" layoutY="495.0" text="CPV egybeszámítás eredménye" />
+            <TableView fx:id="CpvTable" layoutX="43.0" layoutY="523.0" prefHeight="48.0" prefWidth="250.0">
+              <columns>
+                <TableColumn fx:id="Cpv" prefWidth="143.0" text="CPV" />
+                <TableColumn fx:id="CpvOsszeg" prefWidth="106.0" text="Összeg" />
+              </columns>
+            </TableView>
             <Button fx:id="CtrlSzerzMentes" alignment="CENTER" contentDisplay="CENTER" layoutX="718.0" layoutY="611.0" mnemonicParsing="false" onAction="#mentesAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Mentés" textAlignment="CENTER" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="620.0">
                <font>
                   <Font name="Verdana" size="14.0" />
