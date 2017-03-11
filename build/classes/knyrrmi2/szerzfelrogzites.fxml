@@ -61,27 +61,31 @@
             <TextField fx:id="Kapcstarttelszam" layoutX="665.0" layoutY="435.0" prefWidth="159.0" promptText="06304224242" AnchorPane.leftAnchor="710.0" />
             <Label layoutX="465.0" layoutY="440.0" styleClass="textinputcontrol" text="Kapcsolattartó telefonszám" AnchorPane.leftAnchor="550.0" />
             <TextField fx:id="Kapcstartemail" layoutX="312.0" layoutY="512.0" prefWidth="250.0" promptText="valaki@example.hu" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="485.0" />
-            <Button fx:id="CtrlSzerzfelKereses" alignment="CENTER" contentDisplay="CENTER" layoutX="598.0" layoutY="620.0" mnemonicParsing="false" onAction="#mentesAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Keresés" textAlignment="CENTER">
+            <Button fx:id="CtrlSzerzfelKereses" alignment="CENTER" contentDisplay="CENTER" layoutX="598.0" layoutY="631.0" mnemonicParsing="false" onAction="#mentesAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Keresés" textAlignment="CENTER">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="CtrlSzerzfelMentes" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="508.0" mnemonicParsing="false" onAction="#mentesAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Mentés" textAlignment="CENTER" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="620.0">
+            <Button fx:id="CtrlSzerzfelMentes" alignment="CENTER" contentDisplay="CENTER" layoutX="720.0" layoutY="631.0" mnemonicParsing="false" onAction="#mentesAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Mentés" textAlignment="CENTER" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="631.0">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="CtrlSzerzfelVissza" alignment="CENTER" contentDisplay="CENTER" layoutX="452.0" layoutY="522.0" mnemonicParsing="false" onAction="#visszaAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Vissza" textAlignment="CENTER" AnchorPane.leftAnchor="840.0" AnchorPane.topAnchor="620.0">
+            <Button fx:id="CtrlSzerzfelVissza" alignment="CENTER" contentDisplay="CENTER" layoutX="840.0" layoutY="631.0" mnemonicParsing="false" onAction="#visszaAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Vissza" textAlignment="CENTER" AnchorPane.leftAnchor="840.0" AnchorPane.topAnchor="631.0">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font>
             </Button>
             <TableView layoutX="54.0" layoutY="520.0" prefHeight="90.0" prefWidth="886.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
+                <TableColumn fx:id="Szerzfel" prefWidth="126.0" text="Szerződő fél" />
+                <TableColumn fx:id="Varos" prefWidth="77.0" text="Város" />
+                  <TableColumn fx:id="Irszam" prefWidth="79.0" text="Irányítószám" />
+                  <TableColumn fx:id="Kozterulet" prefWidth="166.0" text="Közterület" />
+                  <TableColumn fx:id="Hazszam" prefWidth="72.0" text="Házszám" />
+                  <TableColumn fx:id="Cegjszam" prefWidth="113.0" text="Cégjegyzék-szám" />
+                  <TableColumn fx:id="Adoszam" prefWidth="90.0" text="Adószám" />
+                  <TableColumn fx:id="Kapcstarto" prefWidth="162.0" text="Kapcsolattartó" />
               </columns>
             </TableView>
       </children>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.KeresesController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Felhasználói fiók">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Bezárás" />
+                        <MenuItem mnemonicParsing="false" text="Kijelentkezés" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="region" VBox.vgrow="ALWAYS">
+            <children>
+                <Label layoutX="23.0" layoutY="14.0" prefHeight="48.0" prefWidth="164.0" text="KNYR RENDSZER" AnchorPane.leftAnchor="20.0">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="176.0" layoutY="31.0" styleClass="textinputcontrol" text="KÖZBESZERZÉS KERESÉS" AnchorPane.leftAnchor="170.0" />
+            <Label fx:id="uzenet" layoutX="260.0" layoutY="32.0" />
+                <Button fx:id="CtrlKozbeszKereses" alignment="CENTER" contentDisplay="CENTER" layoutX="724.0" layoutY="26.0" mnemonicParsing="false" onAction="#kereses" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Keresés" textAlignment="CENTER" AnchorPane.leftAnchor="724.0" AnchorPane.topAnchor="26.0">
+                    <font>
+                        <Font name="Verdana" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="CtrlKozbeszKeresesVissza" alignment="CENTER" contentDisplay="CENTER" layoutX="844.0" layoutY="26.0" mnemonicParsing="false" onAction="#keresesVissza" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Vissza" textAlignment="CENTER" AnchorPane.leftAnchor="844.0" AnchorPane.topAnchor="26.0">
+                    <font>
+                        <Font name="Verdana" size="14.0" />
+                    </font>
+                </Button>
+                <Label layoutX="70.0" layoutY="79.0" styleClass="textinputcontrol" text="Beszerzés neve" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="79.0" />
+                <TextField fx:id="SzerzNevKozbeszKereses" layoutX="280.0" layoutY="74.0" prefWidth="250.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="74.0" />
+                <Label layoutX="70.0" layoutY="129.0" styleClass="textinputcontrol" text="Közbeszerzés sorszáma" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="129.0" />
+            <TextField fx:id="KozbeszSorszamKozbeszKereses" layoutX="321.0" layoutY="125.0" />
+            <Label layoutX="600.0" layoutY="105.0" prefHeight="59.0" prefWidth="130.0" text="Közbeszerzési eljárás azonosítója" wrapText="true" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="105.0" />
+            <TextField fx:id="KozbeszAzonKozbeszKereses" layoutX="748.0" layoutY="125.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="124.0" />
+                <Label layoutX="70.0" layoutY="179.0" styleClass="textinputcontrol" text="Közbeszerzési eljárás fajtája" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="179.0" />
+                <ComboBox fx:id="KozbeszFajtKozbeszKereses" layoutX="280.0" layoutY="174.0" prefWidth="150.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="174.0" />
+                <Label layoutX="521.0" layoutY="179.0" styleClass="textinputcontrol" text="Szerződés fajtája" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="179.0" />
+                <ComboBox fx:id="SzerzFajtKozbeszKereses" layoutX="661.0" layoutY="174.0" prefWidth="150.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="174.0" />
+                <Label layoutX="70.0" layoutY="229.0" styleClass="textinputcontrol" text="CPV kód" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="229.0" />
+                <ComboBox fx:id="CPVKozbeszKereses" layoutX="280.0" layoutY="224.0" prefWidth="150.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="224.0" />
+                <Label layoutX="521.0" layoutY="229.0" styleClass="textinputcontrol" text="Projekt" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="229.0" />
+                <ComboBox fx:id="ProjektKozbeszKereses" layoutX="661.0" layoutY="224.0" prefWidth="150.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="224.0" />
+                <Label layoutX="70.0" layoutY="279.0" styleClass="textinputcontrol" text="Köbeszerzési eljárás kezdete" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="279.0" />
+                <DatePicker fx:id="SzerzKotTolKozbeszKereses" layoutX="280.0" layoutY="274.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="274.0" />
+                <Label layoutX="460.0" layoutY="279.0" styleClass="textinputcontrol" text="-tól" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="279.0" />
+                <DatePicker fx:id="SzerzKotIgKozbeszKereses" layoutX="520.0" layoutY="274.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="274.0" />
+                <Label layoutX="700.0" layoutY="279.0" styleClass="textinputcontrol" text="-ig" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="279.0" />
+                <Label layoutX="70.0" layoutY="329.0" styleClass="textinputcontrol" text="Közbeszerzési eljárás vége" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="329.0" />
+                <DatePicker fx:id="SzerzLezarTolKizbeszKereses" layoutX="280.0" layoutY="324.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="324.0" />
+                <Label layoutX="460.0" layoutY="329.0" styleClass="textinputcontrol" text="-tól" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="329.0" />
+                <DatePicker fx:id="SzerzLezarIgKozbeszKereses" layoutX="520.0" layoutY="324.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="324.0" />
+                <Label layoutX="700.0" layoutY="329.0" styleClass="textinputcontrol" text="-ig" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="329.0" />
+            <Label layoutX="109.0" layoutY="382.0" text="Becsült érték" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="379.0" />
+            <TextField fx:id="BecsultErtekMinKozbeszKereses" layoutX="321.0" layoutY="378.0" AnchorPane.topAnchor="374.0" />
+            <Label layoutX="475.0" layoutY="378.0" styleClass="textinputcontrol" text="-tól" />
+            <TextField fx:id="BecsultErtekMaxKozbeszKereses" layoutX="600.0" layoutY="378.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="374.0" />
+            <Label layoutX="757.0" layoutY="378.0" styleClass="textinputcontrol" text="-ig" />
+                <TableView fx:id="KozbeszerzesekTable" layoutX="12.0" layoutY="433.0" prefHeight="200.0" prefWidth="964.0">
+                    <columns>
+                        <TableColumn fx:id="KözbeszSorszamKozbeszKereses" prefWidth="75.0" text="Közbeszerzés sorszáma" />
+                        <TableColumn fx:id="KozbeszAzonKozbeszKeres" prefWidth="151.0" text="Közbeszerzési eljárás azonosító" />
+                        <TableColumn fx:id="BeszNevKozbeszKeres" prefWidth="92.0" text="Beszerzés neve" />
+                        <TableColumn fx:id="KozbeszFajtKozbeszKeres" minWidth="5.0" prefWidth="82.0" text="Közbeszerzés fajtája" />
+                        <TableColumn fx:id="SzerzFajtKozbeszKeres" prefWidth="96.0" text="Szerződés fajtája" />
+                        <TableColumn fx:id="CPVKozbeszKeres" prefWidth="67.0" text="CPV kód" />
+                        <TableColumn fx:id="ProjektKozbeszKeres" prefWidth="103.0" text="Projekt" />
+                        <TableColumn fx:id="KozbeszKezdetKozbeszKereses" prefWidth="97.0" text="Közbeszerzési eljárás kezdete" />
+                        <TableColumn fx:id="KozbeszVegeKozbeszKereses" prefWidth="102.0" text="Közbeszerzési eljárás vége" />
+                        <TableColumn fx:id="BecsultErtKozbeszKereses" prefWidth="98.0" text="Becsült értek" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
