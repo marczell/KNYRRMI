@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="region" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.FomenuController">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="1000.0" />
+      <Label layoutX="23.0" layoutY="14.0" prefHeight="48.0" prefWidth="164.0" text="KNYR RENDSZER" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <styleClass>
+            <String fx:value="textinputcontrol" />
+            <String fx:value="textinputcontrol" />
+         </styleClass>
+      </Label>
+      <Label fx:id="uzenet" layoutX="74.0" layoutY="112.0" />
+      <Label layoutX="81.0" layoutY="169.0" text="Felhasználó név" AnchorPane.leftAnchor="70.0" />
+      <TextField fx:id="FelhNev" layoutX="142.0" layoutY="165.0" prefHeight="25.0" prefWidth="177.0" AnchorPane.leftAnchor="200.0" />
+      <Label layoutX="81.0" layoutY="258.0" text="Jelszó" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="220.0" />
+      <PasswordField fx:id="Password" layoutX="142.0" layoutY="254.0" prefHeight="25.0" prefWidth="177.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="220.0" />
+      <Label layoutX="81.0" layoutY="304.0" text="Ha elfeletette jelszavát, lépjen kapcsolatba a rendszergazdával." AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="270.0" />
+      <Button fx:id="CtrlBelepes" alignment="CENTER" contentDisplay="CENTER" layoutX="184.0" layoutY="320.0" mnemonicParsing="false" onAction="#szerzodoFelRogziteseAction" prefHeight="30.0" prefWidth="135.0" text="Belépés" textAlignment="CENTER" AnchorPane.leftAnchor="184.0" AnchorPane.topAnchor="320.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+         <styleClass>
+            <String fx:value="buttonbase" />
+            <String fx:value="buttonbase" />
+         </styleClass>
+      </Button>
+      <TextArea layoutX="356.0" layoutY="126.0" prefHeight="250.0" prefWidth="450.0" styleClass="textinputcontrol" text="Üdvözöljük a Közbeszerzési Szerződésnyilvántartó Rendszerben!&#10;Belépéshez adja meg felhasználó nevét és jelszavát!" wrapText="true" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="120.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </TextArea>
+   </children>
+</AnchorPane>
