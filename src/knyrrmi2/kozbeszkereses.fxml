@@ -48,8 +48,8 @@
                 </Button>
                 <Label layoutX="70.0" layoutY="79.0" styleClass="textinputcontrol" text="Beszerzés neve" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="79.0" />
                 <TextField fx:id="SzerzNevKozbeszKereses" layoutX="280.0" layoutY="74.0" prefWidth="250.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="74.0" />
-                <Label layoutX="70.0" layoutY="129.0" styleClass="textinputcontrol" text="Közbeszerzés sorszáma" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="129.0" />
-            <TextField fx:id="KozbeszSorszamKozbeszKereses" layoutX="321.0" layoutY="125.0" />
+                <Label layoutX="70.0" layoutY="129.0" styleClass="textinputcontrol" text="Beszerzés sorszáma" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="129.0" />
+            <TextField fx:id="BeszSorszamKozbeszKereses" layoutX="321.0" layoutY="125.0" />
             <Label layoutX="600.0" layoutY="105.0" prefHeight="59.0" prefWidth="130.0" text="Közbeszerzési eljárás azonosítója" wrapText="true" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="105.0" />
             <TextField fx:id="KozbeszAzonKozbeszKereses" layoutX="748.0" layoutY="125.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="124.0" />
                 <Label layoutX="70.0" layoutY="179.0" styleClass="textinputcontrol" text="Közbeszerzési eljárás fajtája" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="179.0" />
@@ -77,7 +77,7 @@
             <Label layoutX="757.0" layoutY="378.0" styleClass="textinputcontrol" text="-ig" />
                 <TableView fx:id="KozbeszerzesekTable" layoutX="12.0" layoutY="433.0" prefHeight="200.0" prefWidth="964.0">
                     <columns>
-                        <TableColumn fx:id="KözbeszSorszamKozbeszKereses" prefWidth="75.0" text="Közbeszerzés sorszáma" />
+                        <TableColumn fx:id="BeszSorszamKozbeszKereses" prefWidth="75.0" text="Beszerzés sorszáma" />
                         <TableColumn fx:id="KozbeszAzonKozbeszKeres" prefWidth="151.0" text="Közbeszerzési eljárás azonosító" />
                         <TableColumn fx:id="BeszNevKozbeszKeres" prefWidth="92.0" text="Beszerzés neve" />
                         <TableColumn fx:id="KozbeszFajtKozbeszKeres" minWidth="5.0" prefWidth="82.0" text="Közbeszerzés fajtája" />

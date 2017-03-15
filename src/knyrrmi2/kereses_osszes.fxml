@@ -43,7 +43,7 @@
                 </Button>
                 <Label layoutX="70.0" layoutY="79.0" styleClass="textinputcontrol" text="Beszerzés neve" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="79.0" />
                 <TextField fx:id="SzerzNevKozbeszKereses" layoutX="280.0" layoutY="74.0" prefWidth="250.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="74.0" />
-                <Label layoutX="70.0" layoutY="129.0" styleClass="textinputcontrol" text="Közbeszerzés sorszáma" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="129.0" />
+                <Label layoutX="70.0" layoutY="129.0" styleClass="textinputcontrol" text="Beszerzés sorszáma" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="129.0" />
             <TextField fx:id="KozbeszSorszamKozbeszKereses" layoutX="321.0" layoutY="125.0" />
             <Label layoutX="600.0" layoutY="105.0" prefHeight="59.0" prefWidth="130.0" text="Közbeszerzési eljárás azonosítója" wrapText="true" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="105.0" />
             <TextField fx:id="KozbeszAzonKozbeszKereses" layoutX="748.0" layoutY="125.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="124.0" />
@@ -72,7 +72,7 @@
             <Label layoutX="757.0" layoutY="378.0" styleClass="textinputcontrol" text="-ig" />
             <Label layoutX="101.0" layoutY="436.0" styleClass="textinputcontrol" text="Szerződő fél" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="429.0" />
             <ComboBox fx:id="SzerzFelKereses" layoutX="320.0" layoutY="432.0" prefWidth="150.0" AnchorPane.topAnchor="425.0" />
-            <Label layoutX="600.0" layoutY="429.0" text="Szerződés sorszáma" />
+            <Label layoutX="600.0" layoutY="429.0" text="Szerződés azonosítója" />
             <TextField fx:id="SorszamKereses" layoutX="750.0" layoutY="425.0" />
             <Label layoutX="99.0" layoutY="481.0" styleClass="textinputcontrol" text="Szerződéskötés dátuma" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="479.0" />
             <DatePicker fx:id="SzerzKotTolKereses" layoutX="320.0" layoutY="477.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="475.0" />

@@ -50,8 +50,8 @@
                 <TextField fx:id="SzerzNevKereses" layoutX="280.0" layoutY="74.0" prefWidth="250.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="74.0" />
                 <Label layoutX="70.0" layoutY="129.0" styleClass="textinputcontrol" text="Szerződő fél" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="129.0" />
                 <ComboBox fx:id="SzerzFelKereses" layoutX="280.0" layoutY="124.0" prefWidth="150.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="124.0" />
-            <Label layoutX="605.0" layoutY="128.0" text="Szerződés sorszáma" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="129.0" />
-            <TextField fx:id="SorszamKereses" layoutX="748.0" layoutY="125.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="124.0" />
+            <Label layoutX="605.0" layoutY="128.0" text="Szerződés azonosítója" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="129.0" />
+            <TextField fx:id="SzerzAzonKereses" layoutX="748.0" layoutY="125.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="124.0" />
                 <Label layoutX="70.0" layoutY="179.0" styleClass="textinputcontrol" text="Közbeszerzési eljárás fajtája" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="179.0" />
                 <ComboBox fx:id="KozbeszFajtKereses" layoutX="280.0" layoutY="174.0" prefWidth="150.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="174.0" />
                 <Label layoutX="521.0" layoutY="179.0" styleClass="textinputcontrol" text="Szerződés fajtája" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="179.0" />
@@ -72,7 +72,7 @@
                 <Label layoutX="700.0" layoutY="329.0" styleClass="textinputcontrol" text="-ig" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="329.0" />
                 <TableView fx:id="SzerzodesekTable" layoutX="9.0" layoutY="385.0" prefHeight="200.0" prefWidth="964.0">
                     <columns>
-                        <TableColumn fx:id="SorszamKereses" prefWidth="75.0" text="Sorszám" />
+                        <TableColumn fx:id="SorszamKereses" prefWidth="75.0" text="Szerződés azonosítója" />
                         <TableColumn fx:id="SzerzNevKeres" prefWidth="151.0" text="Szerződés neve" />
                         <TableColumn fx:id="SzerzFelKeres" prefWidth="92.0" text="Szerződő fél" />
                         <TableColumn fx:id="KozbeszFajtKeres" minWidth="5.0" prefWidth="82.0" text="Közbeszerzés fajtája" />
