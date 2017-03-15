@@ -37,6 +37,10 @@ public class FomenuController implements Initializable {
     private Button CtrlKeres;
     @FXML
     private Button CtrlErtek;
+    @FXML
+    private Button CtrlKozbesz;
+    @FXML
+    private Button CtrlSzerzmod;
 
     /**
      * Initializes the controller class.
@@ -62,8 +66,8 @@ public class FomenuController implements Initializable {
 
     @FXML
     private void szerzodesRogziteseAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) CtrlSzerzfel.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("szerzrogzites.fxml"));
+        Stage stage = (Stage) CtrlSzerz.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("kozbeszkereses.fxml"));
         Scene scene = new Scene(root);
          File f = new File("alkfejl.css");
         scene.getStylesheets().clear();
@@ -74,7 +78,7 @@ public class FomenuController implements Initializable {
 
     @FXML
     private void cpvEgybeszamitasAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) CtrlSzerzfel.getScene().getWindow();
+        Stage stage = (Stage) CtrlCpv.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("CPV_egyb.fxml"));
         Scene scene = new Scene(root);
          File f = new File("alkfejl.css");
@@ -86,7 +90,7 @@ public class FomenuController implements Initializable {
 
     @FXML
     private void projektEgybenszamitasAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) CtrlSzerzfel.getScene().getWindow();
+        Stage stage = (Stage) CtrlProjekt.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("projekt_egyb.fxml"));
         Scene scene = new Scene(root);
          File f = new File("alkfejl.css");
@@ -98,8 +102,8 @@ public class FomenuController implements Initializable {
 
     @FXML
     private void keresesAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) CtrlSzerzfel.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("kereses.fxml"));
+        Stage stage = (Stage) CtrlKeres.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("kereses_osszes.fxml"));
         Scene scene = new Scene(root);
          File f = new File("alkfejl.css");
         scene.getStylesheets().clear();
@@ -110,7 +114,29 @@ public class FomenuController implements Initializable {
 
     @FXML
     private void erteklistakAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) CtrlSzerzfel.getScene().getWindow();
+        Stage stage = (Stage) CtrlErtek.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("erteklista_mod.fxml"));
+        Scene scene = new Scene(root);
+         File f = new File("alkfejl.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        stage.setScene(scene);
+        stage.show();
+    }    
+    @FXML
+    private void kozbeszRogzitesAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) CtrlKozbesz.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("kozbeszrogzites.fxml"));
+        Scene scene = new Scene(root);
+         File f = new File("alkfejl.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        stage.setScene(scene);
+        stage.show();
+    }    
+    @FXML
+    private void SzerzModRogzitesAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) CtrlSzerzmod.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("erteklista_mod.fxml"));
         Scene scene = new Scene(root);
          File f = new File("alkfejl.css");
