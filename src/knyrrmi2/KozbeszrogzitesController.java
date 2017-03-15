@@ -46,7 +46,7 @@ import model.SerializableResultSet;
  *
  * @author Marcell
  */
-public class SzerzrogzitesController implements Initializable {
+public class KozbeszrogzitesController implements Initializable {
 
    
    
@@ -119,7 +119,7 @@ public class SzerzrogzitesController implements Initializable {
             Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
@@ -133,15 +133,15 @@ public class SzerzrogzitesController implements Initializable {
                 txtKozbeszSorszamKozbesz.setText(sorszam);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba a sorszámlekérés során!");
         } catch (RemoteException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         String sql1 = "SELECT KOZBESZERZESIELJARASFAJTAI, KEJID FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";
@@ -157,15 +157,15 @@ public class SzerzrogzitesController implements Initializable {
             KozbeszfajtKozbesz.getItems().clear();
             KozbeszfajtKozbesz.setItems(obListKej);
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
         } catch (RemoteException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         String sql2 = "SELECT SZERZODESFAJTA, SZERZODESFAJTAID FROM SZERZODESFAJTAI WHERE LATHATO=TRUE";
@@ -181,15 +181,15 @@ public class SzerzrogzitesController implements Initializable {
             SzerzFajtKozbesz.getItems().clear();
             SzerzFajtKozbesz.setItems(obListSzerzF);
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
         } catch (RemoteException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         String sql3 = "SELECT CPVKOD, CPVID FROM CPVKODOK WHERE LATHATO=TRUE";
@@ -205,15 +205,15 @@ public class SzerzrogzitesController implements Initializable {
             CpvKozbesz.getItems().clear();
             CpvKozbesz.setItems(obListSzerzF);
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
         } catch (RemoteException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         String sql4 = "SELECT PROJEKT, PROJEKTID FROM PROJEKTEK WHERE LATHATO=TRUE";
@@ -229,15 +229,15 @@ public class SzerzrogzitesController implements Initializable {
             ProjektKozbesz.getItems().clear();
             ProjektKozbesz.setItems(obListProjekt);
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
         } catch (RemoteException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         Projekt.setCellValueFactory(new PropertyValueFactory<ProjektEgybentartas, String>("projektNev"));
@@ -283,15 +283,15 @@ public class SzerzrogzitesController implements Initializable {
                 KozbeszKezdKozbesz.getEditor().clear();
                 KozbeszVegeKozbesz.getEditor().clear();
             } catch (SQLException ex) {
-                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
                 uzenet.setText("Hiba a mentés során!");
             } catch (RemoteException ex) {
-                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 try {
                     serverImpl.closeConnection();
                 } catch (RemoteException ex) {
-                    Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {

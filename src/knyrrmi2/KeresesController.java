@@ -132,7 +132,7 @@ public class KeresesController implements Initializable {
             KozbeszFajtKereses.getItems().clear();
             KozbeszFajtKereses.setItems(FXCollections.observableList(obListKej));
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
         } finally {
             kapcsolat.closeConnection();
@@ -149,7 +149,7 @@ public class KeresesController implements Initializable {
             SzerzFajtKereses.getItems().clear();
             SzerzFajtKereses.setItems(FXCollections.observableList(obListSzerzF));
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
         } finally {
             kapcsolat.closeConnection();
@@ -167,7 +167,7 @@ public class KeresesController implements Initializable {
             CPVKereses.getItems().clear();
             CPVKereses.setItems(FXCollections.observableList(obListCpv));
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
         } finally {
             kapcsolat.closeConnection();
@@ -184,7 +184,7 @@ public class KeresesController implements Initializable {
             ProjektKereses.getItems().clear();
             ProjektKereses.setItems(FXCollections.observableList(obListProjekt));
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
         } finally {
             kapcsolat.closeConnection();
@@ -201,7 +201,7 @@ public class KeresesController implements Initializable {
             SzerzFelKereses.getItems().clear();
             SzerzFelKereses.setItems(FXCollections.observableList(obListSzerzFel));
         } catch (SQLException ex) {
-            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
         } finally {
             kapcsolat.closeConnection();
