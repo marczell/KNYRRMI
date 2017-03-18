@@ -87,7 +87,7 @@ public class SzerzfelrogzitesController implements Initializable {
     @FXML
     private Label szerzfelid;
     @FXML
-    private TableView<SzerzodoFel> SzerzfelTable  = new TableView<>();
+    private final TableView<SzerzodoFel> SzerzfelTable  = new TableView<>();
     @FXML
     private TableColumn<SzerzodoFel, String> tblszfid;
     @FXML
@@ -161,7 +161,8 @@ public class SzerzfelrogzitesController implements Initializable {
     
     @FXML
     private void mentesAction(ActionEvent event) throws RemoteException {
-        //a szerződő fél adatainak rögzítése
+       String sql;
+        //a szerződő fél adatainak ellenőrzése
                 if (SzerzFel.getText().length() <= 100
                         && Varos.getText().length() <= 50
                         && Irszam.getText().matches("[0-9]{4}")
@@ -175,18 +176,32 @@ public class SzerzfelrogzitesController implements Initializable {
                         && Kapcstartnev.getText().length() <= 100
                         && Kapcstarttelszam.getText().length() <= 25
                         && Kapcstartemail.getText().matches(EMAIL_PATTERN)) {
-//        if (true) { //teszteléshez egyszerübb adatbevitel
-            String sql = "INSERT INTO `szerzodo_fel`(`szerzodofel`, `szekhely-varos`, `szekhely-iranyitoszam`, `szekhely-kozterulet`, \n"
+                     if (szerzfelid.getText().equals("")){
+
+                    sql = "INSERT INTO `szerzodo_fel`(`szerzodofel`, `szekhely-varos`, `szekhely-iranyitoszam`, `szekhely-kozterulet`, \n"
                     + "`szekhely-hazszam`, `telefonszam`, `faxszam`, `e-mail`, `cegjegyzekszam`, `adoszam`, `kapcsolattarto-neve`,\n"
                     + "`kapcsolattarto-tel`, `kapcsolattarto-email`) \n"
                     + "VALUES ('" + SzerzFel.getText() + "','" + Varos.getText() + "'," + Irszam.getText() + ",'" + Kozterulet.getText() + "',"
                     + Hazszam.getText() + ",'" + Telszam.getText() + "','" + Faxszam.getText() + "','" + Email.getText() + "','"
                     + Cegjszam.getText() + "','" + Adoszam.getText() + "','" + Kapcstartnev.getText() + "','"
                     + Kapcstarttelszam.getText() + "','" + Kapcstartemail.getText() + "')";
-            System.out.println(sql);
+                     System.out.println(sql);
+                } else{
+                        sql = "UPDATE `szerzodo_fel` SET `szfid`="+szerzfelid.getText()+",`szerzodofel`="+SzerzFel.getText()+","
+                            +"`szekhely-varos`="+Varos.getText()+",`szekhely-iranyitoszam`="+ Irszam.getText() +" ,"
+                            +"`szekhely-kozterulet`=" + Kozterulet.getText() + ",`szekhely-hazszam`="+ Hazszam.getText()+","
+                            +"`telefonszam`=" + Telszam.getText() + ",`faxszam`=" + Faxszam.getText() + ",`e-mail`=" + Email.getText() + ","
+                            +"`cegjegyzekszam`="+ Cegjszam.getText() + ",`adoszam`=" + Adoszam.getText() + ","
+                            +"`kapcsolattarto-neve`=" + Kapcstartnev.getText() + ",`kapcsolattarto-tel`="+ Kapcstarttelszam.getText() + ","
+                            +"`kapcsolattarto-email`=" + Kapcstartemail.getText();
+                             System.out.println(sql);  
+                }
+            
+            
             try {
                 serverImpl.adatbazisbaInsertalas(sql);
                 uzenet.setText("Sikeres mentése a " + SzerzFel.getText());
+                szerzfelid.setText("");
                 SzerzFel.clear();
                 Varos.clear();
                 Irszam.clear();
