@@ -35,7 +35,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.ErtekLista;
-import model.ProjektEgybentartas;
 import model.Szerzodes;
 
 /**

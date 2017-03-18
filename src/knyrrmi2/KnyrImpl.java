@@ -89,6 +89,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
         stmt.executeUpdate(sql);
 //            stmt.executeQuery(sql);
         System.out.println("beszúrás");
+        closeConnection();
     }
 
     @Override
@@ -99,6 +100,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
         System.out.println(sql);
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println("lekérdezés");
+        closeConnection();
         return new SerializableResultSet(rs);
     }
     

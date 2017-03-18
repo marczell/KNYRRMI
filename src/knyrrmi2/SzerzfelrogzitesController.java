@@ -8,10 +8,16 @@ package knyrrmi2;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,11 +26,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import model.SzerzodoFel;
 
 /**
  * FXML Controller class
@@ -46,7 +55,7 @@ public class SzerzfelrogzitesController implements Initializable {
     @FXML
     private TextField Irszam;
     @FXML
-    private TextField Koterulet;
+    private TextField Kozterulet;
     @FXML
     private TextField Hazszam;
     @FXML
@@ -67,11 +76,36 @@ public class SzerzfelrogzitesController implements Initializable {
     private TextField Kapcstartemail;
     @FXML
     private Button CtrlSzerzfelVissza;
-
-    private Kapcsolat kapcsolat = new Kapcsolat();
+    @FXML
+            Button CtrlSzerzfelKereses;
+    
+    KnyrInterface serverImpl;       
+  
 
     @FXML
     private Label uzenet;
+    @FXML
+    private Label szerzfelid;
+    @FXML
+    private TableView<SzerzodoFel> SzerzfelTable  = new TableView<>();
+    @FXML
+    private TableColumn<SzerzodoFel, String> tblszfid;
+    @FXML
+    private TableColumn<SzerzodoFel, String> tblSzerzfel;
+    @FXML
+    private TableColumn<SzerzodoFel, String> tblVaros;
+    @FXML
+    private TableColumn<SzerzodoFel, String> tblIrszam;
+    @FXML
+    private TableColumn<SzerzodoFel, String> tblHazszam;
+    @FXML
+    private TableColumn<SzerzodoFel, String> tblKozterulet;
+    @FXML
+    private TableColumn<SzerzodoFel, String> tblCegjszam;
+    @FXML
+    private TableColumn<SzerzodoFel, String> tblAdoszam;
+    @FXML
+    private TableColumn<SzerzodoFel, String> tblKapcstarto;
 
     /**
      * Initializes the controller class.
@@ -80,16 +114,58 @@ public class SzerzfelrogzitesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+       try {
+            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
+        } catch (RemoteException | NotBoundException ex) {
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       tblszfid.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szfid"));
+       tblSzerzfel.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szerzodoFel"));
+        tblVaros.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyVaro"));
+        tblIrszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyIranyitoszam"));
+        tblHazszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyKozterulet"));
+        tblKozterulet.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyHazszam"));
+        tblCegjszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("cegjegyzekszam"));
+        tblAdoszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("adoszam"));
+        tblKapcstarto.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("kapcsolattartoNeve"));
+       // SzerzodoFel szerzodofel = SzerzfelTable.getSelectionModel().getSelectedItem();
+        //táblázta sorának kiválasztása
+        SzerzfelTable.setRowFactory(tv -> {
+           TableRow<SzerzodoFel> row = new TableRow<>();
+           row.setOnMouseClicked(event -> {
+             if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
+             && event.getClickCount() == 2) {
 
+                SzerzodoFel kivalasztott = row.getItem();
+                szerzfelid.setText(Integer.toString(kivalasztott.getSzfid()));
+                SzerzFel.setText(kivalasztott.getSzerzodoFel());
+                Varos.setText(kivalasztott.getSzekhelyVaro());
+                Irszam.setText(Integer.toString(kivalasztott.getSzekhelyIranyitoszam()));
+                Kozterulet.setText(kivalasztott.getSzekhelyKozterulet());
+                Hazszam.setText(Integer.toString(kivalasztott.getSzekhelyHazszam()));
+                Telszam.setText(kivalasztott.getTelefonszam());
+                Faxszam.setText(kivalasztott.getFaxszam());
+                Email.setText(kivalasztott.getEmail());
+                Cegjszam.setText(kivalasztott.getCegjegyzekszam());
+                Adoszam.setText(kivalasztott.getAdoszam());
+                Kapcstartnev.setText(kivalasztott.getKapcsolattartoNeve());
+                Kapcstarttelszam.setText(kivalasztott.getKapcsolattartoTel());
+                Kapcstartemail.setText(kivalasztott.getKapcsolattartoEmail());
+            
+        }
+    });
+    return row ;
+});
+    }
+    
     @FXML
-    private void mentesAction(ActionEvent event) {
+    private void mentesAction(ActionEvent event) throws RemoteException {
         //a szerződő fél adatainak rögzítése
                 if (SzerzFel.getText().length() <= 100
                         && Varos.getText().length() <= 50
                         && Irszam.getText().matches("[0-9]{4}")
-                        && Koterulet.getText().length() <= 100
+                        && Kozterulet.getText().length() <= 100
                         && Hazszam.getText().matches("[0-9]{1,3}")
                         && Telszam.getText().length() <= 25
                         && Faxszam.getText().length() <= 25
@@ -103,18 +179,18 @@ public class SzerzfelrogzitesController implements Initializable {
             String sql = "INSERT INTO `szerzodo_fel`(`szerzodofel`, `szekhely-varos`, `szekhely-iranyitoszam`, `szekhely-kozterulet`, \n"
                     + "`szekhely-hazszam`, `telefonszam`, `faxszam`, `e-mail`, `cegjegyzekszam`, `adoszam`, `kapcsolattarto-neve`,\n"
                     + "`kapcsolattarto-tel`, `kapcsolattarto-email`) \n"
-                    + "VALUES ('" + SzerzFel.getText() + "','" + Varos.getText() + "'," + Irszam.getText() + ",'" + Koterulet.getText() + "',"
+                    + "VALUES ('" + SzerzFel.getText() + "','" + Varos.getText() + "'," + Irszam.getText() + ",'" + Kozterulet.getText() + "',"
                     + Hazszam.getText() + ",'" + Telszam.getText() + "','" + Faxszam.getText() + "','" + Email.getText() + "','"
                     + Cegjszam.getText() + "','" + Adoszam.getText() + "','" + Kapcstartnev.getText() + "','"
                     + Kapcstarttelszam.getText() + "','" + Kapcstartemail.getText() + "')";
             System.out.println(sql);
             try {
-                kapcsolat.adatbazisbaInsertalas(sql);
+                serverImpl.adatbazisbaInsertalas(sql);
                 uzenet.setText("Sikeres mentése a " + SzerzFel.getText());
                 SzerzFel.clear();
                 Varos.clear();
                 Irszam.clear();
-                Koterulet.clear();
+                Kozterulet.clear();
                 Hazszam.clear();
                 Telszam.clear();
                 Faxszam.clear();
@@ -129,13 +205,72 @@ public class SzerzfelrogzitesController implements Initializable {
                 Logger.getLogger(SzerzfelrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
                 uzenet.setText("Hiba az adatbázis művelet során!");
             } finally {
-                kapcsolat.closeConnection();
+               
             }
         } else {
             uzenet.setText("Hibás adatok!");
         }
     }
+    
+@FXML
+    private void keresesAction(ActionEvent event) {
+        String sql;
+        sql = "SELECT `szfid`, `szerzodofel`, `szekhely-varos`, `szekhely-iranyitoszam`,"
+                + " `szekhely-kozterulet`, `szekhely-hazszam`, `telefonszam`, `faxszam`, `e-mail`,"
+                + " `cegjegyzekszam`, `adoszam`, `kapcsolattarto-neve`, `kapcsolattarto-tel`, "
+                + "`kapcsolattarto-email` FROM `szerzodo_fel` WHERE\n ";
 
+        if (SzerzFel.getText() != null && !SzerzFel.getText().equals("")) {
+            sql += "szerzodofel = '" + SzerzFel.getText() + "' ";
+        }
+        if (Varos.getText() != null && !Varos.getText().equals("")) {
+            sql += "and szekhely-varos = '" + Varos.getText() + "' ";
+        }
+        if (Irszam.getText() != null && !Irszam.getText().equals("")) {
+            sql += "and szekhely-iranyitoszam = '" + Irszam.getText() + "' ";
+        }
+        if (Kozterulet.getText() != null && !Kozterulet.getText().equals("")) {
+            sql += "and szekhely-kozterulet = '" + Kozterulet.getText() + "' ";
+        }
+        if (Hazszam.getText() != null && !Hazszam.getText().equals("")) {
+            sql += "and szekhely-hazszam = '" + Hazszam.getText() + "' ";
+        }
+       if (Telszam.getText() != null && !Telszam.getText().equals("")) {
+            sql += "and telefonszam = '" + Telszam.getText() + "' ";
+        }
+        if (Faxszam.getText() != null && !Faxszam.getText().equals("")) {
+            sql += "and faxszam = '" + Faxszam.getText() + "' ";
+        }
+        if (Email.getText() != null && !Email.getText().equals("")) {
+            sql += "and e-mail = '" + Email.getText() + "' ";
+        }
+        if (Cegjszam.getText() != null && !Cegjszam.getText().equals("")) {
+            sql += "and cegjegyzekszam = '" + Cegjszam.getText() + "' ";
+        }
+        if (Adoszam.getText() != null && !Adoszam.getText().equals("")) {
+            sql += "and adoszam = '" + Adoszam.getText() + "' ";
+        }
+        if (Kapcstartnev.getText() != null && !Kapcstartnev.getText().equals("")) {
+            sql += "and kapcsolattarto-neve = '" + Kapcstartnev.getText() + "' ";
+        }
+        if (Kapcstarttelszam.getText() != null && !Kapcstarttelszam.getText().equals("")) {
+            sql += "and kapcsolattarto-tel = '" + Kapcstarttelszam.getText() + "' ";
+        }
+        if (Kapcstartemail.getText() != null && !Kapcstartemail.getText().equals("")) {
+            sql += "and kapcsolattarto-email = '" + Kapcstartemail.getText() + "' ";
+        }
+        sql += "group by szfid";
+        System.out.println(sql);
+        ArrayList<SzerzodoFel> szerzodoFelLista = new ArrayList<>();
+        try {
+            serverImpl.adatbazisReport(sql);
+        } catch (SQLException | RemoteException ex) {
+            Logger.getLogger(SzerzfelrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        SzerzfelTable.setItems(FXCollections.observableArrayList(szerzodoFelLista));
+    }
+    
     @FXML
     private void visszaAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) CtrlSzerzfelVissza.getScene().getWindow();

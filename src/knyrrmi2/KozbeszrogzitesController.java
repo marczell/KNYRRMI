@@ -288,11 +288,7 @@ public class KozbeszrogzitesController implements Initializable {
             } catch (RemoteException ex) {
                 Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
-                try {
-                    serverImpl.closeConnection();
-                } catch (RemoteException ex) {
-                    Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
             }
         } else {
             uzenet.setText("Ellenőrize a mezők kitöltöttségét!");
