@@ -5,6 +5,8 @@
  */
 package knyrrmi2;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.rmi.NotBoundException;
@@ -13,6 +15,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +23,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -29,6 +35,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.ErtekLista;
 import model.Szerzodes;
 
@@ -59,41 +66,47 @@ public class KozbeszKeresesKontroller implements Initializable{
     @FXML
     private ComboBox<?> ProjektKozbeszKereses;
     @FXML
-    private DatePicker SzerzKotTolKozbeszKereses;
+    private DatePicker KozbeszTolKozbeszKereses;
     @FXML
-    private DatePicker SzerzKotIgKozbeszKereses;
+    private DatePicker KozbeszIgKozbeszKereses;
     @FXML
-    private DatePicker SzerzLezarTolKizbeszKereses;
+    private DatePicker KozbeszLezarTolKozbeszKereses;
     @FXML
-    private DatePicker SzerzLezarIgKozbeszKereses;
+    private DatePicker KozbeszLezarIgKozbeszKereses;
     @FXML
     private TextField BecsultErtekMinKozbeszKereses;
     @FXML
     private TextField BecsultErtekMaxKozbeszKereses;
     @FXML
-    private TableView<?> KozbeszerzesekTable;
+    private TableView<Szerzodes> KozbeszerzesekTable;
     @FXML
-    private TableColumn<?, ?> tblBeszSorszamKozbeszKereses;
+    private TableColumn<Szerzodes, String> tblBeszSorszamKozbeszKereses;
     @FXML
-    private TableColumn<?, ?> tblKozbeszAzonKozbeszKeres;
+    private TableColumn<Szerzodes, String> tblKozbeszAzonKozbeszKeres;
     @FXML
-    private TableColumn<?, ?> tblBeszNevKozbeszKeres;
+    private TableColumn<Szerzodes, String> tblBeszNevKozbeszKeres;
     @FXML
-    private TableColumn<?, ?> tblKozbeszFajtKozbeszKeres;
+    private TableColumn<Szerzodes, String> tblKozbeszFajtKozbeszKeres;
     @FXML
-    private TableColumn<?, ?> tblSzerzFajtKozbeszKeres;
+    private TableColumn<Szerzodes, String> tblSzerzFajtKozbeszKeres;
     @FXML
-    private TableColumn<?, ?> tblCPVKozbeszKeres;
+    private TableColumn<Szerzodes, String> tblCPVKozbeszKeres;
     @FXML
-    private TableColumn<?, ?> tblProjektKozbeszKeres;
+    private TableColumn<Szerzodes, String> tblProjektKozbeszKeres;
     @FXML
-    private TableColumn<?, ?> tblKozbeszKezdetKozbeszKereses;
+    private TableColumn<Szerzodes, String> tblKozbeszKezdetKozbeszKereses;
     @FXML
-    private TableColumn<?, ?> tblKozbeszVegeKozbeszKereses;
+    private TableColumn<Szerzodes, String> tblKozbeszVegeKozbeszKereses;
     @FXML
-    private TableColumn<?, ?> tblBecsultErtKozbeszKereses;
+    private TableColumn<Szerzodes, String> tblBecsultErtKozbeszKereses;
 
     KnyrInterface serverImpl;
+    
+    ArrayList<ErtekLista> listKej = new ArrayList<>();
+    ArrayList<ErtekLista> listSzerzF = new ArrayList<>();
+    ArrayList<ErtekLista> listCpv = new ArrayList<>();
+    ArrayList<ErtekLista> listProjekt = new ArrayList<>();
+    ArrayList<ErtekLista> listSzerzFel = new ArrayList<>();
     
     
      @Override
@@ -105,112 +118,188 @@ public class KozbeszKeresesKontroller implements Initializable{
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         }
         tblBeszSorszamKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("sorszam"));
-        tblKozbeszAzonKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodesNeve"));
-        tblBeszNevKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodoFel"));
-        tblKozbeszFajtKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodesKotesDatum"));
+        tblKozbeszAzonKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("keljarasAzon"));
+        tblBeszNevKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("beszerzesNeve"));
+        tblKozbeszFajtKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszerzesFajtaja"));
         tblSzerzFajtKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodesFajtaja"));
         tblCPVKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("cpvKod"));
         tblProjektKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("projekt"));
-        tblKozbeszKezdetKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodesErteke"));
-        tblKozbeszVegeKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodesTervezettLezarasa"));
-        tblBecsultErtKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszerzesFajtaja"));
+        tblKozbeszKezdetKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszKezdete"));
+        tblKozbeszVegeKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszVege"));
+        tblBecsultErtKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("becsultErtek"));
         
         String sql1 = "SELECT KOZBESZERZESIELJARASFAJTAI, KEJID FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql1);
+            ResultSet rs = serverImpl.adatbazisReport(sql1);
             ObservableList obListKej = FXCollections.observableArrayList();
             while (rs.next()) {
                 listKej.add(new ErtekLista(new BigDecimal(rs.getString("KEJID")),
                         rs.getString("KOZBESZERZESIELJARASFAJTAI")));
                 obListKej.add(rs.getString("KOZBESZERZESIELJARASFAJTAI"));
             }
-            KozbeszFajtKereses.getItems().clear();
-            KozbeszFajtKereses.setItems(FXCollections.observableList(obListKej));
+            KozbeszFajtKozbeszKereses.getItems().clear();
+            KozbeszFajtKozbeszKereses.setItems(FXCollections.observableList(obListKej));
         } catch (SQLException ex) {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
+        } catch (RemoteException ex) {
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            kapcsolat.closeConnection();
+         
         }
         String sql2 = "SELECT SZERZODESFAJTAID, SZERZODESFAJTA FROM SZERZODESFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql2);
+            ResultSet rs = serverImpl.adatbazisReport(sql2);
             ObservableList obListSzerzF = FXCollections.observableArrayList();
             while (rs.next()) {
                 listSzerzF.add(new ErtekLista(new BigDecimal(rs.getString("SZERZODESFAJTAID")),
                         rs.getString("SZERZODESFAJTA")));
                 obListSzerzF.add(rs.getString("SZERZODESFAJTA"));
             }
-            SzerzFajtKereses.getItems().clear();
-            SzerzFajtKereses.setItems(FXCollections.observableList(obListSzerzF));
+            SzerzFajtKozbeszKereses.getItems().clear();
+            SzerzFajtKozbeszKereses.setItems(FXCollections.observableList(obListSzerzF));
         } catch (SQLException ex) {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
+        } catch (RemoteException ex) {
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            kapcsolat.closeConnection();
+            
         }
         //meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         String sql3 = "SELECT CPVKOD, CPVID FROM CPVKODOK WHERE LATHATO=TRUE";
         try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql3);
+            ResultSet rs = serverImpl.adatbazisReport(sql3);
             ObservableList obListCpv = FXCollections.observableArrayList();
             while (rs.next()) {
                 listCpv.add(new ErtekLista(new BigDecimal(rs.getString("CPVID")),
                         rs.getString("CPVKOD")));
                 obListCpv.add(rs.getString("CPVKOD"));
             }
-            CPVKereses.getItems().clear();
-            CPVKereses.setItems(FXCollections.observableList(obListCpv));
+            CPVKozbeszKereses.getItems().clear();
+            CPVKozbeszKereses.setItems(FXCollections.observableList(obListCpv));
         } catch (SQLException ex) {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
+        } catch (RemoteException ex) {
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            kapcsolat.closeConnection();
+            
         }
         String sql4 = "SELECT PROJEKT, PROJEKTID FROM PROJEKTEK WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql4);
+            ResultSet rs = serverImpl.adatbazisReport(sql4);
             ObservableList obListProjekt = FXCollections.observableArrayList();
             while (rs.next()) {
                 listProjekt.add(new ErtekLista(new BigDecimal(rs.getString("PROJEKTID")),
                         rs.getString("PROJEKT")));
                 obListProjekt.add(rs.getString("PROJEKT"));
             }
-            ProjektKereses.getItems().clear();
-            ProjektKereses.setItems(FXCollections.observableList(obListProjekt));
+            ProjektKozbeszKereses.getItems().clear();
+            ProjektKozbeszKereses.setItems(FXCollections.observableList(obListProjekt));
         } catch (SQLException ex) {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
+        } catch (RemoteException ex) {
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            kapcsolat.closeConnection();
+            
         }
-        String sql5 = "SELECT SZFID, SZERZODOFEL FROM SZERZODO_FEL";
-        try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql5);
-            ObservableList obListSzerzFel = FXCollections.observableArrayList();
-            while (rs.next()) {
-                listSzerzFel.add(new ErtekLista(new BigDecimal(rs.getString("SZFID")),
-                        rs.getString("SZERZODOFEL")));
-                obListSzerzFel.add(rs.getString("SZERZODOFEL"));
-            }
-            SzerzFelKereses.getItems().clear();
-            SzerzFelKereses.setItems(FXCollections.observableList(obListSzerzFel));
-        } catch (SQLException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
-            uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
-        } finally {
-            kapcsolat.closeConnection();
-        }
+        
     }
-    
-    
     
     @FXML
     private void kereses(ActionEvent event) {
+        if (KozbeszTolKozbeszKereses.getValue() != null && KozbeszTolKozbeszKereses.getValue().isAfter(KozbeszIgKozbeszKereses.getValue())) {
+            uzenet.setText("Az -ig dátum nem lehet nagyobb a -tól dátumnál!");
+        } else {
+            uzenet.setText("");
+        }
+        if (KozbeszLezarTolKozbeszKereses.getValue() != null && KozbeszLezarTolKozbeszKereses.getValue().isAfter(KozbeszLezarIgKozbeszKereses.getValue())) {
+            uzenet.setText("Az -ig dátum nem lehet nagyobb a -tól dátumnál!");
+        } else {
+            uzenet.setText("");
+        }
+        
+        String sql;
+        sql = "select sorszam, besznev, keljarasazon, bertek, kef.kozbeszerzesieljarasfajta, "
+                + "szfaj.szerzodesfajtaja, c.cpvkod, p.projekt, sz.kozbeszkezdete, "
+                + "sz.kozbeszvege, \n"
+                + "from szerzodes sz, projektek p, szerzodesfajtai szfaj, "
+                + "kozbeszerzesieljarasfajtai kef, cpvkodok c\n"
+                + "where sz.projekt=p.projektid "
+                + "and sz.szerzodesfajtaja=szfaj.szerzodesfajtaid "
+                + "and sz.kozbeszerzesieljarasfajta=kef.kejid "
+                + "and sz.cpvkod=c.cpvid\n ";
+
+        if (BeszSorszamKozbeszKereses.getText() != null && !BeszSorszamKozbeszKereses.getText().equals("")) {
+            sql += "and sorszam = '" + BeszSorszamKozbeszKereses.getText() + "' ";
+        }
+        if (SzerzNevKozbeszKereses.getText() != null && !SzerzNevKozbeszKereses.getText().equals("")) {
+            sql += "and besznev = '" + SzerzNevKozbeszKereses.getText() + "' ";
+        }
+        if (KozbeszAzonKozbeszKereses.getText() != null && !KozbeszAzonKozbeszKereses.getText().equals("")) {
+            sql += "and keljarasazon = '" + KozbeszAzonKozbeszKereses.getText() + "' ";
+        }
+       
+        if (KozbeszFajtKozbeszKereses.getValue() != null) {
+            sql += "and kozbeszerzesieljarasfajta <= '" + KozbeszFajtKozbeszKereses.getValue() + "' ";
+        }
+        if (SzerzFajtKozbeszKereses.getValue() != null) {
+            sql += "and szerzodesfajtaja <= '" + SzerzFajtKozbeszKereses.getValue() + "' ";
+        }
+        if (CPVKozbeszKereses.getValue() != null) {
+            sql += "and cpvkod = '" + CPVKozbeszKereses.getValue() + "' ";
+        }
+        if (ProjektKozbeszKereses.getValue() != null) {
+            sql += "and projekt = '" + ProjektKozbeszKereses.getValue() + "' ";
+        }
+
+        if (KozbeszTolKozbeszKereses.getValue() != null) {
+            sql += "and sz.kozbeszkezdete >= '" + KozbeszTolKozbeszKereses.getValue() + "' ";
+        }
+        if (KozbeszIgKozbeszKereses.getValue() != null) {
+            sql += "and sz.kozbeszkezdete <= '" + KozbeszIgKozbeszKereses.getValue() + "' ";
+        }
+
+        if (KozbeszLezarTolKozbeszKereses.getValue() != null) {
+            sql += "and sz.kozbeszvege >= '" + KozbeszLezarTolKozbeszKereses.getValue() + "' ";
+        }
+        if (KozbeszLezarIgKozbeszKereses.getValue() != null) {
+            sql += "and sz.kozbeszvege <= '" + KozbeszLezarIgKozbeszKereses.getValue() + "' ";
+        }
+        if (BecsultErtekMinKozbeszKereses.getText() != null) {
+            sql += "and bertek >= '" + BecsultErtekMinKozbeszKereses.getText() + "' ";
+        }
+        if (BecsultErtekMaxKozbeszKereses.getText() != null) {
+            sql += "and bertek <= '" + BecsultErtekMaxKozbeszKereses.getText() + "' ";
+        }
+        sql += "group by sorszam";
+        System.out.println(sql);
+        ArrayList<Szerzodes> projektEgybentartasLista = null;
+        try {
+           
+                    
+                    serverImpl.szerzodesKereses(sql);
+        } catch (RemoteException ex) {
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        projektEgybentartasLista.add(new ProjektEgybentartas("projekt neve", "15"));
+        KozbeszerzesekTable.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
+        
+        
     }
 
     @FXML
-    private void keresesVissza(ActionEvent event) {
+    private void keresesVissza(ActionEvent event) throws IOException {
+        Stage stage = (Stage) CtrlKozbeszKeresesVissza.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("fomenu.fxml"));
+        Scene scene = new Scene(root);
+        File f = new File("alkfejl.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        stage.setScene(scene);
+        stage.show();
     }
     
 }
