@@ -6,6 +6,7 @@
 package knyrrmi2;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -24,7 +25,7 @@ public class Server extends UnicastRemoteObject implements Remote {
             KnyrImpl knyrImpl = new KnyrImpl();
             registry.rebind("knyr", knyrImpl);
             System.out.println("server is ready...");
-        } catch (Exception ex) {
+        } catch (RemoteException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
         
