@@ -32,12 +32,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import model.ErtekLista;
 import model.Szerzodes;
+import model.SzerzodoFel;
 
 /**
  *
@@ -127,6 +130,19 @@ public class KozbeszKeresesKontroller implements Initializable{
         tblKozbeszKezdetKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszKezdete"));
         tblKozbeszVegeKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszVege"));
         tblBecsultErtKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("becsultErtek"));
+        KozbeszerzesekTable.setRowFactory(tv -> {
+           TableRow<Szerzodes> row = new TableRow<>();
+           row.setOnMouseClicked(event -> {
+             if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
+             && event.getClickCount() == 2) {
+
+                Szerzodes kivalasztott = row.getItem();
+               
+            
+        }
+    });
+    return row ;
+});
         
         String sql1 = "SELECT KOZBESZERZESIELJARASFAJTAI, KEJID FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {

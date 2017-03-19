@@ -16,9 +16,11 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Felhasználói fiók">
                     <items>                    </items>
-
-                        <MenuItem mnemonicParsing="false" text="Bezárás" />
-                        <MenuItem mnemonicParsing="false" text="Kijelentkezés" />
+                   <items>
+   
+                           <MenuItem mnemonicParsing="false" text="Bezárás" />
+                           <MenuItem mnemonicParsing="false" text="Kijelentkezés" />
+                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
@@ -61,14 +63,14 @@
                 <Label layoutX="521.0" layoutY="229.0" styleClass="textinputcontrol" text="Projekt" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="229.0" />
                 <ComboBox fx:id="ProjektKozbeszKereses" layoutX="661.0" layoutY="224.0" prefWidth="150.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="224.0" />
                 <Label layoutX="70.0" layoutY="279.0" styleClass="textinputcontrol" text="Köbeszerzési eljárás kezdete" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="279.0" />
-                <DatePicker fx:id="SzerzKotTolKozbeszKereses" layoutX="280.0" layoutY="274.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="274.0" />
+                <DatePicker fx:id="KozbeszTolKozbeszKereses" layoutX="280.0" layoutY="274.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="274.0" />
                 <Label layoutX="460.0" layoutY="279.0" styleClass="textinputcontrol" text="-tól" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="279.0" />
-                <DatePicker fx:id="SzerzKotIgKozbeszKereses" layoutX="520.0" layoutY="274.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="274.0" />
+                <DatePicker fx:id="KozbeszIgKozbeszKereses" layoutX="520.0" layoutY="274.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="274.0" />
                 <Label layoutX="700.0" layoutY="279.0" styleClass="textinputcontrol" text="-ig" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="279.0" />
                 <Label layoutX="70.0" layoutY="329.0" styleClass="textinputcontrol" text="Közbeszerzési eljárás vége" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="329.0" />
-                <DatePicker fx:id="SzerzLezarTolKizbeszKereses" layoutX="280.0" layoutY="324.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="324.0" />
+                <DatePicker fx:id="KozbeszLezarTolKozbeszKereses" layoutX="280.0" layoutY="324.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="324.0" />
                 <Label layoutX="460.0" layoutY="329.0" styleClass="textinputcontrol" text="-tól" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="329.0" />
-                <DatePicker fx:id="SzerzLezarIgKozbeszKereses" layoutX="520.0" layoutY="324.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="324.0" />
+                <DatePicker fx:id="KozbeszLezarIgKozbeszKereses" layoutX="520.0" layoutY="324.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="324.0" />
                 <Label layoutX="700.0" layoutY="329.0" styleClass="textinputcontrol" text="-ig" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="329.0" />
             <Label layoutX="109.0" layoutY="382.0" text="Becsült érték" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="379.0" />
             <TextField fx:id="BecsultErtekMinKozbeszKereses" layoutX="321.0" layoutY="378.0" AnchorPane.topAnchor="374.0" />
