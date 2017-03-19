@@ -8,8 +8,14 @@ package knyrrmi2;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -49,15 +55,22 @@ public class Projekt_egybController implements Initializable {
     @FXML
     private Button CtrlPrEgybeVissza;
 
-    private Kapcsolat kapcsolat = new Kapcsolat();
     @FXML
     private Label hibaLabel;
+    
+    KnyrInterface serverImpl;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
+        } catch (RemoteException | NotBoundException ex) {
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         PrEgybeProjekt.setCellValueFactory(new PropertyValueFactory<ProjektEgybentartas, String>("projektNev"));
         PrEgybeOsszeg.setCellValueFactory(new PropertyValueFactory<ProjektEgybentartas, String>("projektErtek"));
     }
@@ -75,7 +88,7 @@ public class Projekt_egybController implements Initializable {
     }
 
     @FXML
-    private void lekerdezesAction(ActionEvent event) {
+    private void lekerdezesAction(ActionEvent event) throws RemoteException {
         if (PrEgybeTol.getValue()!=null && PrEgybeTol.getValue().isAfter(PrEgybeIg.getValue())) {
             hibaLabel.setText("Az -ig dátum nem lehet nagyobb a -tól dátumnál!");
         } else {
@@ -94,7 +107,7 @@ public class Projekt_egybController implements Initializable {
         sql += "group by sz.projekt";
         System.out.println(sql);
         ArrayList<ProjektEgybentartas> projektEgybentartasLista = //new ArrayList<>();
-                kapcsolat.projektEgybOsszes(sql);
+                serverImpl.projektEgybOsszes(sql);
 //        projektEgybentartasLista.add(new ProjektEgybentartas("projekt neve", "15"));
         TablePrEgybe.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
     }

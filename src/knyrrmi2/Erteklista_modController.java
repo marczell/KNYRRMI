@@ -8,6 +8,10 @@ package knyrrmi2;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,7 +61,8 @@ public class Erteklista_modController implements Initializable {
     @FXML
     private Label uzenet;
     
-    private Kapcsolat kapcsolat = new Kapcsolat();
+    KnyrInterface serverImpl;
+
     
     String tabla = new String();
     String oszlop = new String();
@@ -70,7 +75,13 @@ public class Erteklista_modController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        try {
+            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
+        } catch (RemoteException | NotBoundException ex) {
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
                
         List<String> list = new ArrayList<>();// ezt a feltöltési módszert ComboBoxhoz ajánlották, de hátha itt is működik
         list.add("CPV kód");
@@ -94,7 +105,7 @@ public class Erteklista_modController implements Initializable {
                 try {
                     tabla = "CPVKODOK";
                     oszlop = "CPVKOD";
-                    ResultSet rs = kapcsolat.adatbazisReport(sql); 
+                    ResultSet rs = serverImpl.adatbazisReport(sql); 
                     while (rs.next()) {
                         String s = rs.getString("CPVKOD");
                         list2.add(s);
@@ -102,14 +113,17 @@ public class Erteklista_modController implements Initializable {
                 } catch (SQLException ex) {
                 Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
                     uzenet.setText("Hiba az értékkeresés során!");
-                } finally {
-                    kapcsolat.closeConnection();
-                }break;
+                } catch (RemoteException ex) {
+              Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+          } finally {
+                   
+                }
+break;
             case "Közbeszerzési eljárás fajta": sql = "SELECT KOZBESZERZESIELJARASFAJTAI FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";
                 try { 
                     tabla = "KOZBESZERZESIELJARASFAJTAI";
                     oszlop = "KOZBESZERZESIELJARASFAJTAI";
-                    ResultSet rs = kapcsolat.adatbazisReport(sql); 
+                    ResultSet rs = serverImpl.adatbazisReport(sql); 
                     while (rs.next()) {
                         String s = rs.getString("KOZBESZERZESIELJARASFAJTAI");
                         list2.add(s);
@@ -117,14 +131,17 @@ public class Erteklista_modController implements Initializable {
                 } catch (SQLException ex) {
                     Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
                     uzenet.setText("Hiba az értékkeresés során!");
-                } finally {
-                    kapcsolat.closeConnection();
-                }break;
+                } catch (RemoteException ex) {
+              Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+          } finally {
+                    
+                }
+break;
             case "Projekt":   sql = "SELECT PROJEKT FROM PROJEKTEK WHERE LATHATO=TRUE";
                 try {
                     tabla = "PROJEKTEK";
                      oszlop = "PROJEKT";
-                    ResultSet rs = kapcsolat.adatbazisReport(sql); 
+                    ResultSet rs = serverImpl.adatbazisReport(sql); 
                     while (rs.next()) {
                         String s = rs.getString("PROJEKT");
                         list2.add(s);
@@ -132,14 +149,17 @@ public class Erteklista_modController implements Initializable {
                 } catch (SQLException ex) {
                     Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
                     uzenet.setText("Hiba az értékkeresés során!");
-                } finally {
-                    kapcsolat.closeConnection();
-                }break;
+                } catch (RemoteException ex) {
+              Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+          } finally {
+                    
+                }
+break;
             case "Szerződés fajta":   sql = "SELECT SZERZODESFAJTA FROM SZERZODESFAJTAI WHERE LATHATO=TRUE";
                 try {
                     tabla = "SZERZODESFAJTAI";
                     oszlop = "SZERZODESFAJTA";
-                    ResultSet rs = kapcsolat.adatbazisReport(sql); 
+                    ResultSet rs = serverImpl.adatbazisReport(sql); 
                     while (rs.next()) {
                         String s = rs.getString("SZERZODESFAJTA");
                         list2.add(s);
@@ -147,8 +167,10 @@ public class Erteklista_modController implements Initializable {
                 } catch (SQLException ex) {
                     Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
                     uzenet.setText("Hiba az értékkeresés során!");
-                } finally {
-                    kapcsolat.closeConnection();
+                } catch (RemoteException ex) {
+              Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+          } finally {
+                   
                 } 
                 break;
           }
@@ -168,13 +190,15 @@ public class Erteklista_modController implements Initializable {
         Object kivalasztottErtek = OsszesErtek.getSelectionModel().getSelectedItem();
         String sql = "UPDATE "+tabla+" SET LATHATO=FALSE WHERE "+oszlop+" = '"+kivalasztottErtek.toString()+"'";
         try {
-                kapcsolat.adatbazisbaInsertalas(sql);
+                serverImpl.adatbazisbaInsertalas(sql);
                 uzenet.setText("Sikeres mentése a " + kivalasztottErtek.toString());
             } catch (SQLException ex) {
                 Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
                 uzenet.setText("Hiba a mentés során!");
-            } finally {
-                kapcsolat.closeConnection();
+            } catch (RemoteException ex) {
+            Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+                
             }
     }
     @FXML
@@ -200,15 +224,17 @@ public class Erteklista_modController implements Initializable {
         String sql = "INSERT INTO "+tabla+" ("+oszlop+",LATHATO) VALUES ('"+UjErtek.getText()+"', TRUE)";
     
         try {
-                kapcsolat.adatbazisbaInsertalas(sql);
+                serverImpl.adatbazisbaInsertalas(sql);
                 uzenet.setText("Sikeres mentése a " + UjErtek.getText());
                 UjErtek.clear();
             } catch (SQLException ex) {
                 Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
                 uzenet.setText("Hiba a mentés során!");
                  UjErtek.clear();
-            } finally {
-                kapcsolat.closeConnection();
+            } catch (RemoteException ex) {
+            Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+               
             }
      }
     

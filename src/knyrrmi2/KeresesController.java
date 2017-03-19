@@ -44,17 +44,10 @@ import model.Szerzodes;
  */
 public class KeresesController implements Initializable {
 
-    @FXML
-    private Button CtrlKereses;
-    @FXML
     private TextField SzerzNevKereses;
-    @FXML
     private ComboBox<ErtekLista> KozbeszFajtKereses;
-    @FXML
     private ComboBox<?> SzerzFajtKereses;
-    @FXML
     private ComboBox<?> CPVKereses;
-    @FXML
     private ComboBox<?> ProjektKereses;
     @FXML
     private DatePicker SzerzKotTolKereses;
@@ -67,26 +60,16 @@ public class KeresesController implements Initializable {
     @FXML
     private DatePicker SzerzLezarIgKereses;
     @FXML
-    private TableColumn<Szerzodes, String> SorszamKereses;
-    @FXML
+    private TextField SorszamKereses;
     private TableColumn<Szerzodes, String> SzerzKotKereses;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzLezarKereses;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzertekKereses;
-    @FXML
     private Button CtrlKeresesVissza;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzNevKeres;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzFelKeres;
-    @FXML
     private TableColumn<Szerzodes, String> KozbeszFajtKeres;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzFajtKeres;
-    @FXML
     private TableColumn<Szerzodes, String> CPVKeres;
-    @FXML
     private TableColumn<Szerzodes, String> ProjektKeres;
 
     private Kapcsolat kapcsolat = new Kapcsolat();
@@ -99,8 +82,35 @@ public class KeresesController implements Initializable {
     
     @FXML
     private Label uzenet;
-    @FXML
     private TableView<Szerzodes> SzerzodesekTable;
+    @FXML
+    private Button CtrlKozbeszKeresesVissza;
+    @FXML
+    private TextField SzerzNevKozbeszKereses;
+    @FXML
+    private TextField KozbeszAzonKozbeszKereses;
+    @FXML
+    private ComboBox<?> KozbeszFajtKozbeszKereses;
+    @FXML
+    private ComboBox<?> SzerzFajtKozbeszKereses;
+    @FXML
+    private ComboBox<?> CPVKozbeszKereses;
+    @FXML
+    private ComboBox<?> ProjektKozbeszKereses;
+    @FXML
+    private DatePicker SzerzKotTolKozbeszKereses;
+    @FXML
+    private DatePicker SzerzKotIgKozbeszKereses;
+    @FXML
+    private DatePicker SzerzLezarTolKizbeszKereses;
+    @FXML
+    private DatePicker SzerzLezarIgKozbeszKereses;
+    @FXML
+    private TextField BecsultErtekMinKozbeszKereses;
+    @FXML
+    private TextField BecsultErtekMaxKozbeszKereses;
+    @FXML
+    private TextField KozbeszSorszamKozbeszKereses;
 
 
     /**
@@ -218,7 +228,6 @@ public class KeresesController implements Initializable {
         return null;
     }
 
-    @FXML
     private void kereses(ActionEvent event) {
 //        System.out.println(KozbeszFajtKereses.getId());
 //        System.out.println(idKereso(ertekListaLista));

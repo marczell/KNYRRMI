@@ -8,10 +8,14 @@ package knyrrmi2;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,18 +57,25 @@ public class CPV_egybController implements Initializable {
     //private Kapcsolat kapcsolat = new Kapcsolat();
     @FXML
     private Label hibaLabel;
+    KnyrInterface serverImpl;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
+        } catch (RemoteException | NotBoundException ex) {
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         cpvEgybNev.setCellValueFactory(new PropertyValueFactory<DataEgybentartas, String>("nev"));
         cpvEgybErtek.setCellValueFactory(new PropertyValueFactory<DataEgybentartas, String>("ertek"));
     }
 
     @FXML
-    private void lekerdezesAction(ActionEvent event) {
+    private void lekerdezesAction(ActionEvent event) throws RemoteException {
         if (CtrlCpvTol.getValue()!=null && CtrlCpvTol.getValue().isAfter(CtrlCpvIg.getValue())) {
             hibaLabel.setText("Az -ig dátum nem lehet nagyobb a -tól dátumnál!");
         } else {
@@ -84,15 +95,10 @@ public class CPV_egybController implements Initializable {
         System.out.println(sql);
         
         ArrayList<DataEgybentartas> dataEgybentartasLista=null;
-        try {
-            Registry myRegistry= LocateRegistry.getRegistry("127.0.0.1",1099);
-            KnyrInterface serverImpl = (KnyrInterface)myRegistry.lookup("knyr");
+        
             dataEgybentartasLista=serverImpl.cpvEgybOsszes(sql);
             cpvEgybenTable.setItems(FXCollections.observableArrayList(dataEgybentartasLista));
-            //KnyrInterface knyrInterface = (KnyrInterface) Naming.lookup("almafa");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+           
         
 //        cpvEgybentartasLista.add(new CpvEgybentartas("cpv neve", "15"));
         

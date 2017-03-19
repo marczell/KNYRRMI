@@ -10,15 +10,15 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.KeresesController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.KozbeszKeresesKontroller">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
                 <Menu mnemonicParsing="false" text="Felhasználói fiók">
-                    <items>
+                    <items>                    </items>
+
                         <MenuItem mnemonicParsing="false" text="Bezárás" />
                         <MenuItem mnemonicParsing="false" text="Kijelentkezés" />
-                    </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
@@ -77,16 +77,16 @@
             <Label layoutX="757.0" layoutY="378.0" styleClass="textinputcontrol" text="-ig" />
                 <TableView fx:id="KozbeszerzesekTable" layoutX="12.0" layoutY="433.0" prefHeight="200.0" prefWidth="964.0">
                     <columns>
-                        <TableColumn fx:id="BeszSorszamKozbeszKereses" prefWidth="75.0" text="Beszerzés sorszáma" />
-                        <TableColumn fx:id="KozbeszAzonKozbeszKeres" prefWidth="151.0" text="Közbeszerzési eljárás azonosító" />
-                        <TableColumn fx:id="BeszNevKozbeszKeres" prefWidth="92.0" text="Beszerzés neve" />
-                        <TableColumn fx:id="KozbeszFajtKozbeszKeres" minWidth="5.0" prefWidth="82.0" text="Közbeszerzés fajtája" />
-                        <TableColumn fx:id="SzerzFajtKozbeszKeres" prefWidth="96.0" text="Szerződés fajtája" />
-                        <TableColumn fx:id="CPVKozbeszKeres" prefWidth="67.0" text="CPV kód" />
-                        <TableColumn fx:id="ProjektKozbeszKeres" prefWidth="103.0" text="Projekt" />
-                        <TableColumn fx:id="KozbeszKezdetKozbeszKereses" prefWidth="97.0" text="Közbeszerzési eljárás kezdete" />
-                        <TableColumn fx:id="KozbeszVegeKozbeszKereses" prefWidth="102.0" text="Közbeszerzési eljárás vége" />
-                        <TableColumn fx:id="BecsultErtKozbeszKereses" prefWidth="98.0" text="Becsült értek" />
+                        <TableColumn fx:id="tblBeszSorszamKozbeszKereses" prefWidth="75.0" text="Beszerzés sorszáma" />
+                        <TableColumn fx:id="tblKozbeszAzonKozbeszKeres" prefWidth="151.0" text="Közbeszerzési eljárás azonosító" />
+                        <TableColumn fx:id="tblBeszNevKozbeszKeres" prefWidth="92.0" text="Beszerzés neve" />
+                        <TableColumn fx:id="tblKozbeszFajtKozbeszKeres" minWidth="5.0" prefWidth="82.0" text="Közbeszerzés fajtája" />
+                        <TableColumn fx:id="tblSzerzFajtKozbeszKeres" prefWidth="96.0" text="Szerződés fajtája" />
+                        <TableColumn fx:id="tblCPVKozbeszKeres" prefWidth="67.0" text="CPV kód" />
+                        <TableColumn fx:id="tblProjektKozbeszKeres" prefWidth="103.0" text="Projekt" />
+                        <TableColumn fx:id="tblKozbeszKezdetKozbeszKereses" prefWidth="97.0" text="Közbeszerzési eljárás kezdete" />
+                        <TableColumn fx:id="tblKozbeszVegeKozbeszKereses" prefWidth="102.0" text="Közbeszerzési eljárás vége" />
+                        <TableColumn fx:id="tblBecsultErtKozbeszKereses" prefWidth="98.0" text="Becsült értek" />
                     </columns>
                 </TableView>
             </children>
