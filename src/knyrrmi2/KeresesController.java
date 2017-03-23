@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -71,8 +75,9 @@ public class KeresesController implements Initializable {
     private TableColumn<Szerzodes, String> SzerzFajtKeres;
     private TableColumn<Szerzodes, String> CPVKeres;
     private TableColumn<Szerzodes, String> ProjektKeres;
-
-    private Kapcsolat kapcsolat = new Kapcsolat();
+        KnyrInterface serverImpl;
+ 
+   
 
     ArrayList<ErtekLista> listKej = new ArrayList<>();
     ArrayList<ErtekLista> listSzerzF = new ArrayList<>();
@@ -118,7 +123,16 @@ public class KeresesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        SorszamKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("sorszam"));
+        
+        try {
+            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
+        } catch (RemoteException | NotBoundException ex) {
+            Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+       
         SzerzNevKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodesNeve"));
         SzerzFelKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodoFel"));
         SzerzKotKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodesKotesDatum"));
@@ -131,7 +145,12 @@ public class KeresesController implements Initializable {
         
         String sql1 = "SELECT KOZBESZERZESIELJARASFAJTAI, KEJID FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql1);
+            ResultSet rs = null;
+            try {
+                rs = serverImpl.adatbazisReport(sql1);
+            } catch (RemoteException ex) {
+                Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ObservableList obListKej = FXCollections.observableArrayList();
             while (rs.next()) {
                 listKej.add(new ErtekLista(new BigDecimal(rs.getString("KEJID")),
@@ -144,11 +163,11 @@ public class KeresesController implements Initializable {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
         } finally {
-            kapcsolat.closeConnection();
+           
         }
         String sql2 = "SELECT SZERZODESFAJTAID, SZERZODESFAJTA FROM SZERZODESFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql2);
+            ResultSet rs = serverImpl.adatbazisReport(sql2);
             ObservableList obListSzerzF = FXCollections.observableArrayList();
             while (rs.next()) {
                 listSzerzF.add(new ErtekLista(new BigDecimal(rs.getString("SZERZODESFAJTAID")),
@@ -160,13 +179,15 @@ public class KeresesController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
+        } catch (RemoteException ex) {
+            Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            kapcsolat.closeConnection();
+            
         }
         //meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         String sql3 = "SELECT CPVKOD, CPVID FROM CPVKODOK WHERE LATHATO=TRUE";
         try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql3);
+            ResultSet rs = serverImpl.adatbazisReport(sql3);
             ObservableList obListCpv = FXCollections.observableArrayList();
             while (rs.next()) {
                 listCpv.add(new ErtekLista(new BigDecimal(rs.getString("CPVID")),
@@ -178,12 +199,14 @@ public class KeresesController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
+        } catch (RemoteException ex) {
+            Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            kapcsolat.closeConnection();
+            
         }
         String sql4 = "SELECT PROJEKT, PROJEKTID FROM PROJEKTEK WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql4);
+            ResultSet rs = serverImpl.adatbazisReport(sql4);
             ObservableList obListProjekt = FXCollections.observableArrayList();
             while (rs.next()) {
                 listProjekt.add(new ErtekLista(new BigDecimal(rs.getString("PROJEKTID")),
@@ -195,12 +218,14 @@ public class KeresesController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
+        } catch (RemoteException ex) {
+            Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            kapcsolat.closeConnection();
+           
         }
         String sql5 = "SELECT SZFID, SZERZODOFEL FROM SZERZODO_FEL";
         try {
-            ResultSet rs = kapcsolat.adatbazisReport(sql5);
+            ResultSet rs = serverImpl.adatbazisReport(sql5);
             ObservableList obListSzerzFel = FXCollections.observableArrayList();
             while (rs.next()) {
                 listSzerzFel.add(new ErtekLista(new BigDecimal(rs.getString("SZFID")),
@@ -212,8 +237,10 @@ public class KeresesController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
+        } catch (RemoteException ex) {
+            Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            kapcsolat.closeConnection();
+            
         }
     }
     
@@ -288,8 +315,13 @@ public class KeresesController implements Initializable {
         }
         sql += "group by sorszam";
         System.out.println(sql);
-        ArrayList<Szerzodes> projektEgybentartasLista = //new ArrayList<>();
-                kapcsolat.szerzodesKereses(sql);
+        ArrayList<Szerzodes> projektEgybentartasLista = null;
+        try {
+            projektEgybentartasLista = //new ArrayList<>();
+                    serverImpl.szerzodesKereses(sql);
+        } catch (RemoteException ex) {
+            Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 //        projektEgybentartasLista.add(new ProjektEgybentartas("projekt neve", "15"));
         SzerzodesekTable.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
     }

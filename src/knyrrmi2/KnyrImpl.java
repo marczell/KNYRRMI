@@ -145,11 +145,11 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
             while (rs.next()) {
                 Szerzodes szerzodes
                         = new Szerzodes(rs.getObject(1).toString(), rs.getObject(2).toString(),
-                            rs.getObject(3).toString(), rs.getObject(4).toString(),
+                            rs.getObject(3).toString(), Integer.getInteger(rs.getObject(4).toString()),
                             rs.getObject(5).toString(), rs.getObject(6).toString(),
                             rs.getObject(7).toString(), rs.getObject(8).toString(),
                             rs.getObject(9).toString(), rs.getObject(10).toString(), 
-                            rs.getObject(11).toString(), rs.getObject(12).toString(), rs.getObject(13).toString(),
+                            rs.getObject(11).toString(), rs.getObject(12).toString(), Integer.getInteger(rs.getObject(13).toString()),
                             rs.getObject(14).toString(), rs.getObject(15).toString(), rs.getObject(16).toString(),
                             rs.getObject(17).toString(), rs.getObject(18).toString(),
                             rs.getObject(19).toString(), rs.getObject(20).toString(), rs.getObject(21).toString());

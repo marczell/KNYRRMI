@@ -130,6 +130,7 @@ public class KozbeszKeresesKontroller implements Initializable{
         tblKozbeszKezdetKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszKezdete"));
         tblKozbeszVegeKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszVege"));
         tblBecsultErtKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("becsultErtek"));
+        
         KozbeszerzesekTable.setRowFactory(tv -> {
            TableRow<Szerzodes> row = new TableRow<>();
            row.setOnMouseClicked(event -> {
@@ -137,11 +138,25 @@ public class KozbeszKeresesKontroller implements Initializable{
              && event.getClickCount() == 2) {
 
                 Szerzodes kivalasztott = row.getItem();
+                Stage stage = (Stage) row.getScene().getWindow();
+                Parent root = null;
+                 try {
+                     root = FXMLLoader.load(getClass().getResource("KozbeszrogzitesController.fxml"));
+                 } catch (IOException ex) {
+                     Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+        Scene scene = new Scene(root);
+         File f = new File("alkfejl.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        stage.setScene(scene);
+        stage.show();
                
             
         }
     });
     return row ;
+    
 });
         
         String sql1 = "SELECT KOZBESZERZESIELJARASFAJTAI, KEJID FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
