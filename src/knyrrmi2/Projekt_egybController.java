@@ -69,7 +69,7 @@ public class Projekt_egybController implements Initializable {
             Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Projekt_egybController.class.getName()).log(Level.SEVERE, null, ex);
         }
         PrEgybeProjekt.setCellValueFactory(new PropertyValueFactory<ProjektEgybentartas, String>("projektNev"));
         PrEgybeOsszeg.setCellValueFactory(new PropertyValueFactory<ProjektEgybentartas, String>("projektErtek"));

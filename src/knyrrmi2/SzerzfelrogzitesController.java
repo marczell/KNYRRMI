@@ -118,7 +118,7 @@ public class SzerzfelrogzitesController implements Initializable {
             Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SzerzfelrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         }
        tblszfid.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szfid"));
        tblSzerzfel.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szerzodoFel"));

@@ -80,7 +80,7 @@ public class Erteklista_modController implements Initializable {
             Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
         }
                
         List<String> list = new ArrayList<>();// ezt a feltöltési módszert ComboBoxhoz ajánlották, de hátha itt is működik

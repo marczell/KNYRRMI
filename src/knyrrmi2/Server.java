@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Marcell
  */
-public class Server extends UnicastRemoteObject implements Remote {
+public class Server implements Remote {
 
     public static void main(String[] args) {
         try {

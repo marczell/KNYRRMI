@@ -29,6 +29,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
 
     private Connection conn = null;
     
+    
     public KnyrImpl() throws RemoteException {
     }
 
@@ -49,7 +50,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
                 data.add(cpvEgybentartas);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Kapcsolat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeConnection();
         }
@@ -62,9 +63,9 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/knyr?zeroDateTimeBehavior=convertToNull", "root", "");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Kapcsolat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Kapcsolat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -74,7 +75,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(Kapcsolat.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -123,7 +124,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
                 data.add(projektEgybentartas);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Kapcsolat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeConnection();
         }
@@ -155,7 +156,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
                 data.add(szerzodes);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Kapcsolat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeConnection();
         }

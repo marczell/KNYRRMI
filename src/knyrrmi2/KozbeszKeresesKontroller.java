@@ -118,7 +118,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         }
         tblBeszSorszamKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("sorszam"));
         tblKozbeszAzonKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("keljarasAzon"));
@@ -156,7 +156,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             KozbeszFajtKozbeszKereses.getItems().clear();
             KozbeszFajtKozbeszKereses.setItems(FXCollections.observableList(obListKej));
         } catch (SQLException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
         } catch (RemoteException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,7 +175,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             SzerzFajtKozbeszKereses.getItems().clear();
             SzerzFajtKozbeszKereses.setItems(FXCollections.observableList(obListSzerzF));
         } catch (SQLException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
         } catch (RemoteException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
@@ -195,7 +195,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             CPVKozbeszKereses.getItems().clear();
             CPVKozbeszKereses.setItems(FXCollections.observableList(obListCpv));
         } catch (SQLException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
         } catch (RemoteException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,7 +214,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             ProjektKozbeszKereses.getItems().clear();
             ProjektKozbeszKereses.setItems(FXCollections.observableList(obListProjekt));
         } catch (SQLException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
         } catch (RemoteException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);

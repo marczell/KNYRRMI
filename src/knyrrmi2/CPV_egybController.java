@@ -68,7 +68,7 @@ public class CPV_egybController implements Initializable {
             Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CPV_egybController.class.getName()).log(Level.SEVERE, null, ex);
         }
         cpvEgybNev.setCellValueFactory(new PropertyValueFactory<DataEgybentartas, String>("nev"));
         cpvEgybErtek.setCellValueFactory(new PropertyValueFactory<DataEgybentartas, String>("ertek"));
