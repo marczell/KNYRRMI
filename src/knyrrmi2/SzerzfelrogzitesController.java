@@ -77,7 +77,7 @@ public class SzerzfelrogzitesController implements Initializable {
     @FXML
     private Button CtrlSzerzfelVissza;
     @FXML
-            Button CtrlSzerzfelKereses;
+    private Button CtrlSzerzfelKereses;
     
     KnyrInterface serverImpl;       
   
@@ -200,7 +200,7 @@ public class SzerzfelrogzitesController implements Initializable {
             
             try {
                 serverImpl.adatbazisbaInsertalas(sql);
-                uzenet.setText("Sikeres mentése a " + SzerzFel.getText());
+                uzenet.setText("Sikeres mentése a " + SzerzFel.getText()+ "szerződőfélnek!");
                 szerzfelid.setText("");
                 SzerzFel.clear();
                 Varos.clear();
@@ -278,8 +278,8 @@ public class SzerzfelrogzitesController implements Initializable {
         System.out.println(sql);
         ArrayList<SzerzodoFel> szerzodoFelLista = new ArrayList<>();
         try {
-            serverImpl.adatbazisReport(sql);
-        } catch (SQLException | RemoteException ex) {
+           szerzodoFelLista = serverImpl.szerzodoFelKereses(sql);
+        } catch (RemoteException ex) {
             Logger.getLogger(SzerzfelrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         }
 

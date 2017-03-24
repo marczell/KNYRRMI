@@ -27,6 +27,25 @@ public class SzerzodoFel implements Serializable{
     private String kapcsolattartoNeve;
     private String kapcsolattartoTel;
     private String kapcsolattartoEmail;
+    
+    public SzerzodoFel (int szfid, String szerzodoFel, String szekhelyVaro, int szekhelyIranyitoszam, String szekhelyKozterulet, int szekhelyHazszam, String telefonszam, String faxszam, String email, String cegjegyzekszam, String adoszam, String kapcsolattartoNeve, String kapcsolattartoTel, String kapcsolattartoEmail){
+
+    this.szfid = szfid;
+    this.szerzodoFel = szerzodoFel;
+    this.szekhelyVaro = szekhelyVaro;
+    this.szekhelyIranyitoszam = szekhelyIranyitoszam;
+    this.szekhelyKozterulet = szekhelyKozterulet;
+    this.szekhelyHazszam = szekhelyHazszam;
+    this.telefonszam = telefonszam;
+    this.faxszam = faxszam;
+    this.email = email;
+    this.cegjegyzekszam = cegjegyzekszam;
+    this.adoszam = adoszam;
+    this.kapcsolattartoNeve = kapcsolattartoNeve;
+    this.kapcsolattartoTel = kapcsolattartoTel;
+    this.kapcsolattartoEmail = kapcsolattartoEmail;
+
+}
 
     public int getSzfid() {
         return szfid;

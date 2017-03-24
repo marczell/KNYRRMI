@@ -13,6 +13,7 @@ import model.DataEgybentartas;
 import model.ProjektEgybentartas;
 import model.SerializableResultSet;
 import model.Szerzodes;
+import model.SzerzodoFel;
 
 /**
  *
@@ -29,4 +30,5 @@ public interface KnyrInterface extends Remote{
     public ArrayList<DataEgybentartas> cpvEgybOsszes(String sql) throws RemoteException;
     public ArrayList<ProjektEgybentartas> projektEgybOsszes(String sql) throws RemoteException;
     public ArrayList<Szerzodes> szerzodesKereses(String sql) throws RemoteException;
+    public ArrayList<SzerzodoFel> szerzodoFelKereses(String sql) throws RemoteException;
 }

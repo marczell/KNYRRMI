@@ -20,6 +20,7 @@ import model.DataEgybentartas;
 import model.ProjektEgybentartas;
 import model.SerializableResultSet;
 import model.Szerzodes;
+import model.SzerzodoFel;
 
 /**
  *
@@ -162,5 +163,34 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
         }
         return data;
     }
-    
+  
+    @Override
+    public ArrayList<SzerzodoFel> szerzodoFelKereses(String sql) throws RemoteException {
+        createConnection();
+        ArrayList<SzerzodoFel> data = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            String[] colnames = new String[rsmd.getColumnCount()];
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                colnames[i] = rsmd.getColumnName(i + 1);
+            }
+            while (rs.next()) {
+                SzerzodoFel szerzodofel
+                        = new SzerzodoFel (Integer.getInteger(rs.getObject(1).toString()), rs.getObject(2).toString(),
+                            rs.getObject(3).toString(), Integer.getInteger(rs.getObject(4).toString()),
+                            rs.getObject(5).toString(), Integer.getInteger(rs.getObject(6).toString()),
+                            rs.getObject(7).toString(), rs.getObject(8).toString(),
+                            rs.getObject(9).toString(), rs.getObject(10).toString(), 
+                            rs.getObject(11).toString(), rs.getObject(12).toString(), rs.getObject(13).toString(),
+                            rs.getObject(14).toString());
+                data.add(szerzodofel);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeConnection();
+        }
+        return data;
+    }
 }
