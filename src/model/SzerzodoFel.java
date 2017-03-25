@@ -15,7 +15,7 @@ public class SzerzodoFel implements Serializable{
     
     private int szfid;
     private String szerzodoFel;
-    private String szekhelyVaro;
+    private String szekhelyVaros;
     private int szekhelyIranyitoszam;
     private String szekhelyKozterulet;
     private int szekhelyHazszam;
@@ -28,11 +28,11 @@ public class SzerzodoFel implements Serializable{
     private String kapcsolattartoTel;
     private String kapcsolattartoEmail;
     
-    public SzerzodoFel (int szfid, String szerzodoFel, String szekhelyVaro, int szekhelyIranyitoszam, String szekhelyKozterulet, int szekhelyHazszam, String telefonszam, String faxszam, String email, String cegjegyzekszam, String adoszam, String kapcsolattartoNeve, String kapcsolattartoTel, String kapcsolattartoEmail){
+    public SzerzodoFel (int szfid, String szerzodoFel, String szekhelyVaros, int szekhelyIranyitoszam, String szekhelyKozterulet, int szekhelyHazszam, String telefonszam, String faxszam, String email, String cegjegyzekszam, String adoszam, String kapcsolattartoNeve, String kapcsolattartoTel, String kapcsolattartoEmail){
 
     this.szfid = szfid;
     this.szerzodoFel = szerzodoFel;
-    this.szekhelyVaro = szekhelyVaro;
+    this.szekhelyVaros = szekhelyVaros;
     this.szekhelyIranyitoszam = szekhelyIranyitoszam;
     this.szekhelyKozterulet = szekhelyKozterulet;
     this.szekhelyHazszam = szekhelyHazszam;
@@ -63,12 +63,12 @@ public class SzerzodoFel implements Serializable{
         this.szerzodoFel = szerzodoFel;
     }
 
-    public String getSzekhelyVaro() {
-        return szekhelyVaro;
+    public String getSzekhelyVaros() {
+        return szekhelyVaros;
     }
 
-    public void setSzekhelyVaro(String szekhelyVaro) {
-        this.szekhelyVaro = szekhelyVaro;
+    public void setSzekhelyVaros(String szekhelyVaro) {
+        this.szekhelyVaros = szekhelyVaro;
     }
 
     public int getSzekhelyIranyitoszam() {

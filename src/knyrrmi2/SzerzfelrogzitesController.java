@@ -140,7 +140,7 @@ public class SzerzfelrogzitesController implements Initializable {
                 SzerzodoFel kivalasztott = row.getItem();
                 szerzfelid.setText(Integer.toString(kivalasztott.getSzfid()));
                 SzerzFel.setText(kivalasztott.getSzerzodoFel());
-                Varos.setText(kivalasztott.getSzekhelyVaro());
+                Varos.setText(kivalasztott.getSzekhelyVaros());
                 Irszam.setText(Integer.toString(kivalasztott.getSzekhelyIranyitoszam()));
                 Kozterulet.setText(kivalasztott.getSzekhelyKozterulet());
                 Hazszam.setText(Integer.toString(kivalasztott.getSzekhelyHazszam()));
@@ -233,7 +233,7 @@ public class SzerzfelrogzitesController implements Initializable {
         sql = "SELECT `szfid`, `szerzodofel`, `szekhely-varos`, `szekhely-iranyitoszam`,"
                 + " `szekhely-kozterulet`, `szekhely-hazszam`, `telefonszam`, `faxszam`, `e-mail`,"
                 + " `cegjegyzekszam`, `adoszam`, `kapcsolattarto-neve`, `kapcsolattarto-tel`, "
-                + "`kapcsolattarto-email` FROM `szerzodo_fel` WHERE\n ";
+                + "`kapcsolattarto-email` FROM `szerzodo_fel` WHERE szfid IS NOT null \n ";
 
         if (SzerzFel.getText() != null && !SzerzFel.getText().equals("")) {
             sql += "szerzodofel = '" + SzerzFel.getText() + "' ";
@@ -281,6 +281,10 @@ public class SzerzfelrogzitesController implements Initializable {
            szerzodoFelLista = serverImpl.szerzodoFelKereses(sql);
         } catch (RemoteException ex) {
             Logger.getLogger(SzerzfelrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (NullPointerException e){
+            Logger.getLogger(SzerzfelrogzitesController.class.getName()).log(Level.SEVERE, null, e);
+            uzenet.setText("Nincs ilyen Szerződő fél!");
         }
 
         SzerzfelTable.setItems(FXCollections.observableArrayList(szerzodoFelLista));

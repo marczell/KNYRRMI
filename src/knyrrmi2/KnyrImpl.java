@@ -184,12 +184,14 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
                             rs.getObject(9).toString(), rs.getObject(10).toString(), 
                             rs.getObject(11).toString(), rs.getObject(12).toString(), rs.getObject(13).toString(),
                             rs.getObject(14).toString());
+                
                 data.add(szerzodofel);
+                System.out.println(szerzodofel.getSzerzodoFel());
             }
         } catch (SQLException ex) {
             Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            closeConnection();
+          
         }
         return data;
     }
