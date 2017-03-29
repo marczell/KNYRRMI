@@ -236,7 +236,7 @@ public class SzerzfelrogzitesController implements Initializable {
                 + "`kapcsolattarto-email` FROM `szerzodo_fel` WHERE szfid IS NOT null \n ";
 
         if (SzerzFel.getText() != null && !SzerzFel.getText().equals("")) {
-            sql += "szerzodofel = '" + SzerzFel.getText() + "' ";
+            sql += "and szerzodofel = '" + SzerzFel.getText() + "' ";
         }
         if (Varos.getText() != null && !Varos.getText().equals("")) {
             sql += "and szekhely-varos = '" + Varos.getText() + "' ";

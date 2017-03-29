@@ -40,7 +40,6 @@ import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import model.ErtekLista;
 import model.Szerzodes;
-import model.SzerzodoFel;
 
 /**
  *
