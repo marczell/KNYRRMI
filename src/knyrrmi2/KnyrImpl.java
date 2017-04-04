@@ -62,7 +62,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
     public void createConnection() throws RemoteException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/knyr?zeroDateTimeBehavior=convertToNull", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://br-cdbr-azure-south-a.cloudapp.net:3306/adattar?zeroDateTimeBehavior=convertToNull", "bae55a4830fff7", "0e873d5e");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
