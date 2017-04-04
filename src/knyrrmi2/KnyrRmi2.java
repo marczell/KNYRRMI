@@ -33,8 +33,6 @@ public class KnyrRmi2 extends Application{
         File f = new File("alkfejl.css");
         scene.getStylesheets().clear();
         scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-        //Application.setUserAgentStylesheet(null);
-        //StyleManager.getInstance().addUserAgentStylesheet("/src/alkfejl.css");
         primaryStage.setScene(scene);    
         primaryStage.show();
     }

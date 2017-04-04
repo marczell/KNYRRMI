@@ -9,73 +9,94 @@ import java.io.Serializable;
 
 /**
  *
- * @author Marcell
+ * @author zsofi
  */
-public class SzerzodoFel implements Serializable{
+
+public class SzerzodoFel implements Serializable {
+
     
-    private int szfid;
-    private String szerzodoFel;
+    private String szfid;
+    
+    private String szerzodofel;
+    
     private String szekhelyVaros;
-    private int szekhelyIranyitoszam;
+    
+    private String szekhelyIranyitoszam;
+    
     private String szekhelyKozterulet;
-    private int szekhelyHazszam;
+    
+    private String szekhelyHazszam;
+    
     private String telefonszam;
+    
     private String faxszam;
-    private String email;
+    
+    private String eMail;
+    
     private String cegjegyzekszam;
+    
     private String adoszam;
+    
     private String kapcsolattartoNeve;
+    
     private String kapcsolattartoTel;
+   
     private String kapcsolattartoEmail;
     
-    public SzerzodoFel (int szfid, String szerzodoFel, String szekhelyVaros, int szekhelyIranyitoszam, String szekhelyKozterulet, int szekhelyHazszam, String telefonszam, String faxszam, String email, String cegjegyzekszam, String adoszam, String kapcsolattartoNeve, String kapcsolattartoTel, String kapcsolattartoEmail){
 
-    this.szfid = szfid;
-    this.szerzodoFel = szerzodoFel;
-    this.szekhelyVaros = szekhelyVaros;
-    this.szekhelyIranyitoszam = szekhelyIranyitoszam;
-    this.szekhelyKozterulet = szekhelyKozterulet;
-    this.szekhelyHazszam = szekhelyHazszam;
-    this.telefonszam = telefonszam;
-    this.faxszam = faxszam;
-    this.email = email;
-    this.cegjegyzekszam = cegjegyzekszam;
-    this.adoszam = adoszam;
-    this.kapcsolattartoNeve = kapcsolattartoNeve;
-    this.kapcsolattartoTel = kapcsolattartoTel;
-    this.kapcsolattartoEmail = kapcsolattartoEmail;
-
-}
-
-    public int getSzfid() {
-        return szfid;
+    public SzerzodoFel() {
     }
 
-    public void setSzfid(int szfid) {
+    public SzerzodoFel(String szfid) {
         this.szfid = szfid;
     }
 
-    public String getSzerzodoFel() {
-        return szerzodoFel;
+    public SzerzodoFel(String szfid, String szerzodofel, String szekhelyVaros, String szekhelyIranyitoszam, String szekhelyKozterulet, String szekhelyHazszam, String telefonszam, String faxszam, String eMail, String cegjegyzekszam, String adoszam, String kapcsolattartoNeve, String kapcsolattartoTel, String kapcsolattartoEmail) {
+        this.szfid = szfid;
+        this.szerzodofel = szerzodofel;
+        this.szekhelyVaros = szekhelyVaros;
+        this.szekhelyIranyitoszam = szekhelyIranyitoszam;
+        this.szekhelyKozterulet = szekhelyKozterulet;
+        this.szekhelyHazszam = szekhelyHazszam;
+        this.telefonszam = telefonszam;
+        this.faxszam = faxszam;
+        this.eMail = eMail;
+        this.cegjegyzekszam = cegjegyzekszam;
+        this.adoszam = adoszam;
+        this.kapcsolattartoNeve = kapcsolattartoNeve;
+        this.kapcsolattartoTel = kapcsolattartoTel;
+        this.kapcsolattartoEmail = kapcsolattartoEmail;
     }
 
-    public void setSzerzodoFel(String szerzodoFel) {
-        this.szerzodoFel = szerzodoFel;
+    public String getSzfid() {
+        return szfid;
+    }
+
+    public void setSzfid(String szfid) {
+        this.szfid = szfid;
+    }
+
+    public String getSzerzodofel() {
+        return szerzodofel;
+    }
+
+    public void setSzerzodofel(String szerzodofel) {
+        this.szerzodofel = szerzodofel;
     }
 
     public String getSzekhelyVaros() {
         return szekhelyVaros;
     }
 
-    public void setSzekhelyVaros(String szekhelyVaro) {
-        this.szekhelyVaros = szekhelyVaro;
+    public void setSzekhelyVaros(String szekhelyVaros) {
+        this.szekhelyVaros = szekhelyVaros;
     }
 
-    public int getSzekhelyIranyitoszam() {
+    public String getSzekhelyIranyitoszam() {
         return szekhelyIranyitoszam;
     }
 
-    public void setSzekhelyIranyitoszam(int szekhelyIranyitoszam) {
+    public void setSzekhelyIranyitoszam(String szekhelyIranyitoszam) {
         this.szekhelyIranyitoszam = szekhelyIranyitoszam;
     }
 
@@ -87,11 +108,11 @@ public class SzerzodoFel implements Serializable{
         this.szekhelyKozterulet = szekhelyKozterulet;
     }
 
-    public int getSzekhelyHazszam() {
+    public String getSzekhelyHazszam() {
         return szekhelyHazszam;
     }
 
-    public void setSzekhelyHazszam(int szekhelyHazszam) {
+    public void setSzekhelyHazszam(String szekhelyHazszam) {
         this.szekhelyHazszam = szekhelyHazszam;
     }
 
@@ -111,12 +132,12 @@ public class SzerzodoFel implements Serializable{
         this.faxszam = faxszam;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEMail() {
+        return eMail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEMail(String eMail) {
+        this.eMail = eMail;
     }
 
     public String getCegjegyzekszam() {
@@ -158,6 +179,35 @@ public class SzerzodoFel implements Serializable{
     public void setKapcsolattartoEmail(String kapcsolattartoEmail) {
         this.kapcsolattartoEmail = kapcsolattartoEmail;
     }
-    
+
+   
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (szfid != null ? szfid.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof SzerzodoFel)) {
+            return false;
+        }
+        SzerzodoFel other = (SzerzodoFel) object;
+        if ((this.szfid == null && other.szfid != null) || (this.szfid != null && !this.szfid.equals(other.szfid))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.SzerzodoFel[ szfid=" + szfid + " ]";
+    }
+
+    public String getEmail() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -145,15 +145,9 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
             }
             while (rs.next()) {
                 Szerzodes szerzodes
-                        = new Szerzodes(rs.getObject(1).toString(), rs.getObject(2).toString(),
-                            rs.getObject(3).toString(), Integer.getInteger(rs.getObject(4).toString()),
-                            rs.getObject(5).toString(), rs.getObject(6).toString(),
-                            rs.getObject(7).toString(), rs.getObject(8).toString(),
-                            rs.getObject(9).toString(), rs.getObject(10).toString(), 
-                            rs.getObject(11).toString(), rs.getObject(12).toString(), Integer.getInteger(rs.getObject(13).toString()),
-                            rs.getObject(14).toString(), rs.getObject(15).toString(), rs.getObject(16).toString(),
-                            rs.getObject(17).toString(), rs.getObject(18).toString(),
-                            rs.getObject(19).toString(), rs.getObject(20).toString(), rs.getObject(21).toString());
+                        = new Szerzodes(Integer.getInteger(rs.getObject(1).toString()),Integer.getInteger(rs.getObject(2).toString()),
+                            Integer.getInteger(rs.getObject(3).toString()), Integer.getInteger(rs.getObject(4).toString()),
+                            rs.getObject(5).toString(), rs.getDate(6), rs.getDate(7));
                 data.add(szerzodes);
             }
         } catch (SQLException ex) {
@@ -175,18 +169,22 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
             for (int i = 0; i < rsmd.getColumnCount(); i++) {
                 colnames[i] = rsmd.getColumnName(i + 1);
             }
+            
             while (rs.next()) {
+                System.out.println("Object 3: " + (rs.getObject(3)));
+                System.out.println("Object 3: " + (rs.getObject(4)));
                 SzerzodoFel szerzodofel
-                        = new SzerzodoFel (Integer.getInteger(rs.getObject(1).toString()), rs.getObject(2).toString(),
-                            rs.getObject(3).toString(), Integer.getInteger(rs.getObject(4).toString()),
-                            rs.getObject(5).toString(), Integer.getInteger(rs.getObject(6).toString()),
+                        = new SzerzodoFel (rs.getObject(1).toString(), rs.getObject(2).toString(),
+                            
+                                (rs.getObject(3) == null ? "null" : rs.getObject(3).toString()), (rs.getObject(4) == null ? "null" : rs.getObject(4).toString()),
+                            rs.getObject(5).toString(), rs.getObject(6).toString(),
                             rs.getObject(7).toString(), rs.getObject(8).toString(),
                             rs.getObject(9).toString(), rs.getObject(10).toString(), 
                             rs.getObject(11).toString(), rs.getObject(12).toString(), rs.getObject(13).toString(),
                             rs.getObject(14).toString());
                 
                 data.add(szerzodofel);
-                System.out.println(szerzodofel.getSzerzodoFel());
+                System.out.println(szerzodofel.getSzerzodofel());
             }
         } catch (SQLException ex) {
             Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);

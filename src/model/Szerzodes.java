@@ -6,143 +6,123 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
- * @author Marcell
+ * @author zsofi
  */
-public class Szerzodes implements Serializable{
-    
-    
-    private String sorszam;
-    private String beszerzesNeve;
-    private String keljarasAzon;
-    private int becsultErtek;
-    private String kozbeszerzesFajtaja;
-    private String szerzodesFajtaja;
-    private String cpvKod;
-    private String projekt;
-    private String kozbeszKezdete;
-    private String kozbeszVege;
-    private String szerzAzon;    
-    private String szerzodoFel;
-    private int szerzodesErteke;
-    private String szerzTargy;
-    private String szerzodesKotesDatum;
-    private String szerzodesTervezettLezarasa;
-    private String szerzmodAzon;
-    private String szerzmodErtek;
-    private String szerzmodTargy;
-    private String szerzmodDatum;
-    private String szerzmodVege;
 
-    public Szerzodes(String sorszam, String beszerzesNeve, String keljarasAzon, int becsultErtek, String kozbeszerzesFajtaja, String szerzodesFajtaja, String cpvKod, String projekt, String kozbeszKezdete, String kozbeszVege, String szerzAzon, String szerzodoFel, int szerzodesErteke, String szerzTargy, String szerzodesKotesDatum, String szerzodesTervezettLezarasa, String szerzmodAzon, String szerzmodErtek, String szerzmodTargy, String szerzmodDatum, String szerzmodVege) {
+public class Szerzodes implements Serializable {
+
+    
+    private Integer sorszam;
+   
+    private Integer szerzazon;
+    
+    private int szerzodeserteke;
+    
+    private String szerztargy;
+   
+    private Date szerzodeskotesdatuma;
+    
+    private Date szerzodestervezettlezarasa;
+    
+    private Integer szerzodoFel;
+   
+
+    public Szerzodes() {
+    }
+
+    public Szerzodes(Integer sorszam, Integer szerzazon, Integer szerzodoFel, int szerzodeserteke, String szerztargy, Date szerzodeskotesdatuma, Date szerzodestervezettlezarasa  ) {
         this.sorszam = sorszam;
-        this.beszerzesNeve = beszerzesNeve;
-        this.keljarasAzon = keljarasAzon;
-        this.becsultErtek = becsultErtek;
-        this.kozbeszerzesFajtaja = kozbeszerzesFajtaja;
-        this.szerzodesFajtaja = szerzodesFajtaja;
-        this.cpvKod = cpvKod;
-        this.projekt = projekt;
-        this.kozbeszKezdete = kozbeszKezdete;
-        this.kozbeszVege = kozbeszVege;
-        this.szerzAzon = szerzAzon;    
+        this.szerzazon = szerzazon;
         this.szerzodoFel = szerzodoFel;
-        this.szerzodesErteke = szerzodesErteke;
-        this.szerzTargy = szerzTargy;
-        this.szerzodesKotesDatum = szerzodesKotesDatum;
-        this.szerzodesTervezettLezarasa = szerzodesTervezettLezarasa;
-        this.szerzmodAzon = szerzmodAzon;
-        this.szerzmodErtek = szerzmodErtek;
-        this.szerzmodTargy = szerzmodTargy;
-        this.szerzmodDatum = szerzmodDatum;
-        this.szerzmodVege = szerzmodVege;
+        this.szerzodeserteke = szerzodeserteke;
+        this.szerztargy = szerztargy;
+        this.szerzodeskotesdatuma = szerzodeskotesdatuma;
+        this.szerzodestervezettlezarasa = szerzodestervezettlezarasa;
+        
+        
     }
 
-    public String getSorszam() {
-        return sorszam;
+    public Integer getSzerzazon() {
+        return szerzazon;
     }
 
-    public String getKeljarasAzon() {
-        return keljarasAzon;
+    public void setSzerzazon(Integer szerzazon) {
+        this.szerzazon = szerzazon;
     }
 
-    public String getKozbeszerzesFajtaja() {
-        return kozbeszerzesFajtaja;
+    public int getSzerzodeserteke() {
+        return szerzodeserteke;
     }
 
-    public String getSzerzodesFajtaja() {
-        return szerzodesFajtaja;
+    public void setSzerzodeserteke(int szerzodeserteke) {
+        this.szerzodeserteke = szerzodeserteke;
     }
 
-    public String getCpvKod() {
-        return cpvKod;
+    public String getSzerztargy() {
+        return szerztargy;
     }
 
-    public String getProjekt() {
-        return projekt;
+    public void setSzerztargy(String szerztargy) {
+        this.szerztargy = szerztargy;
     }
 
-    public String getKozbeszKezdete() {
-        return kozbeszKezdete;
+    public Date getSzerzodeskotesdatuma() {
+        return szerzodeskotesdatuma;
     }
 
-    public String getKozbeszVege() {
-        return kozbeszVege;
+    public void setSzerzodeskotesdatuma(Date szerzodeskotesdatuma) {
+        this.szerzodeskotesdatuma = szerzodeskotesdatuma;
     }
 
-    public String getSzerzAzon() {
-        return szerzAzon;
+    public Date getSzerzodestervezettlezarasa() {
+        return szerzodestervezettlezarasa;
     }
 
-    public String getSzerzodoFel() {
+    public void setSzerzodestervezettlezarasa(Date szerzodestervezettlezarasa) {
+        this.szerzodestervezettlezarasa = szerzodestervezettlezarasa;
+    }
+
+   
+
+   
+
+    public int getSzerzodoFel() {
         return szerzodoFel;
     }
 
-    public int getSzerzodesErteke() {
-        return szerzodesErteke;
+    public void setSzerzodoFel(int szerzodoFel) {
+        this.szerzodoFel = szerzodoFel;
     }
 
-    public String getSzerzTargy() {
-        return szerzTargy;
+   
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (szerzazon != null ? szerzazon.hashCode() : 0);
+        return hash;
     }
 
-    public String getSzerzodesKotesDatum() {
-        return szerzodesKotesDatum;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Szerzodes)) {
+            return false;
+        }
+        Szerzodes other = (Szerzodes) object;
+        if ((this.szerzazon == null && other.szerzazon != null) || (this.szerzazon != null && !this.szerzazon.equals(other.szerzazon))) {
+            return false;
+        }
+        return true;
     }
 
-    public String getSzerzodesTervezettLezarasa() {
-        return szerzodesTervezettLezarasa;
+    @Override
+    public String toString() {
+        return "model.Szerzodes[ szerzazon=" + szerzazon + " ]";
     }
-
-    public String getSzerzmodAzon() {
-        return szerzmodAzon;
-    }
-
-    public String getSzerzmodErtek() {
-        return szerzmodErtek;
-    }
-
-    public String getSzerzmodTargy() {
-        return szerzmodTargy;
-    }
-
-    public String getSzerzmodDatum() {
-        return szerzmodDatum;
-    }
-
-    public String getSzerzmodVege() {
-        return szerzmodVege;
-    }
-
-    public String getBeszerzesNeve() {
-        return beszerzesNeve;
-    }
-
-    public int getBecsultErtek() {
-        return becsultErtek;
-    }
-
     
 }

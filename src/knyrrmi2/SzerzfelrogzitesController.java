@@ -14,6 +14,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -121,8 +122,8 @@ public class SzerzfelrogzitesController implements Initializable {
             Logger.getLogger(SzerzfelrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         }
        tblszfid.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szfid"));
-       tblSzerzfel.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szerzodoFel"));
-        tblVaros.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyVaro"));
+       tblSzerzfel.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szerzodofel"));
+        tblVaros.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyVaros"));
         tblIrszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyIranyitoszam"));
         tblHazszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyKozterulet"));
         tblKozterulet.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyHazszam"));
@@ -138,12 +139,12 @@ public class SzerzfelrogzitesController implements Initializable {
              && event.getClickCount() == 2) {
 
                 SzerzodoFel kivalasztott = row.getItem();
-                szerzfelid.setText(Integer.toString(kivalasztott.getSzfid()));
-                SzerzFel.setText(kivalasztott.getSzerzodoFel());
+                szerzfelid.setText(kivalasztott.getSzfid());
+                SzerzFel.setText(kivalasztott.getSzerzodofel());
                 Varos.setText(kivalasztott.getSzekhelyVaros());
-                Irszam.setText(Integer.toString(kivalasztott.getSzekhelyIranyitoszam()));
+                Irszam.setText(kivalasztott.getSzekhelyIranyitoszam());
                 Kozterulet.setText(kivalasztott.getSzekhelyKozterulet());
-                Hazszam.setText(Integer.toString(kivalasztott.getSzekhelyHazszam()));
+                Hazszam.setText(kivalasztott.getSzekhelyHazszam());
                 Telszam.setText(kivalasztott.getTelefonszam());
                 Faxszam.setText(kivalasztott.getFaxszam());
                 Email.setText(kivalasztott.getEmail());
@@ -279,6 +280,13 @@ public class SzerzfelrogzitesController implements Initializable {
         ArrayList<SzerzodoFel> szerzodoFelLista = new ArrayList<>();
         try {
            szerzodoFelLista = serverImpl.szerzodoFelKereses(sql);
+           Iterator<SzerzodoFel> itr = szerzodoFelLista.iterator();
+        while(itr.hasNext()){
+            SzerzodoFel next = itr.next();
+            System.out.println(next.getSzerzodofel());
+        }
+           
+
         } catch (RemoteException ex) {
             Logger.getLogger(SzerzfelrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -288,6 +296,7 @@ public class SzerzfelrogzitesController implements Initializable {
         }
 
         SzerzfelTable.setItems(FXCollections.observableArrayList(szerzodoFelLista));
+        SzerzfelTable.getColumns().setAll(tblszfid, tblSzerzfel, tblVaros, tblIrszam, tblHazszam, tblKozterulet, tblCegjszam, tblAdoszam, tblKapcstarto);
     }
     
     @FXML
