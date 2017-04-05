@@ -30,7 +30,7 @@
                </font>
             </Label>
             <Label layoutX="176.0" layoutY="28.0" text="SZERZŐDŐ FÉL RÖGZÍTÉSE" />
-            <Label fx:id="uzenet" layoutX="516.0" layoutY="28.0" prefHeight="17.0" prefWidth="194.0" textFill="RED" />
+            <Label fx:id="uzenet" layoutX="516.0" layoutY="28.0" prefHeight="17.0" prefWidth="365.0" textFill="RED" />
             <Label layoutX="72.0" layoutY="88.0" text="Szerződő fél" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="70.0" />
             <TextField fx:id="SzerzFel" layoutX="217.0" layoutY="84.0" prefHeight="25.0" prefWidth="250.0" promptText="Szerződő fél neve" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="65.0" />
             <Label fx:id="szerzfelid" layoutX="463.0" layoutY="69.0" visible="false" />

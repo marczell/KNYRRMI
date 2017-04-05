@@ -17,36 +17,36 @@ import java.util.List;
 public class Kozbeszerzes implements Serializable {
 
    
-    private Integer sorszam;
+    private String sorszam;
    
     private String besznev;
     
     private String keljarasazon;
     
-    private int bertek;
+    private String bertek;
     
-    private int kozbeszerzesieljarasfajta;
+    private String kozbeszerzesieljarasfajta;
    
-    private int szerzodesfajtaja;
+    private String szerzodesfajtaja;
     
-    private int cpvkod;
+    private String cpvkod;
     
-    private int projekt;    
+    private String projekt;    
    
-    private Date kozbeszkezdete;
+    private String kozbeszkezdete;
    
-    private Date kozbeszvege;
+    private String kozbeszvege;
    
-    private List<Szerzodes> szerzodesList;
+  
 
     public Kozbeszerzes() {
     }
 
-    public Kozbeszerzes(Integer sorszam) {
+    public Kozbeszerzes(String sorszam) {
         this.sorszam = sorszam;
     }
 
-    public Kozbeszerzes(Integer sorszam, String besznev, String keljarasazon, int bertek, int kozbeszerzesieljarasfajta, int szerzodesfajtaja, int cpvkod, int projekt, Date kozbeszkezdete, Date kozbeszvege) {
+    public Kozbeszerzes(String sorszam, String besznev, String keljarasazon, String bertek, String kozbeszerzesieljarasfajta, String szerzodesfajtaja, String cpvkod, String projekt, String kozbeszkezdete, String kozbeszvege) {
         this.sorszam = sorszam;
         this.besznev = besznev;
         this.keljarasazon = keljarasazon;
@@ -59,11 +59,11 @@ public class Kozbeszerzes implements Serializable {
         this.kozbeszvege = kozbeszvege;
     }
 
-    public Integer getSorszam() {
+    public String getSorszam() {
         return sorszam;
     }
 
-    public void setSorszam(Integer sorszam) {
+    public void setSorszam(String sorszam) {
         this.sorszam = sorszam;
     }
 
@@ -83,37 +83,31 @@ public class Kozbeszerzes implements Serializable {
         this.keljarasazon = keljarasazon;
     }
 
-    public int getBertek() {
+    public String getBertek() {
         return bertek;
     }
 
-    public void setBertek(int bertek) {
+    public void setBertek(String bertek) {
         this.bertek = bertek;
     }
 
-    public Date getKozbeszkezdete() {
+    public String getKozbeszkezdete() {
         return kozbeszkezdete;
     }
 
-    public void setKozbeszkezdete(Date kozbeszkezdete) {
+    public void setKozbeszkezdete(String kozbeszkezdete) {
         this.kozbeszkezdete = kozbeszkezdete;
     }
 
-    public Date getKozbeszvege() {
+    public String getKozbeszvege() {
         return kozbeszvege;
     }
 
-    public void setKozbeszvege(Date kozbeszvege) {
+    public void setKozbeszvege(String kozbeszvege) {
         this.kozbeszvege = kozbeszvege;
     }
 
-    public List<Szerzodes> getSzerzodesList() {
-        return szerzodesList;
-    }
-
-    public void setSzerzodesList(List<Szerzodes> szerzodesList) {
-        this.szerzodesList = szerzodesList;
-    }
+  
 
     @Override
     public int hashCode() {

@@ -33,6 +33,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.SzerzodoFel;
 
@@ -88,7 +89,7 @@ public class SzerzfelrogzitesController implements Initializable {
     @FXML
     private Label szerzfelid;
     @FXML
-    private final TableView<SzerzodoFel> SzerzfelTable  = new TableView<>();
+    private TableView<SzerzodoFel> SzerzfelTable;
     @FXML
     private TableColumn<SzerzodoFel, String> tblszfid;
     @FXML
@@ -125,16 +126,16 @@ public class SzerzfelrogzitesController implements Initializable {
        tblSzerzfel.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szerzodofel"));
         tblVaros.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyVaros"));
         tblIrszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyIranyitoszam"));
-        tblHazszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyKozterulet"));
-        tblKozterulet.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyHazszam"));
+        tblHazszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyHazszam"));
+        tblKozterulet.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("szekhelyKozterulet"));
         tblCegjszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("cegjegyzekszam"));
         tblAdoszam.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("adoszam"));
         tblKapcstarto.setCellValueFactory(new PropertyValueFactory<SzerzodoFel, String>("kapcsolattartoNeve"));
        // SzerzodoFel szerzodofel = SzerzfelTable.getSelectionModel().getSelectedItem();
         //táblázta sorának kiválasztása
-        SzerzfelTable.setRowFactory(tv -> {
+        SzerzfelTable.setRowFactory((TableView<SzerzodoFel> tv) -> {
            TableRow<SzerzodoFel> row = new TableRow<>();
-           row.setOnMouseClicked(event -> {
+           row.setOnMouseClicked((MouseEvent event) -> {
              if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
              && event.getClickCount() == 2) {
 
@@ -147,7 +148,7 @@ public class SzerzfelrogzitesController implements Initializable {
                 Hazszam.setText(kivalasztott.getSzekhelyHazszam());
                 Telszam.setText(kivalasztott.getTelefonszam());
                 Faxszam.setText(kivalasztott.getFaxszam());
-                Email.setText(kivalasztott.getEmail());
+                Email.setText(kivalasztott.getEMail());
                 Cegjszam.setText(kivalasztott.getCegjegyzekszam());
                 Adoszam.setText(kivalasztott.getAdoszam());
                 Kapcstartnev.setText(kivalasztott.getKapcsolattartoNeve());
@@ -188,20 +189,20 @@ public class SzerzfelrogzitesController implements Initializable {
                     + Kapcstarttelszam.getText() + "','" + Kapcstartemail.getText() + "')";
                      System.out.println(sql);
                 } else{
-                        sql = "UPDATE `szerzodo_fel` SET `szfid`="+szerzfelid.getText()+",`szerzodofel`="+SzerzFel.getText()+","
-                            +"`szekhely-varos`="+Varos.getText()+",`szekhely-iranyitoszam`="+ Irszam.getText() +" ,"
-                            +"`szekhely-kozterulet`=" + Kozterulet.getText() + ",`szekhely-hazszam`="+ Hazszam.getText()+","
-                            +"`telefonszam`=" + Telszam.getText() + ",`faxszam`=" + Faxszam.getText() + ",`e-mail`=" + Email.getText() + ","
+                        sql = "UPDATE `adattar`.`szerzodo_fel` SET `szfid` = "+ szerzfelid.getText()+",`szerzodofel`='"+SzerzFel.getText()+"',"
+                            +"`szekhely-varos`='"+Varos.getText()+"',`szekhely-iranyitoszam`="+ Irszam.getText() +" ,"
+                            +"`szekhely-kozterulet`='" + Kozterulet.getText() + "',`szekhely-hazszam`="+ Hazszam.getText()+","
+                            +"`telefonszam`=" + Telszam.getText() + ",`faxszam`=" + Faxszam.getText() + ",`e-mail`='" + Email.getText() + "',"
                             +"`cegjegyzekszam`="+ Cegjszam.getText() + ",`adoszam`=" + Adoszam.getText() + ","
-                            +"`kapcsolattarto-neve`=" + Kapcstartnev.getText() + ",`kapcsolattarto-tel`="+ Kapcstarttelszam.getText() + ","
-                            +"`kapcsolattarto-email`=" + Kapcstartemail.getText();
+                            +"`kapcsolattarto-neve`='" + Kapcstartnev.getText() + "',`kapcsolattarto-tel`="+ Kapcstarttelszam.getText() + ","
+                            +"`kapcsolattarto-email`='" + Kapcstartemail.getText()+"' WHERE `szfid` = "+ szerzfelid.getText();
                              System.out.println(sql);  
                 }
             
             
             try {
                 serverImpl.adatbazisbaInsertalas(sql);
-                uzenet.setText("Sikeres mentése a " + SzerzFel.getText()+ "szerződőfélnek!");
+                uzenet.setText("Sikeres mentése a " + SzerzFel.getText()+ " szerződőfélnek!");
                 szerzfelid.setText("");
                 SzerzFel.clear();
                 Varos.clear();
@@ -280,11 +281,12 @@ public class SzerzfelrogzitesController implements Initializable {
         ArrayList<SzerzodoFel> szerzodoFelLista = new ArrayList<>();
         try {
            szerzodoFelLista = serverImpl.szerzodoFelKereses(sql);
-           Iterator<SzerzodoFel> itr = szerzodoFelLista.iterator();
-        while(itr.hasNext()){
-            SzerzodoFel next = itr.next();
-            System.out.println(next.getSzerzodofel());
-        }
+           SzerzfelTable.setItems(FXCollections.observableArrayList(szerzodoFelLista));
+  //         Iterator<SzerzodoFel> itr = szerzodoFelLista.iterator();
+    //    while(itr.hasNext()){
+      //      SzerzodoFel next = itr.next();
+        //    System.out.println(next.getSzerzodofel());
+      //  }
            
 
         } catch (RemoteException ex) {
