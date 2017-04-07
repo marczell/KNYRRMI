@@ -153,7 +153,7 @@ public class KeresesController implements Initializable {
             }
             ObservableList obListKej = FXCollections.observableArrayList();
             while (rs.next()) {
-                listKej.add(new ErtekLista(new BigDecimal(rs.getString("KEJID")),
+                listKej.add(new ErtekLista(rs.getString("KEJID"),
                         rs.getString("KOZBESZERZESIELJARASFAJTAI")));
                 obListKej.add(rs.getString("KOZBESZERZESIELJARASFAJTAI"));
             }
@@ -170,7 +170,7 @@ public class KeresesController implements Initializable {
             ResultSet rs = serverImpl.adatbazisReport(sql2);
             ObservableList obListSzerzF = FXCollections.observableArrayList();
             while (rs.next()) {
-                listSzerzF.add(new ErtekLista(new BigDecimal(rs.getString("SZERZODESFAJTAID")),
+                listSzerzF.add(new ErtekLista(rs.getString("SZERZODESFAJTAID"),
                         rs.getString("SZERZODESFAJTA")));
                 obListSzerzF.add(rs.getString("SZERZODESFAJTA"));
             }
@@ -190,7 +190,7 @@ public class KeresesController implements Initializable {
             ResultSet rs = serverImpl.adatbazisReport(sql3);
             ObservableList obListCpv = FXCollections.observableArrayList();
             while (rs.next()) {
-                listCpv.add(new ErtekLista(new BigDecimal(rs.getString("CPVID")),
+                listCpv.add(new ErtekLista(rs.getString("CPVID"),
                         rs.getString("CPVKOD")));
                 obListCpv.add(rs.getString("CPVKOD"));
             }
@@ -209,7 +209,7 @@ public class KeresesController implements Initializable {
             ResultSet rs = serverImpl.adatbazisReport(sql4);
             ObservableList obListProjekt = FXCollections.observableArrayList();
             while (rs.next()) {
-                listProjekt.add(new ErtekLista(new BigDecimal(rs.getString("PROJEKTID")),
+                listProjekt.add(new ErtekLista(rs.getString("PROJEKTID"),
                         rs.getString("PROJEKT")));
                 obListProjekt.add(rs.getString("PROJEKT"));
             }
@@ -228,7 +228,7 @@ public class KeresesController implements Initializable {
             ResultSet rs = serverImpl.adatbazisReport(sql5);
             ObservableList obListSzerzFel = FXCollections.observableArrayList();
             while (rs.next()) {
-                listSzerzFel.add(new ErtekLista(new BigDecimal(rs.getString("SZFID")),
+                listSzerzFel.add(new ErtekLista(rs.getString("SZFID"),
                         rs.getString("SZERZODOFEL")));
                 obListSzerzFel.add(rs.getString("SZERZODOFEL"));
             }
@@ -244,7 +244,7 @@ public class KeresesController implements Initializable {
         }
     }
     
-    private BigDecimal idKereso(ArrayList<ErtekLista> ertekLista){
+    private String idKereso(ArrayList<ErtekLista> ertekLista){
         for (ErtekLista kozFajt : ertekLista) {
             if (kozFajt.getNev().equals(KozbeszFajtKereses.getValue())) {
                 return kozFajt.getId();

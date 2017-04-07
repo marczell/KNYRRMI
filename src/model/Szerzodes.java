@@ -16,25 +16,25 @@ import java.util.Date;
 public class Szerzodes implements Serializable {
 
     
-    private Integer sorszam;
+    private String sorszam;
    
-    private Integer szerzazon;
+    private String szerzazon;
     
-    private int szerzodeserteke;
+    private String szerzodeserteke;
     
     private String szerztargy;
    
-    private Date szerzodeskotesdatuma;
+    private String szerzodeskotesdatuma;
     
-    private Date szerzodestervezettlezarasa;
+    private String szerzodestervezettlezarasa;
     
-    private Integer szerzodoFel;
+    private String szerzodoFel;
    
 
     public Szerzodes() {
     }
 
-    public Szerzodes(Integer sorszam, Integer szerzazon, Integer szerzodoFel, int szerzodeserteke, String szerztargy, Date szerzodeskotesdatuma, Date szerzodestervezettlezarasa  ) {
+    public Szerzodes(String sorszam, String szerzazon, String szerzodoFel, String szerzodeserteke, String szerztargy, String szerzodeskotesdatuma, String szerzodestervezettlezarasa  ) {
         this.sorszam = sorszam;
         this.szerzazon = szerzazon;
         this.szerzodoFel = szerzodoFel;
@@ -46,19 +46,19 @@ public class Szerzodes implements Serializable {
         
     }
 
-    public Integer getSzerzazon() {
+    public String getSzerzazon() {
         return szerzazon;
     }
 
-    public void setSzerzazon(Integer szerzazon) {
+    public void setSzerzazon(String szerzazon) {
         this.szerzazon = szerzazon;
     }
 
-    public int getSzerzodeserteke() {
+    public String getSzerzodeserteke() {
         return szerzodeserteke;
     }
 
-    public void setSzerzodeserteke(int szerzodeserteke) {
+    public void setSzerzodeserteke(String szerzodeserteke) {
         this.szerzodeserteke = szerzodeserteke;
     }
 
@@ -70,19 +70,19 @@ public class Szerzodes implements Serializable {
         this.szerztargy = szerztargy;
     }
 
-    public Date getSzerzodeskotesdatuma() {
+    public String getSzerzodeskotesdatuma() {
         return szerzodeskotesdatuma;
     }
 
-    public void setSzerzodeskotesdatuma(Date szerzodeskotesdatuma) {
+    public void setSzerzodeskotesdatuma(String szerzodeskotesdatuma) {
         this.szerzodeskotesdatuma = szerzodeskotesdatuma;
     }
 
-    public Date getSzerzodestervezettlezarasa() {
+    public String getSzerzodestervezettlezarasa() {
         return szerzodestervezettlezarasa;
     }
 
-    public void setSzerzodestervezettlezarasa(Date szerzodestervezettlezarasa) {
+    public void setSzerzodestervezettlezarasa(String szerzodestervezettlezarasa) {
         this.szerzodestervezettlezarasa = szerzodestervezettlezarasa;
     }
 
@@ -90,11 +90,11 @@ public class Szerzodes implements Serializable {
 
    
 
-    public int getSzerzodoFel() {
+    public String getSzerzodoFel() {
         return szerzodoFel;
     }
 
-    public void setSzerzodoFel(int szerzodoFel) {
+    public void setSzerzodoFel(String szerzodoFel) {
         this.szerzodoFel = szerzodoFel;
     }
 

@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.DataEgybentartas;
+import model.Kozbeszerzes;
 import model.ProjektEgybentartas;
 import model.SerializableResultSet;
 import model.Szerzodes;
@@ -31,4 +32,5 @@ public interface KnyrInterface extends Remote{
     public ArrayList<ProjektEgybentartas> projektEgybOsszes(String sql) throws RemoteException;
     public ArrayList<Szerzodes> szerzodesKereses(String sql) throws RemoteException;
     public ArrayList<SzerzodoFel> szerzodoFelKereses(String sql) throws RemoteException;
+    public ArrayList<Kozbeszerzes> kozbeszKereses(String sql) throws RemoteException;
 }

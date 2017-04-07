@@ -14,19 +14,19 @@ import java.math.BigDecimal;
  */
 public class ErtekLista implements Serializable{
     
-    private BigDecimal id;
+    private String id;
     private String nev;
 
-    public ErtekLista(BigDecimal id, String nev) {
+    public ErtekLista(String id, String nev) {
         this.id = id;
         this.nev = nev;
     }
 
-    public BigDecimal getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -62,8 +62,7 @@ public class KozbeszrogzitesController implements Initializable {
     List<String> listCpvId = new ArrayList<>();
     List<String> listProjekt = new ArrayList<>();
     List<String> listProjektId = new ArrayList<>();
-    List<String> listSzerzFel = new ArrayList<>();
-    List<String> listSzerzFelId = new ArrayList<>();
+    
 
     /**
      * Initializes the controller class.
@@ -76,7 +75,7 @@ public class KozbeszrogzitesController implements Initializable {
     @FXML
     private TextField SzerzNevKozbesz;
     @FXML
-    private Label txtKozbeszSorszamKozbesz;
+    private Label txtBeszSorszamKozbesz;
     @FXML
     private TextField KozbeszAzonKozbesz;
     @FXML
@@ -123,14 +122,14 @@ public class KozbeszrogzitesController implements Initializable {
         }
 
         
-        String sql = "SELECT MAX(SORSZAM) as SORSZAM FROM SZERZODES";
+        String sql = "SELECT MAX(`kozbeszerzes`.`sorszam`) as SORSZAM FROM `adattar`.`kozbeszerzes`";
         try {
             SerializableResultSet rs = (SerializableResultSet) serverImpl.adatbazisReport(sql);
             while (rs.next()) {
-                int s = rs.getInt("SORSZAM");
+                int s = Integer.parseInt(rs.getObject(0).toString());
                 int x = s + 1;
                 String sorszam = Integer.toString(x);
-                txtKozbeszSorszamKozbesz.setText(sorszam);
+                txtBeszSorszamKozbesz.setText(sorszam);
             }
         } catch (SQLException ex) {
             Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,7 +147,7 @@ public class KozbeszrogzitesController implements Initializable {
         try {
             ResultSet rs = (ResultSet) serverImpl.adatbazisReport(sql1);
             while (rs.next()) {
-                String s = ((Integer)rs.getInt(2)).toString();
+                String s = rs.getObject(2).toString();
                 String t = rs.getString(1);
                 listKejId.add(s);
                 listKej.add(t);
@@ -247,7 +246,7 @@ public class KozbeszrogzitesController implements Initializable {
     }
  @FXML
     private void mentesAction(ActionEvent event) {
-        //a szerződés adatainak rögzítése
+        //a közbeszerzés adatainak rögzítése
         String kozbeszf = (String) KozbeszfajtKozbesz.getSelectionModel().getSelectedItem();
         String szerzf = (String) SzerzFajtKozbesz.getSelectionModel().getSelectedItem();
         String cpv = (String) CpvKozbesz.getSelectionModel().getSelectedItem();
@@ -264,14 +263,23 @@ public class KozbeszrogzitesController implements Initializable {
                 && KozbeszVegeKozbesz.getValue() != null
                 && KozbeszKezdKozbesz.getValue().isBefore(KozbeszVegeKozbesz.getValue())) {
 
-            String sql = "INSERT INTO SZERZODES (`sorszam`, `besznev`, `keljarasazon`, `bertek`, `kozbeszerzesieljarasfajta`, `szerzodesfajtaja`, `cpvkod`, `projekt`, `kozbeszkezdete`, `kozbeszvege`, `szerzazon`, `szerzodofel`, `szerzodeserteke`, `szerztargy`, `szerzodeskotesdatuma`, `szerzodestervezettlezarasa`, `szerzmodazon`, `szerzmodertek`, `szerzmodtargy`, `szerzmoddatum`, `szerzmodvege`)\n"
+            String sql = "INSERT INTO `adattar`.`kozbeszerzes` (`sorszam`,\n" +
+            "`besznev`,\n" +
+            "`keljarasazon`,\n" +
+            "`bertek`,\n" +
+            "`kozbeszerzesieljarasfajta`,\n" +
+            "`szerzodesfajtaja`,\n" +
+            "`cpvkod`,\n" +
+            "`projekt`,\n" +
+            "`kozbeszkezdete`,\n" +
+            "`kozbeszvege`)\n"
                     + " VALUES ('" + SzerzNevKozbesz.getText() + "', '" + KozbeszAzonKozbesz.getText() + "', '" + BecsErtekKozbesz.getText() + "', '"
                     + listKejId.get(listKej.indexOf(kozbeszf))+ "', '" +listSzerzFId.get(listSzerzF.indexOf(szerzf))  + "','" + listCpvId.get(listCpv.indexOf(cpv)) + "','" + listProjektId.get(listProjekt.indexOf(projekt)) + "','"
-                    + KozbeszKezdKozbesz.getValue() + "','" + KozbeszVegeKozbesz.getValue() + "', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null')";
+                    + KozbeszKezdKozbesz.getValue() + "','" + KozbeszVegeKozbesz.getValue() + "')";
             System.out.println(sql);
             try {
                 serverImpl.adatbazisbaInsertalas(sql);
-                //kapcsolat.adatbazisbaInsertalas(sql);
+              
                 uzenet.setText("Sikeres mentése a " + SzerzNevKozbesz.getText());
                 SzerzNevKozbesz.clear();
                 KozbeszAzonKozbesz.clear();
@@ -294,7 +302,6 @@ public class KozbeszrogzitesController implements Initializable {
             uzenet.setText("Ellenőrize a mezők kitöltöttségét!");
         }
     }
-    
     @FXML
     private void egybeszamitasAction(ActionEvent event) {
         //egybeszámítási vizsgálat

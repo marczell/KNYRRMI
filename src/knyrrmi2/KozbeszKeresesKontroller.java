@@ -39,6 +39,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import model.ErtekLista;
+import model.Kozbeszerzes;
 import model.Szerzodes;
 
 /**
@@ -80,27 +81,27 @@ public class KozbeszKeresesKontroller implements Initializable{
     @FXML
     private TextField BecsultErtekMaxKozbeszKereses;
     @FXML
-    private TableView<Szerzodes> KozbeszerzesekTable;
+    private TableView<Kozbeszerzes> KozbeszerzesekTable;
     @FXML
-    private TableColumn<Szerzodes, String> tblBeszSorszamKozbeszKereses;
+    private TableColumn<Kozbeszerzes, String> tblBeszSorszamKozbeszKereses;
     @FXML
-    private TableColumn<Szerzodes, String> tblKozbeszAzonKozbeszKeres;
+    private TableColumn<Kozbeszerzes, String> tblKozbeszAzonKozbeszKeres;
     @FXML
-    private TableColumn<Szerzodes, String> tblBeszNevKozbeszKeres;
+    private TableColumn<Kozbeszerzes, String> tblBeszNevKozbeszKeres;
     @FXML
-    private TableColumn<Szerzodes, String> tblKozbeszFajtKozbeszKeres;
+    private TableColumn<Kozbeszerzes, String> tblKozbeszFajtKozbeszKeres;
     @FXML
-    private TableColumn<Szerzodes, String> tblSzerzFajtKozbeszKeres;
+    private TableColumn<Kozbeszerzes, String> tblSzerzFajtKozbeszKeres;
     @FXML
-    private TableColumn<Szerzodes, String> tblCPVKozbeszKeres;
+    private TableColumn<Kozbeszerzes, String> tblCPVKozbeszKeres;
     @FXML
-    private TableColumn<Szerzodes, String> tblProjektKozbeszKeres;
+    private TableColumn<Kozbeszerzes, String> tblProjektKozbeszKeres;
     @FXML
-    private TableColumn<Szerzodes, String> tblKozbeszKezdetKozbeszKereses;
+    private TableColumn<Kozbeszerzes, String> tblKozbeszKezdetKozbeszKereses;
     @FXML
-    private TableColumn<Szerzodes, String> tblKozbeszVegeKozbeszKereses;
+    private TableColumn<Kozbeszerzes, String> tblKozbeszVegeKozbeszKereses;
     @FXML
-    private TableColumn<Szerzodes, String> tblBecsultErtKozbeszKereses;
+    private TableColumn<Kozbeszerzes, String> tblBecsultErtKozbeszKereses;
 
     KnyrInterface serverImpl;
     
@@ -119,24 +120,27 @@ public class KozbeszKeresesKontroller implements Initializable{
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        tblBeszSorszamKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("sorszam"));
-        tblKozbeszAzonKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("keljarasAzon"));
-        tblBeszNevKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("beszerzesNeve"));
-        tblKozbeszFajtKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszerzesFajtaja"));
-        tblSzerzFajtKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodesFajtaja"));
-        tblCPVKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("cpvKod"));
-        tblProjektKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("projekt"));
-        tblKozbeszKezdetKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszKezdete"));
-        tblKozbeszVegeKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszVege"));
-        tblBecsultErtKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("becsultErtek"));
+        BecsultErtekMaxKozbeszKereses.clear();
+        BecsultErtekMinKozbeszKereses.clear();
+        
+        tblBeszSorszamKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("sorszam"));
+        tblKozbeszAzonKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("keljarasazon"));
+        tblBeszNevKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("besznev"));
+        tblKozbeszFajtKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("kozbeszerzesieljarasfajta"));
+        tblSzerzFajtKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("szerzodesfajtaja"));
+        tblCPVKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("cpvkod"));
+        tblProjektKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("projekt"));
+        tblKozbeszKezdetKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("kozbeszkezdete"));
+        tblKozbeszVegeKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("kozbeszvege"));
+        tblBecsultErtKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("bertek"));
         
         KozbeszerzesekTable.setRowFactory(tv -> {
-           TableRow<Szerzodes> row = new TableRow<>();
+           TableRow<Kozbeszerzes> row = new TableRow<>();
            row.setOnMouseClicked(event -> {
              if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
              && event.getClickCount() == 2) {
 
-                Szerzodes kivalasztott = row.getItem();
+                Kozbeszerzes kivalasztott = row.getItem();
                 Stage stage = (Stage) row.getScene().getWindow();
                 Parent root = null;
                  try {
@@ -158,14 +162,15 @@ public class KozbeszKeresesKontroller implements Initializable{
     
 });
         
-        String sql1 = "SELECT KOZBESZERZESIELJARASFAJTAI, KEJID FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
+        String sql1 = "SELECT KEJID, KOZBESZERZESIELJARASFAJTAI FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql1);
             ObservableList obListKej = FXCollections.observableArrayList();
+            
             while (rs.next()) {
-                listKej.add(new ErtekLista(new BigDecimal(rs.getString("KEJID")),
-                        rs.getString("KOZBESZERZESIELJARASFAJTAI")));
-                obListKej.add(rs.getString("KOZBESZERZESIELJARASFAJTAI"));
+                listKej.add(new ErtekLista(rs.getObject(1).toString(),
+                        rs.getObject(2).toString()));
+                obListKej.add(rs.getObject(2).toString());
             }
             KozbeszFajtKozbeszKereses.getItems().clear();
             KozbeszFajtKozbeszKereses.setItems(FXCollections.observableList(obListKej));
@@ -175,16 +180,20 @@ public class KozbeszKeresesKontroller implements Initializable{
         } catch (RemoteException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-         
+         try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         String sql2 = "SELECT SZERZODESFAJTAID, SZERZODESFAJTA FROM SZERZODESFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql2);
             ObservableList obListSzerzF = FXCollections.observableArrayList();
             while (rs.next()) {
-                listSzerzF.add(new ErtekLista(new BigDecimal(rs.getString("SZERZODESFAJTAID")),
-                        rs.getString("SZERZODESFAJTA")));
-                obListSzerzF.add(rs.getString("SZERZODESFAJTA"));
+                listSzerzF.add(new ErtekLista(rs.getObject(1).toString(),
+                        rs.getObject(2).toString()));
+                obListSzerzF.add(rs.getObject(2).toString());
             }
             SzerzFajtKozbeszKereses.getItems().clear();
             SzerzFajtKozbeszKereses.setItems(FXCollections.observableList(obListSzerzF));
@@ -194,17 +203,22 @@ public class KozbeszKeresesKontroller implements Initializable{
         } catch (RemoteException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+            try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
         //meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
-        String sql3 = "SELECT CPVKOD, CPVID FROM CPVKODOK WHERE LATHATO=TRUE";
+        String sql3 = "SELECT CPVID, CPVKOD FROM CPVKODOK WHERE LATHATO=TRUE";
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql3);
             ObservableList obListCpv = FXCollections.observableArrayList();
             while (rs.next()) {
-                listCpv.add(new ErtekLista(new BigDecimal(rs.getString("CPVID")),
-                        rs.getString("CPVKOD")));
-                obListCpv.add(rs.getString("CPVKOD"));
+                listCpv.add(new ErtekLista(rs.getObject(1).toString(),
+                       rs.getObject(2).toString()));
+                obListCpv.add(rs.getObject(2).toString());
             }
             CPVKozbeszKereses.getItems().clear();
             CPVKozbeszKereses.setItems(FXCollections.observableList(obListCpv));
@@ -214,16 +228,21 @@ public class KozbeszKeresesKontroller implements Initializable{
         } catch (RemoteException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+            try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
-        String sql4 = "SELECT PROJEKT, PROJEKTID FROM PROJEKTEK WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
+        String sql4 = "SELECT PROJEKTID, PROJEKT FROM PROJEKTEK WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql4);
             ObservableList obListProjekt = FXCollections.observableArrayList();
             while (rs.next()) {
-                listProjekt.add(new ErtekLista(new BigDecimal(rs.getString("PROJEKTID")),
-                        rs.getString("PROJEKT")));
-                obListProjekt.add(rs.getString("PROJEKT"));
+                listProjekt.add(new ErtekLista(rs.getObject(1).toString(),
+                        rs.getObject(2).toString()));
+                obListProjekt.add(rs.getObject(2).toString());
             }
             ProjektKozbeszKereses.getItems().clear();
             ProjektKozbeszKereses.setItems(FXCollections.observableList(obListProjekt));
@@ -233,6 +252,11 @@ public class KozbeszKeresesKontroller implements Initializable{
         } catch (RemoteException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+            try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
         
@@ -252,70 +276,75 @@ public class KozbeszKeresesKontroller implements Initializable{
         }
         
         String sql;
-        sql = "select sorszam, besznev, keljarasazon, bertek, kef.kozbeszerzesieljarasfajta, "
-                + "szfaj.szerzodesfajtaja, c.cpvkod, p.projekt, sz.kozbeszkezdete, "
-                + "sz.kozbeszvege, \n"
-                + "from szerzodes sz, projektek p, szerzodesfajtai szfaj, "
-                + "kozbeszerzesieljarasfajtai kef, cpvkodok c\n"
-                + "where sz.projekt=p.projektid "
-                + "and sz.szerzodesfajtaja=szfaj.szerzodesfajtaid "
-                + "and sz.kozbeszerzesieljarasfajta=kef.kejid "
-                + "and sz.cpvkod=c.cpvid\n ";
+        sql = "SELECT `kozbeszerzes`.`sorszam`,\n" +
+        "    `kozbeszerzes`.`besznev`,\n" +
+        "    `kozbeszerzes`.`keljarasazon`,\n" +
+        "    `kozbeszerzes`.`bertek`,\n" +
+        "    `kozbeszerzesieljarasfajtai`.`kozbeszerzesieljarasfajtai`,\n" +
+        "    `szerzodesfajtai`.`szerzodesfajta`,\n" +
+        "    `cpvkodok`.`cpvkod`,\n" +
+        "    `projektek`.`projekt`,\n" +
+        "    `kozbeszerzes`.`kozbeszkezdete`,\n" +
+        "    `kozbeszerzes`.`kozbeszvege`\n" +
+        "FROM `adattar`.`kozbeszerzes`, `adattar`.`projektek`, `adattar`.`szerzodesfajtai`,\n" +
+        "`adattar`.`cpvkodok`, `adattar`.`kozbeszerzesieljarasfajtai` WHERE  \n" +
+        "`kozbeszerzes`.`projekt`=`projektek`.`projektid` and `kozbeszerzes`.`szerzodesfajtaja`=`szerzodesfajtai`.`szerzodesfajtaid` and \n" +
+        "`kozbeszerzes`.`kozbeszerzesieljarasfajta`=`kozbeszerzesieljarasfajtai`.`kejid` and `kozbeszerzes`.`cpvkod`=`cpvkodok`.`cpvid`\n ";
 
         if (BeszSorszamKozbeszKereses.getText() != null && !BeszSorszamKozbeszKereses.getText().equals("")) {
-            sql += "and sorszam = '" + BeszSorszamKozbeszKereses.getText() + "' ";
+            sql += "and `kozbeszerzes`.`sorszam` = '" + BeszSorszamKozbeszKereses.getText() + "' ";
         }
         if (SzerzNevKozbeszKereses.getText() != null && !SzerzNevKozbeszKereses.getText().equals("")) {
-            sql += "and besznev = '" + SzerzNevKozbeszKereses.getText() + "' ";
+            sql += "and `kozbeszerzes`.`besznev` = '" + SzerzNevKozbeszKereses.getText() + "' ";
         }
         if (KozbeszAzonKozbeszKereses.getText() != null && !KozbeszAzonKozbeszKereses.getText().equals("")) {
-            sql += "and keljarasazon = '" + KozbeszAzonKozbeszKereses.getText() + "' ";
+            sql += "and keljarasazon`kozbeszerzes`.`keljarasazon` = '" + KozbeszAzonKozbeszKereses.getText() + "' ";
         }
        
         if (KozbeszFajtKozbeszKereses.getValue() != null) {
-            sql += "and kozbeszerzesieljarasfajta <= '" + KozbeszFajtKozbeszKereses.getValue() + "' ";
+            sql += "and `kozbeszerzesieljarasfajtai`.`kozbeszerzesieljarasfajtai` = '" + KozbeszFajtKozbeszKereses.getValue() + "' ";
         }
         if (SzerzFajtKozbeszKereses.getValue() != null) {
-            sql += "and szerzodesfajtaja <= '" + SzerzFajtKozbeszKereses.getValue() + "' ";
+            sql += "and `szerzodesfajtai`.`szerzodesfajta` = '" + SzerzFajtKozbeszKereses.getValue() + "' ";
         }
         if (CPVKozbeszKereses.getValue() != null) {
-            sql += "and cpvkod = '" + CPVKozbeszKereses.getValue() + "' ";
+            sql += "and `cpvkodok`.`cpvkod` = '" + CPVKozbeszKereses.getValue() + "' ";
         }
         if (ProjektKozbeszKereses.getValue() != null) {
-            sql += "and projekt = '" + ProjektKozbeszKereses.getValue() + "' ";
+            sql += "and `projektek`.`projekt` = '" + ProjektKozbeszKereses.getValue() + "' ";
         }
 
         if (KozbeszTolKozbeszKereses.getValue() != null) {
-            sql += "and sz.kozbeszkezdete >= '" + KozbeszTolKozbeszKereses.getValue() + "' ";
+            sql += "and `kozbeszerzes`.`kozbeszkezdete` >= '" + KozbeszTolKozbeszKereses.getValue() + "' ";
         }
         if (KozbeszIgKozbeszKereses.getValue() != null) {
-            sql += "and sz.kozbeszkezdete <= '" + KozbeszIgKozbeszKereses.getValue() + "' ";
+            sql += "and `kozbeszerzes`.`kozbeszkezdete` <= '" + KozbeszIgKozbeszKereses.getValue() + "' ";
         }
 
         if (KozbeszLezarTolKozbeszKereses.getValue() != null) {
-            sql += "and sz.kozbeszvege >= '" + KozbeszLezarTolKozbeszKereses.getValue() + "' ";
+            sql += "and `kozbeszerzes`.`kozbeszvege` >= '" + KozbeszLezarTolKozbeszKereses.getValue() + "' ";
         }
         if (KozbeszLezarIgKozbeszKereses.getValue() != null) {
-            sql += "and sz.kozbeszvege <= '" + KozbeszLezarIgKozbeszKereses.getValue() + "' ";
+            sql += "and `kozbeszerzes`.`kozbeszvege` <= '" + KozbeszLezarIgKozbeszKereses.getValue() + "' ";
         }
         if (BecsultErtekMinKozbeszKereses.getText() != null) {
-            sql += "and bertek >= '" + BecsultErtekMinKozbeszKereses.getText() + "' ";
+            sql += "and `kozbeszerzes`.`bertek` >= '" + BecsultErtekMinKozbeszKereses.getText() + "' ";
         }
         if (BecsultErtekMaxKozbeszKereses.getText() != null) {
-            sql += "and bertek <= '" + BecsultErtekMaxKozbeszKereses.getText() + "' ";
+            sql += "and `kozbeszerzes`.`bertek` <= '" + BecsultErtekMaxKozbeszKereses.getText() + "' ";
         }
         sql += "group by sorszam";
         System.out.println(sql);
-        ArrayList<Szerzodes> projektEgybentartasLista = null;
+        ArrayList<Kozbeszerzes> KozbeszerzesekLista = null;
         try {
            
                     
-                    serverImpl.szerzodesKereses(sql);
+                    KozbeszerzesekLista = serverImpl.kozbeszKereses(sql);
         } catch (RemoteException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        projektEgybentartasLista.add(new ProjektEgybentartas("projekt neve", "15"));
-        KozbeszerzesekTable.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
+        KozbeszerzesekTable.setItems(FXCollections.observableArrayList(KozbeszerzesekLista));
         
         
     }

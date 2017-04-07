@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DataEgybentartas;
+import model.Kozbeszerzes;
 import model.ProjektEgybentartas;
 import model.SerializableResultSet;
 import model.Szerzodes;
@@ -102,7 +103,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
         System.out.println(sql);
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println("lekérdezés");
-        closeConnection();
+      //  closeConnection();
         return new SerializableResultSet(rs);
     }
     
@@ -133,6 +134,33 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
     }
 
     @Override
+    public ArrayList<Kozbeszerzes> kozbeszKereses(String sql) throws RemoteException {
+        createConnection();
+        ArrayList<Kozbeszerzes> data = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            String[] colnames = new String[rsmd.getColumnCount()];
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                colnames[i] = rsmd.getColumnName(i + 1);
+            }
+            while (rs.next()) {
+                Kozbeszerzes kozbesz
+                        = new Kozbeszerzes(rs.getObject(1).toString(),rs.getObject(2).toString(),
+                            rs.getObject(3).toString(), rs.getObject(4).toString(),
+                            rs.getObject(5).toString(), rs.getObject(6).toString(), rs.getObject(7).toString(),
+                            rs.getObject(8).toString(), rs.getObject(9).toString(), rs.getObject(10).toString());
+                data.add(kozbesz);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeConnection();
+        }
+        return data;
+    }
+    
+    @Override
     public ArrayList<Szerzodes> szerzodesKereses(String sql) throws RemoteException {
         createConnection();
         ArrayList<Szerzodes> data = new ArrayList<>();
@@ -145,9 +173,9 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
             }
             while (rs.next()) {
                 Szerzodes szerzodes
-                        = new Szerzodes(Integer.getInteger(rs.getObject(1).toString()),Integer.getInteger(rs.getObject(2).toString()),
-                            Integer.getInteger(rs.getObject(3).toString()), Integer.getInteger(rs.getObject(4).toString()),
-                            rs.getObject(5).toString(), rs.getDate(6), rs.getDate(7));
+                        = new Szerzodes(rs.getObject(1).toString(),rs.getObject(2).toString(),
+                            rs.getObject(3).toString(), rs.getObject(4).toString(),
+                            rs.getObject(5).toString(), rs.getObject(6).toString(), rs.getObject(7).toString());
                 data.add(szerzodes);
             }
         } catch (SQLException ex) {
@@ -189,7 +217,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
         } catch (SQLException ex) {
             Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-          
+           closeConnection();
         }
         return data;
     }
@@ -214,7 +242,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
         } catch (SQLException ex) {
             Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-          
+           closeConnection();
         }
         return data;
     }

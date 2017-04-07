@@ -16,26 +16,26 @@ import java.util.Date;
 public class Szerzmodositas implements Serializable {
 
     
-    private Integer szerzmodazon;
+    private String szerzmodazon;
     
-    private int szerzmodertek;
+    private String szerzmodertek;
     
     private String szerzmodtargy;
     
-    private Date szerzmoddatum;
+    private String szerzmoddatum;
     
-    private Date szerzmodvege;
+    private String szerzmodvege;
     
-    private Integer szerzazon;
+    private String szerzazon;
 
     public Szerzmodositas() {
     }
 
-    public Szerzmodositas(Integer szerzmodazon) {
+    public Szerzmodositas(String szerzmodazon) {
         this.szerzmodazon = szerzmodazon;
     }
 
-    public Szerzmodositas(Integer szerzmodazon, Integer szerzazon, int szerzmodertek, String szerzmodtargy, Date szerzmoddatum, Date szerzmodvege) {
+    public Szerzmodositas(String szerzmodazon, String szerzazon, String szerzmodertek, String szerzmodtargy, String szerzmoddatum, String szerzmodvege) {
         this.szerzmodazon = szerzmodazon;
         this.szerzazon = szerzazon;
         this.szerzmodertek = szerzmodertek;
@@ -44,19 +44,19 @@ public class Szerzmodositas implements Serializable {
         this.szerzmodvege = szerzmodvege;
     }
 
-    public Integer getSzerzmodazon() {
+    public String getSzerzmodazon() {
         return szerzmodazon;
     }
 
-    public void setSzerzmodazon(Integer szerzmodazon) {
+    public void setSzerzmodazon(String szerzmodazon) {
         this.szerzmodazon = szerzmodazon;
     }
 
-    public int getSzerzmodertek() {
+    public String getSzerzmodertek() {
         return szerzmodertek;
     }
 
-    public void setSzerzmodertek(int szerzmodertek) {
+    public void setSzerzmodertek(String szerzmodertek) {
         this.szerzmodertek = szerzmodertek;
     }
 
@@ -68,19 +68,19 @@ public class Szerzmodositas implements Serializable {
         this.szerzmodtargy = szerzmodtargy;
     }
 
-    public Date getSzerzmoddatum() {
+    public String getSzerzmoddatum() {
         return szerzmoddatum;
     }
 
-    public void setSzerzmoddatum(Date szerzmoddatum) {
+    public void setSzerzmoddatum(String szerzmoddatum) {
         this.szerzmoddatum = szerzmoddatum;
     }
 
-    public Date getSzerzmodvege() {
+    public String getSzerzmodvege() {
         return szerzmodvege;
     }
 
-    public void setSzerzmodvege(Date szerzmodvege) {
+    public void setSzerzmodvege(String szerzmodvege) {
         this.szerzmodvege = szerzmodvege;
     }
 
