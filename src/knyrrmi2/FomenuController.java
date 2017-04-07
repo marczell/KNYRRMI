@@ -33,14 +33,21 @@ import javafx.stage.Stage;
  * @author Marcell
  */
 public class FomenuController implements Initializable {
-
+    @FXML
     private Button CtrlSzerzfel;
+    @FXML
     private Button CtrlSzerz;
+    @FXML
     private Button CtrlCpv;
+    @FXML
     private Button CtrlProjekt;
+    @FXML
     private Button CtrlKeres;
+    @FXML
     private Button CtrlErtek;
+    @FXML
     private Button CtrlKozbesz;
+    @FXML
     private Button CtrlSzerzmod;
     @FXML
     private Label uzenet;
@@ -51,7 +58,7 @@ public class FomenuController implements Initializable {
     @FXML
     private Button CtrlBelepes;
     
-    KnyrInterface serverImpl;
+ 
     /**
      * Initializes the controller class.
      * @param url
@@ -59,12 +66,7 @@ public class FomenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       try {
-            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
-            serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
-        } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(BelepesController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }
 
     @FXML
