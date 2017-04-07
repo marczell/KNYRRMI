@@ -193,4 +193,31 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
         }
         return data;
     }
+    
+     public ArrayList<String> jelszoKereses(String sql) throws RemoteException {
+        createConnection();
+        ArrayList<String> data = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            String[] colnames = new String[rsmd.getColumnCount()];
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                colnames[i] = rsmd.getColumnName(i + 1);
+            }
+            
+            while (rs.next()) {
+                
+                String jelszoKapott = rs.getObject(1).toString();
+                data.add(jelszoKapott);
+           
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+          
+        }
+        return data;
+    }
+    
+    
 }

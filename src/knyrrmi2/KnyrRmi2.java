@@ -27,7 +27,7 @@ public class KnyrRmi2 extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fomenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("belepes.fxml"));
 
         Scene scene = new Scene(root);
         File f = new File("alkfejl.css");

@@ -26,7 +26,7 @@ public interface KnyrInterface extends Remote{
     public void closeConnection() throws RemoteException;
     public void adatbazisbaInsertalas(String sql) throws SQLException,RemoteException;
     public SerializableResultSet adatbazisReport(String sql) throws SQLException,RemoteException;
-    
+    public ArrayList<String> jelszoKereses(String sql) throws RemoteException;
     public ArrayList<DataEgybentartas> cpvEgybOsszes(String sql) throws RemoteException;
     public ArrayList<ProjektEgybentartas> projektEgybOsszes(String sql) throws RemoteException;
     public ArrayList<Szerzodes> szerzodesKereses(String sql) throws RemoteException;

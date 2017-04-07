@@ -140,7 +140,7 @@ public class KozbeszKeresesKontroller implements Initializable{
                 Stage stage = (Stage) row.getScene().getWindow();
                 Parent root = null;
                  try {
-                     root = FXMLLoader.load(getClass().getResource("KozbeszrogzitesController.fxml"));
+                     root = FXMLLoader.load(getClass().getResource("szerzrogzites.fxml"));
                  } catch (IOException ex) {
                      Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
                  }
