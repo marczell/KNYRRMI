@@ -115,15 +115,15 @@ public class SzerzrogzitesController implements Initializable {
                 SzerzAzonSzerz.setText(sorszam);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba a sorszámlekérés során!");
         } catch (RemoteException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
@@ -140,15 +140,15 @@ public class SzerzrogzitesController implements Initializable {
             SzerzfelSzerz.getItems().clear();
             SzerzfelSzerz.setItems(obListKej);
         } catch (SQLException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
         } catch (RemoteException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }    
@@ -191,10 +191,10 @@ public void initData(Kozbeszerzes kozbesz) {
                 uzenet.setText("Sikeres mentése a " + SzerzAzonSzerz.getText() + " azonosítójú szerződésnek!");
                
             } catch (SQLException ex) {
-                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
                 uzenet.setText("Hiba a mentés során!");
             } catch (RemoteException ex) {
-                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 
                 String sql_uj = "SELECT MAX(`szerzodes`.`szerzazon`) as szerzazon FROM `adattar`.`szerzodes`";
@@ -207,15 +207,15 @@ public void initData(Kozbeszerzes kozbesz) {
                 SzerzAzonSzerz.setText(sorszam);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba a sorszámlekérés során!");
         } catch (RemoteException ex) {
-            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SzerzrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
                 SzerzertekSzerz.clear();
                 SzerzTargya.clear();

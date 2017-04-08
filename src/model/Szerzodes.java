@@ -6,7 +6,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
@@ -84,6 +83,14 @@ public class Szerzodes implements Serializable {
 
     public void setSzerzodestervezettlezarasa(String szerzodestervezettlezarasa) {
         this.szerzodestervezettlezarasa = szerzodestervezettlezarasa;
+    }
+
+    public String getSorszam() {
+        return sorszam;
+    }
+
+    public void setSorszam(String sorszam) {
+        this.sorszam = sorszam;
     }
 
    

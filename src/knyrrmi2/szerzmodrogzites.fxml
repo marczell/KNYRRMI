@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.SzerzrogzitesController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knyrrmi2.SzerzmodrogzitesController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -31,14 +31,13 @@
             </Label>
             <Label layoutX="176.0" layoutY="28.0" styleClass="textinputcontrol" text="SZERZŐDÉS RÖGZÍTÉSE" AnchorPane.leftAnchor="170.0" />
             <Label fx:id="uzenet" layoutX="468.0" layoutY="30.0" prefHeight="17.0" prefWidth="250.0" styleClass="textinputcontrol" text="" textFill="RED" />
-            <Label layoutX="540.0" layoutY="69.0" styleClass="textinputcontrol" text="Beszerzés neve" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="69.0" />
-            <TextField fx:id="SzerzNevSzerz" layoutX="695.0" layoutY="65.0" prefWidth="250.0" AnchorPane.leftAnchor="710.0" AnchorPane.topAnchor="65.0" />
+            <Label layoutX="110.0" layoutY="69.0" text="Beszerzés azonosítója" />
+            <TextField fx:id="sorszamMod" layoutX="271.0" layoutY="65.0" />
             <Line endX="850.0" layoutX="150.0" layoutY="101.0" startX="-50.0" AnchorPane.leftAnchor="40.0" />
             <Label layoutX="50.0" layoutY="112.0" text="Szerződés" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="112.0" />
             <Label layoutX="110.0" layoutY="141.0" prefHeight="17.0" prefWidth="118.0" styleClass="textinputcontrol" text="Szerződés azonosítója" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="141.0" />
             <TextField fx:id="SzerzAzonszerz" layoutX="271.0" layoutY="137.0" />
             <Label layoutX="110.0" layoutY="192.0" styleClass="textinputcontrol" text="Szerződő fél" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="192.0" />
-            <ChoiceBox fx:id="SzerzfelSzerz" layoutX="270.0" layoutY="188.0" prefWidth="150.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="188.0" />
             <Label layoutX="110.0" layoutY="242.0" text="Szerződés tárgya" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="242.0" />
             <TextField fx:id="SzerzTargya" layoutX="270.0" layoutY="238.0" prefHeight="25.0" prefWidth="350.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="238.0" />
             <Label layoutX="540.0" layoutY="192.0" styleClass="textinputcontrol" text="Szerződés értéke" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="192.0" />
@@ -50,7 +49,7 @@
             <Line endX="850.0" layoutX="90.0" layoutY="357.0" startX="-50.0" AnchorPane.leftAnchor="39.5" AnchorPane.topAnchor="356.5" />
             <Label layoutX="56.0" layoutY="373.0" text="Szerződésmódosítás" />
             <Label layoutX="113.0" layoutY="410.0" prefHeight="40.0" prefWidth="144.0" text="Szerződésmódosítás azonosítója" wrapText="true" />
-            <TextField fx:id="SzerzModAzonMod" layoutX="271.0" layoutY="417.0" />
+            <Label fx:id="SzerzModAzonMod" layoutX="273.0" layoutY="422.0" prefHeight="17.0" prefWidth="90.0" text="Label" />
             <Label layoutX="113.0" layoutY="470.0" styleClass="textinputcontrol" text="Szerződés módosult értéke" AnchorPane.leftAnchor="113.0" AnchorPane.topAnchor="470.0" />
             <TextField fx:id="SzerzertekMod" layoutX="273.0" layoutY="465.0" AnchorPane.leftAnchor="273.0" AnchorPane.topAnchor="465.0" />
             <Label layoutX="113.0" layoutY="520.0" text="Szerződés módosult tárgya" AnchorPane.leftAnchor="113.0" AnchorPane.topAnchor="520.0" />
@@ -69,8 +68,7 @@
                   <Font name="Verdana" size="14.0" />
                </font>
             </Button>
-            <Label layoutX="110.0" layoutY="69.0" text="Beszerzés azonosítója" />
-            <TextField layoutX="271.0" layoutY="65.0" />
+            <TextField fx:id="SzerzfelSzerz" layoutX="271.0" layoutY="187.0" />
       </children>
     </AnchorPane>
   </children>

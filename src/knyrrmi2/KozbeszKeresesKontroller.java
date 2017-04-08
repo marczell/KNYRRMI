@@ -153,8 +153,6 @@ public class KozbeszKeresesKontroller implements Initializable{
                 scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
                 stage.setScene(scene);
                 stage.show();
-               
-            
         }
     });
     return row ;
