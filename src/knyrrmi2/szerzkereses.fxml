@@ -50,7 +50,7 @@
                 <TextField fx:id="SzerzNevKereses" layoutX="280.0" layoutY="74.0" prefWidth="250.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="74.0" />
                 <Label layoutX="70.0" layoutY="129.0" styleClass="textinputcontrol" text="Szerződő fél" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="129.0" />
                 <ComboBox fx:id="SzerzFelKereses" layoutX="280.0" layoutY="124.0" prefWidth="150.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="124.0" />
-            <Label layoutX="605.0" layoutY="128.0" text="Szerződés azonosítója" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="129.0" />
+            <Label layoutX="605.0" layoutY="128.0" styleClass="textinputcontrol" text="Szerződés azonosítója" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="129.0" />
             <TextField fx:id="SzerzAzonKereses" layoutX="748.0" layoutY="125.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="124.0" />
                 <Label layoutX="70.0" layoutY="179.0" styleClass="textinputcontrol" text="Közbeszerzési eljárás fajtája" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="179.0" />
                 <ComboBox fx:id="KozbeszFajtKereses" layoutX="280.0" layoutY="174.0" prefWidth="150.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="174.0" />

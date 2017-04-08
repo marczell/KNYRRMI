@@ -188,7 +188,7 @@ public void initData(Kozbeszerzes kozbesz) {
             try {
                 serverImpl.adatbazisbaInsertalas(sql);
               
-                uzenet.setText("Sikeres mentése a " + SzerzAzonSzerz.getText() + "azonosítójú szerződésnek!");
+                uzenet.setText("Sikeres mentése a " + SzerzAzonSzerz.getText() + " azonosítójú szerződésnek!");
                
             } catch (SQLException ex) {
                 Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);

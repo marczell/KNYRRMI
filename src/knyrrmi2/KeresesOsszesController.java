@@ -7,6 +7,7 @@ package knyrrmi2;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -15,6 +16,8 @@ import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,17 +46,12 @@ import model.Szerzodes;
  *
  * @author Marcell
  */
-public class KeresesController implements Initializable {
+public class KeresesOsszesController implements Initializable {
 
-    @FXML
     private TextField SzerzNevKereses;
-    @FXML
     private ComboBox<ErtekLista> KozbeszFajtKereses;
-    @FXML
     private ComboBox<?> SzerzFajtKereses;
-    @FXML
     private ComboBox<?> CPVKereses;
-    @FXML
     private ComboBox<?> ProjektKereses;
     @FXML
     private DatePicker SzerzKotTolKereses;
@@ -66,26 +64,16 @@ public class KeresesController implements Initializable {
     @FXML
     private DatePicker SzerzLezarIgKereses;
     @FXML
-    private TableColumn<?, ?> SorszamKereses;
-    @FXML
+    private TextField SorszamKereses;
     private TableColumn<Szerzodes, String> SzerzKotKereses;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzLezarKereses;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzertekKereses;
-    @FXML
     private Button CtrlKeresesVissza;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzNevKeres;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzFelKeres;
-    @FXML
     private TableColumn<Szerzodes, String> KozbeszFajtKeres;
-    @FXML
     private TableColumn<Szerzodes, String> SzerzFajtKeres;
-    @FXML
     private TableColumn<Szerzodes, String> CPVKeres;
-    @FXML
     private TableColumn<Szerzodes, String> ProjektKeres;
         KnyrInterface serverImpl;
  
@@ -99,12 +87,35 @@ public class KeresesController implements Initializable {
     
     @FXML
     private Label uzenet;
-    @FXML
     private TableView<Szerzodes> SzerzodesekTable;
     @FXML
-    private Button CtrlKereses;
+    private Button CtrlKozbeszKeresesVissza;
     @FXML
-    private TextField SzerzAzonKereses;
+    private TextField SzerzNevKozbeszKereses;
+    @FXML
+    private TextField KozbeszAzonKozbeszKereses;
+    @FXML
+    private ComboBox<?> KozbeszFajtKozbeszKereses;
+    @FXML
+    private ComboBox<?> SzerzFajtKozbeszKereses;
+    @FXML
+    private ComboBox<?> CPVKozbeszKereses;
+    @FXML
+    private ComboBox<?> ProjektKozbeszKereses;
+    @FXML
+    private DatePicker SzerzKotTolKozbeszKereses;
+    @FXML
+    private DatePicker SzerzKotIgKozbeszKereses;
+    @FXML
+    private DatePicker SzerzLezarTolKizbeszKereses;
+    @FXML
+    private DatePicker SzerzLezarIgKozbeszKereses;
+    @FXML
+    private TextField BecsultErtekMinKozbeszKereses;
+    @FXML
+    private TextField BecsultErtekMaxKozbeszKereses;
+    @FXML
+    private TextField KozbeszSorszamKozbeszKereses;
 
 
     /**
@@ -132,7 +143,7 @@ public class KeresesController implements Initializable {
         SzerzLezarKereses.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("szerzodesTervezettLezarasa"));
         KozbeszFajtKeres.setCellValueFactory(new PropertyValueFactory<Szerzodes, String>("kozbeszerzesFajtaja"));
         
-        String sql1 = "SELECT KEJID, KOZBESZERZESIELJARASFAJTAI FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
+        String sql1 = "SELECT KOZBESZERZESIELJARASFAJTAI, KEJID FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
             ResultSet rs = null;
             try {
@@ -142,9 +153,9 @@ public class KeresesController implements Initializable {
             }
             ObservableList obListKej = FXCollections.observableArrayList();
             while (rs.next()) {
-                listKej.add(new ErtekLista(rs.getObject(1).toString(),
-                        rs.getObject(2).toString()));
-                obListKej.add(rs.getObject(2).toString());
+                listKej.add(new ErtekLista(rs.getString("KEJID"),
+                        rs.getString("KOZBESZERZESIELJARASFAJTAI")));
+                obListKej.add(rs.getString("KOZBESZERZESIELJARASFAJTAI"));
             }
             KozbeszFajtKereses.getItems().clear();
             KozbeszFajtKereses.setItems(FXCollections.observableList(obListKej));
@@ -159,9 +170,9 @@ public class KeresesController implements Initializable {
             ResultSet rs = serverImpl.adatbazisReport(sql2);
             ObservableList obListSzerzF = FXCollections.observableArrayList();
             while (rs.next()) {
-                listSzerzF.add(new ErtekLista(rs.getObject(1).toString(),
-                        rs.getObject(2).toString()));
-                obListSzerzF.add(rs.getObject(2).toString());
+                listSzerzF.add(new ErtekLista(rs.getString("SZERZODESFAJTAID"),
+                        rs.getString("SZERZODESFAJTA")));
+                obListSzerzF.add(rs.getString("SZERZODESFAJTA"));
             }
             SzerzFajtKereses.getItems().clear();
             SzerzFajtKereses.setItems(FXCollections.observableList(obListSzerzF));
@@ -174,14 +185,14 @@ public class KeresesController implements Initializable {
             
         }
         //meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
-        String sql3 = "SELECT CPVID, CPVKOD FROM CPVKODOK WHERE LATHATO=TRUE";
+        String sql3 = "SELECT CPVKOD, CPVID FROM CPVKODOK WHERE LATHATO=TRUE";
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql3);
             ObservableList obListCpv = FXCollections.observableArrayList();
             while (rs.next()) {
-                listCpv.add(new ErtekLista(rs.getObject(1).toString(),
-                        rs.getObject(2).toString()));
-                obListCpv.add(rs.getObject(2).toString());
+                listCpv.add(new ErtekLista(rs.getString("CPVID"),
+                        rs.getString("CPVKOD")));
+                obListCpv.add(rs.getString("CPVKOD"));
             }
             CPVKereses.getItems().clear();
             CPVKereses.setItems(FXCollections.observableList(obListCpv));
@@ -193,14 +204,14 @@ public class KeresesController implements Initializable {
         } finally {
             
         }
-        String sql4 = "SELECT PROJEKTID, PROJEKT FROM PROJEKTEK WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
+        String sql4 = "SELECT PROJEKT, PROJEKTID FROM PROJEKTEK WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql4);
             ObservableList obListProjekt = FXCollections.observableArrayList();
             while (rs.next()) {
-                listProjekt.add(new ErtekLista(rs.getObject(1).toString(),
-                        rs.getObject(2).toString()));
-                obListProjekt.add(rs.getObject(2).toString());
+                listProjekt.add(new ErtekLista(rs.getString("PROJEKTID"),
+                        rs.getString("PROJEKT")));
+                obListProjekt.add(rs.getString("PROJEKT"));
             }
             ProjektKereses.getItems().clear();
             ProjektKereses.setItems(FXCollections.observableList(obListProjekt));
@@ -217,9 +228,9 @@ public class KeresesController implements Initializable {
             ResultSet rs = serverImpl.adatbazisReport(sql5);
             ObservableList obListSzerzFel = FXCollections.observableArrayList();
             while (rs.next()) {
-                listSzerzFel.add(new ErtekLista(rs.getObject(1).toString(),
-                        rs.getObject(2).toString()));
-                obListSzerzFel.add(rs.getObject(2).toString());
+                listSzerzFel.add(new ErtekLista(rs.getString("SZFID"),
+                        rs.getString("SZERZODOFEL")));
+                obListSzerzFel.add(rs.getString("SZERZODOFEL"));
             }
             SzerzFelKereses.getItems().clear();
             SzerzFelKereses.setItems(FXCollections.observableList(obListSzerzFel));
@@ -244,7 +255,6 @@ public class KeresesController implements Initializable {
         return null;
     }
 
-    @FXML
     private void kereses(ActionEvent event) {
 //        System.out.println(KozbeszFajtKereses.getId());
 //        System.out.println(idKereso(ertekListaLista));

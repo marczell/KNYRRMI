@@ -134,7 +134,7 @@ public class FomenuController implements Initializable {
      @FXML
     private void SzerzModRogzitesAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) CtrlSzerzmod.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("erteklista_mod.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("szerzkereses.fxml"));
         Scene scene = new Scene(root);
          File f = new File("alkfejl.css");
         scene.getStylesheets().clear();
