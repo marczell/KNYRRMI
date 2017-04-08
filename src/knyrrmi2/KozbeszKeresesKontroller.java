@@ -326,11 +326,11 @@ public class KozbeszKeresesKontroller implements Initializable{
         if (KozbeszLezarIgKozbeszKereses.getValue() != null) {
             sql += "and `kozbeszerzes`.`kozbeszvege` <= '" + KozbeszLezarIgKozbeszKereses.getValue() + "' ";
         }
-        if (BecsultErtekMinKozbeszKereses.getText().isEmpty()) {
+        if (!BecsultErtekMinKozbeszKereses.getText().isEmpty()) {
             System.out.println("**********"+BecsultErtekMinKozbeszKereses.getText()+"**********");
             sql += "and `kozbeszerzes`.`bertek` >= '" + BecsultErtekMinKozbeszKereses.getText() + "' ";
         }
-        if (BecsultErtekMaxKozbeszKereses.getText().isEmpty()) {
+        if (!BecsultErtekMaxKozbeszKereses.getText().isEmpty()) {
             sql += "and `kozbeszerzes`.`bertek` <= '" + BecsultErtekMaxKozbeszKereses.getText() + "' ";
         }
         sql += "group by sorszam";

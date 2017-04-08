@@ -265,8 +265,7 @@ public class KozbeszrogzitesController implements Initializable {
                 && KozbeszVegeKozbesz.getValue() != null
                 && KozbeszKezdKozbesz.getValue().isBefore(KozbeszVegeKozbesz.getValue())) {
 
-            String sql = "INSERT INTO `adattar`.`kozbeszerzes` (`sorszam`,\n" +
-            "`besznev`,\n" +
+            String sql = "INSERT INTO `adattar`.`kozbeszerzes` (`besznev`,\n" +
             "`keljarasazon`,\n" +
             "`bertek`,\n" +
             "`kozbeszerzesieljarasfajta`,\n" +
@@ -282,7 +281,7 @@ public class KozbeszrogzitesController implements Initializable {
             try {
                 serverImpl.adatbazisbaInsertalas(sql);
               
-                uzenet.setText("Sikeres mentése a " + SzerzNevKozbesz.getText());
+                uzenet.setText("A" + SzerzNevKozbesz.getText()+"beszerzés mentése sikeresen megtörtént!");
                 SzerzNevKozbesz.clear();
                 KozbeszAzonKozbesz.clear();
                 BecsErtekKozbesz.clear();
@@ -298,6 +297,27 @@ public class KozbeszrogzitesController implements Initializable {
             } catch (RemoteException ex) {
                 Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
+                 String sqluj = "SELECT MAX(`kozbeszerzes`.`sorszam`) as SORSZAM FROM `adattar`.`kozbeszerzes`";
+        try {
+            SerializableResultSet rs = (SerializableResultSet) serverImpl.adatbazisReport(sqluj);
+            while (rs.next()) {
+                int s = Integer.parseInt(rs.getObject(1).toString());
+                int x = s + 1;
+                String sorszam = Integer.toString(x);
+                txtBeszSorszamKozbesz.setText(sorszam);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            uzenet.setText("Hiba a sorszámlekérés során!");
+        } catch (RemoteException ex) {
+            Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
                 
             }
         } else {
@@ -333,7 +353,7 @@ public class KozbeszrogzitesController implements Initializable {
         try {
            
             projektEgybentartasLista=serverImpl.projektEgybOsszes(sqlprojekt);
-          if (projektEgybentartasLista == null){
+          if (projektEgybentartasLista.isEmpty()){
               
               ProjektEgybentartas uj = new ProjektEgybentartas(projekt,BecsErtekKozbesz.getText());
               projektEgybentartasLista.add(uj);
@@ -364,8 +384,8 @@ public class KozbeszrogzitesController implements Initializable {
         try {
             
             dataEgybentartasLista=serverImpl.cpvEgybOsszes(sqlcpv);
-            System.out.println(dataEgybentartasLista.get(0).getErtek());
-             if (dataEgybentartasLista == null){
+           
+             if (dataEgybentartasLista.isEmpty()){
               
               DataEgybentartas uj = new DataEgybentartas(cpv,BecsErtekKozbesz.getText());
               dataEgybentartasLista.add(uj);

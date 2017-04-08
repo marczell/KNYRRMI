@@ -127,12 +127,12 @@ public class SzerzrogzitesController implements Initializable {
             }
         }
         
-        String sql1 = "SELECT KOZBESZERZESIELJARASFAJTAI, KEJID FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";
+        String sql1 = "SELECT szfid, szerzodofel FROM `adattar`.`szerzodo_fel`";
         try {
             ResultSet rs = (ResultSet) serverImpl.adatbazisReport(sql1);
             while (rs.next()) {
-                String s = rs.getObject(2).toString();
-                String t = rs.getString(1);
+                String s = rs.getObject(1).toString();
+                String t = rs.getString(2);
                 listSzerzFelId.add(s);
                 listSzerzFel.add(t);
             }
@@ -176,14 +176,13 @@ public void initData(Kozbeszerzes kozbesz) {
             String szerzfel = (String) SzerzfelSzerz.getSelectionModel().getSelectedItem();
 
             String sql = "INSERT INTO `adattar`.`szerzodes` (`sorszam`,\n" +
-            "`szerzazon`,\n" +
             "`szerzodofel`,\n" +
             "`szerzodeserteke`,\n" +
             "`szerztargy`,\n" +
             "`szerzodeskotesdatuma`,\n" +
             "`szerzodestervezettlezarasa`)\n"
             + " VALUES ('"+ txtBeszSorszam.getText() +"','"+ listSzerzFelId.get(listSzerzFel.indexOf(szerzfel)) + "', '"
-            + SzerzertekSzerz.getText() + "', '" + SzerzertekSzerz.getText() 
+            + SzerzertekSzerz.getText() + "', '" + SzerzTargya.getText() 
             + "','" + SzerzkotSzerz.getValue() + "','" + SzerzlezarSzerz.getValue() + "')";
             System.out.println(sql);
             try {
@@ -202,7 +201,7 @@ public void initData(Kozbeszerzes kozbesz) {
         try {
             SerializableResultSet rs = (SerializableResultSet) serverImpl.adatbazisReport(sql_uj);
             while (rs.next()) {
-                int s = Integer.parseInt(rs.getObject(0).toString());
+                int s = Integer.parseInt(rs.getObject(1).toString());
                 int x = s + 1;
                 String sorszam = Integer.toString(x);
                 SzerzAzonSzerz.setText(sorszam);

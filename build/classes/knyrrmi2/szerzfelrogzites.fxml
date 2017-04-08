@@ -31,16 +31,16 @@
             </Label>
             <Label layoutX="176.0" layoutY="28.0" text="SZERZŐDŐ FÉL RÖGZÍTÉSE" />
             <Label fx:id="uzenet" layoutX="516.0" layoutY="28.0" prefHeight="17.0" prefWidth="365.0" textFill="RED" />
-            <Label layoutX="72.0" layoutY="88.0" text="Szerződő fél" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="70.0" />
+            <Label layoutX="72.0" layoutY="88.0" styleClass="textinputcontrol" text="Szerződő fél" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="70.0" />
             <TextField fx:id="SzerzFel" layoutX="217.0" layoutY="84.0" prefHeight="25.0" prefWidth="250.0" promptText="Szerződő fél neve" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="65.0" />
             <Label fx:id="szerzfelid" layoutX="463.0" layoutY="69.0" visible="false" />
             <Line endX="850.0" layoutX="95.0" layoutY="106.0" startX="-50.0" strokeWidth="2.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="105.0" />
-            <Label layoutX="72.0" layoutY="134.0" text="Székhely" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0" />
+            <Label layoutX="72.0" layoutY="134.0" styleClass="textinputcontrol" text="Székhely" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0" />
             <Label layoutX="72.0" layoutY="184.0" styleClass="textinputcontrol" text="Város" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="150.0" />
             <TextField fx:id="Varos" layoutX="143.0" layoutY="180.0" promptText="Város" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="145.0" />
-            <Label layoutX="465.0" layoutY="150.0" text="Irányítószám" AnchorPane.leftAnchor="550.0" />
+            <Label layoutX="465.0" layoutY="150.0" styleClass="textinputcontrol" text="Irányítószám" AnchorPane.leftAnchor="550.0" />
             <TextField fx:id="Irszam" layoutX="585.0" layoutY="145.0" promptText="1111" AnchorPane.leftAnchor="710.0" />
-            <Label layoutX="72.0" layoutY="235.0" text="Közterület" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="200.0" />
+            <Label layoutX="72.0" layoutY="235.0" styleClass="textinputcontrol" text="Közterület" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="200.0" />
             <TextField fx:id="Kozterulet" layoutX="186.0" layoutY="231.0" promptText="Köterület neve és jellege" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="195.0" />
             <Label layoutX="465.0" layoutY="200.0" styleClass="textinputcontrol" text="Házszám" AnchorPane.leftAnchor="550.0" />
             <TextField fx:id="Hazszam" layoutX="585.0" layoutY="195.0" promptText="Házszám" AnchorPane.leftAnchor="710.0" />
@@ -60,7 +60,7 @@
             <TextField fx:id="Kapcstartnev" layoutX="218.0" layoutY="463.0" promptText="Név" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="435.0" />
             <Label layoutX="92.0" layoutY="513.0" styleClass="textinputcontrol" text="Kapcsolattartó e-mail" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="490.0" />
             <TextField fx:id="Kapcstarttelszam" layoutX="665.0" layoutY="435.0" prefWidth="159.0" promptText="06304224242" AnchorPane.leftAnchor="710.0" />
-            <Label layoutX="465.0" layoutY="440.0" styleClass="textinputcontrol" text="Kapcsolattartó telefonszám" AnchorPane.leftAnchor="550.0" />
+            <Label layoutX="465.0" layoutY="440.0" prefHeight="17.0" prefWidth="144.0" styleClass="textinputcontrol" text="Kapcsolattartó telefonszám" wrapText="true" AnchorPane.leftAnchor="550.0" />
             <TextField fx:id="Kapcstartemail" layoutX="312.0" layoutY="512.0" prefWidth="250.0" promptText="valaki@example.hu" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="485.0" />
             <Button fx:id="CtrlSzerzfelKereses" alignment="CENTER" contentDisplay="CENTER" layoutX="598.0" layoutY="631.0" mnemonicParsing="false" onAction="#keresesAction" prefHeight="30.0" prefWidth="100.0" styleClass="buttonbase" text="Keresés" textAlignment="CENTER">
                <font>
@@ -83,11 +83,11 @@
                 <TableColumn fx:id="tblSzerzfel" prefWidth="126.0" text="Szerződő fél" />
                 <TableColumn fx:id="tblVaros" prefWidth="77.0" text="Város" />
                   <TableColumn fx:id="tblIrszam" prefWidth="79.0" text="Irányítószám" />
-                  <TableColumn fx:id="tblKozterulet" prefWidth="166.0" text="Közterület" />
-                  <TableColumn fx:id="tblHazszam" prefWidth="72.0" text="Házszám" />
-                  <TableColumn fx:id="tblCegjszam" prefWidth="113.0" text="Cégjegyzék-szám" />
-                  <TableColumn fx:id="tblAdoszam" prefWidth="90.0" text="Adószám" />
-                  <TableColumn fx:id="tblKapcstarto" prefWidth="162.0" text="Kapcsolattartó" />
+                  <TableColumn fx:id="tblKozterulet" prefWidth="115.0" text="Közterület" />
+                  <TableColumn fx:id="tblHazszam" prefWidth="62.0" text="Házszám" />
+                  <TableColumn fx:id="tblCegjszam" prefWidth="120.0" text="Cégjegyzék-szám" />
+                  <TableColumn fx:id="tblAdoszam" prefWidth="92.0" text="Adószám" />
+                  <TableColumn fx:id="tblKapcstarto" prefWidth="139.0" text="Kapcsolattartó" />
               </columns>
             </TableView>
       </children>
