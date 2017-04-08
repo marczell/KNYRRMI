@@ -107,6 +107,38 @@ public class Kozbeszerzes implements Serializable {
         this.kozbeszvege = kozbeszvege;
     }
 
+    public String getKozbeszerzesieljarasfajta() {
+        return kozbeszerzesieljarasfajta;
+    }
+
+    public void setKozbeszerzesieljarasfajta(String kozbeszerzesieljarasfajta) {
+        this.kozbeszerzesieljarasfajta = kozbeszerzesieljarasfajta;
+    }
+
+    public String getSzerzodesfajtaja() {
+        return szerzodesfajtaja;
+    }
+
+    public void setSzerzodesfajtaja(String szerzodesfajtaja) {
+        this.szerzodesfajtaja = szerzodesfajtaja;
+    }
+
+    public String getCpvkod() {
+        return cpvkod;
+    }
+
+    public void setCpvkod(String cpvkod) {
+        this.cpvkod = cpvkod;
+    }
+
+    public String getProjekt() {
+        return projekt;
+    }
+
+    public void setProjekt(String projekt) {
+        this.projekt = projekt;
+    }
+
   
 
     @Override

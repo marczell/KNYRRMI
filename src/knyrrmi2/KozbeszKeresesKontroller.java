@@ -7,7 +7,6 @@ package knyrrmi2;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -40,7 +39,6 @@ import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import model.ErtekLista;
 import model.Kozbeszerzes;
-import model.Szerzodes;
 
 /**
  *
@@ -109,7 +107,7 @@ public class KozbeszKeresesKontroller implements Initializable{
     ArrayList<ErtekLista> listSzerzF = new ArrayList<>();
     ArrayList<ErtekLista> listCpv = new ArrayList<>();
     ArrayList<ErtekLista> listProjekt = new ArrayList<>();
-    ArrayList<ErtekLista> listSzerzFel = new ArrayList<>();
+
     
     
      @Override
@@ -120,9 +118,7 @@ public class KozbeszKeresesKontroller implements Initializable{
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        BecsultErtekMaxKozbeszKereses.clear();
-        BecsultErtekMinKozbeszKereses.clear();
-        
+                
         tblBeszSorszamKozbeszKereses.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("sorszam"));
         tblKozbeszAzonKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("keljarasazon"));
         tblBeszNevKozbeszKeres.setCellValueFactory(new PropertyValueFactory<Kozbeszerzes, String>("besznev"));
@@ -142,18 +138,21 @@ public class KozbeszKeresesKontroller implements Initializable{
 
                 Kozbeszerzes kivalasztott = row.getItem();
                 Stage stage = (Stage) row.getScene().getWindow();
-                Parent root = null;
+                FXMLLoader loader = new FXMLLoader();
+                Parent  root=null;
                  try {
-                     root = FXMLLoader.load(getClass().getResource("szerzrogzites.fxml"));
+                     root = loader.load(getClass().getResource("szerzrogzites.fxml").openStream());
                  } catch (IOException ex) {
                      Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
                  }
-        Scene scene = new Scene(root);
-         File f = new File("alkfejl.css");
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-        stage.setScene(scene);
-        stage.show();
+                 SzerzrogzitesController szerzcon = (SzerzrogzitesController)loader.getController();
+                 szerzcon.initData(kivalasztott);
+                Scene scene = new Scene(root);
+                 File f = new File("alkfejl.css");
+                scene.getStylesheets().clear();
+                scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+                stage.setScene(scene);
+                stage.show();
                
             
         }
@@ -327,10 +326,11 @@ public class KozbeszKeresesKontroller implements Initializable{
         if (KozbeszLezarIgKozbeszKereses.getValue() != null) {
             sql += "and `kozbeszerzes`.`kozbeszvege` <= '" + KozbeszLezarIgKozbeszKereses.getValue() + "' ";
         }
-        if (BecsultErtekMinKozbeszKereses.getText() != null) {
+        if (BecsultErtekMinKozbeszKereses.getText().isEmpty()) {
+            System.out.println("**********"+BecsultErtekMinKozbeszKereses.getText()+"**********");
             sql += "and `kozbeszerzes`.`bertek` >= '" + BecsultErtekMinKozbeszKereses.getText() + "' ";
         }
-        if (BecsultErtekMaxKozbeszKereses.getText() != null) {
+        if (BecsultErtekMaxKozbeszKereses.getText().isEmpty()) {
             sql += "and `kozbeszerzes`.`bertek` <= '" + BecsultErtekMaxKozbeszKereses.getText() + "' ";
         }
         sql += "group by sorszam";

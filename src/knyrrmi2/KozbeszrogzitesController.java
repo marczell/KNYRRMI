@@ -14,7 +14,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -126,7 +128,7 @@ public class KozbeszrogzitesController implements Initializable {
         try {
             SerializableResultSet rs = (SerializableResultSet) serverImpl.adatbazisReport(sql);
             while (rs.next()) {
-                int s = Integer.parseInt(rs.getObject(0).toString());
+                int s = Integer.parseInt(rs.getObject(1).toString());
                 int x = s + 1;
                 String sorszam = Integer.toString(x);
                 txtBeszSorszamKozbesz.setText(sorszam);
@@ -310,6 +312,9 @@ public class KozbeszrogzitesController implements Initializable {
         String projekt = (String) ProjektKozbesz.getSelectionModel().getSelectedItem();
         String sqlprojekt = null;
         String sqlcpv = null;
+        LocalDate datum = KozbeszKezdKozbesz.getValue();
+        int ev = datum.getYear();
+        
         if (BecsErtekKozbesz.getText().matches("[0-9]{1,11}")
                 && CpvKozbesz.getSelectionModel().getSelectedItem() != null
                 && ProjektKozbesz.getSelectionModel().getSelectedItem() != null
@@ -317,18 +322,29 @@ public class KozbeszrogzitesController implements Initializable {
                 ) {
 
          //Projekt egybeszámítás elvégzése   
-        sqlprojekt = "select p.projekt, sum(sz.szerzodeserteke) as osszeg \n"
-                + "from projektek p, szerzodes sz \n"
-                + "where sz.projekt=p.projektid and sz.projekt=  \n"
-                + listProjektId.get(listProjekt.indexOf(projekt)) + "' ";
+        sqlprojekt = "select p.projekt, sum(sz.bertek) as osszeg \n" +
+        "from projektek p, kozbeszerzes sz \n" +
+        "where sz.projekt=p.projektid and sz.projekt=  '"+ listProjektId.get(listProjekt.indexOf(projekt)) +
+        "' and year(sz.kozbeszkezdete) = " + ev;
         
-        sqlprojekt += "group by sz.projekt";
+        sqlprojekt += " group by sz.projekt";
         System.out.println(sqlprojekt);
         ArrayList<ProjektEgybentartas> projektEgybentartasLista = null;
         try {
-           Registry myRegistry= LocateRegistry.getRegistry("127.0.0.1",1099);
-            KnyrInterface serverImpl = (KnyrInterface)myRegistry.lookup("knyr");
+           
             projektEgybentartasLista=serverImpl.projektEgybOsszes(sqlprojekt);
+          if (projektEgybentartasLista == null){
+              
+              ProjektEgybentartas uj = new ProjektEgybentartas(projekt,BecsErtekKozbesz.getText());
+              projektEgybentartasLista.add(uj);
+          } else{
+              ProjektEgybentartas uj = projektEgybentartasLista.get(0);
+              System.out.println(projektEgybentartasLista.get(0).getProjektErtek());
+              int eredeti = Integer.parseInt(projektEgybentartasLista.get(0).getProjektErtek());
+              Integer teljes = eredeti + Integer.parseInt(BecsErtekKozbesz.getText());
+              uj.setProjektErtek(teljes.toString());
+              projektEgybentartasLista.set(0,uj);
+          }
             ProjektTable.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
         } catch (Exception e) {
             e.printStackTrace();
@@ -336,18 +352,31 @@ public class KozbeszrogzitesController implements Initializable {
 //        projektEgybentartasLista.add(new ProjektEgybentartas("projekt neve", "15"));
         ProjektTable.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
         //cpv egybeszámítás elvégzése
-        sqlcpv = "select c.cpvkod, sum(sz.szerzodeserteke) as osszeg \n"
-                + "from cpvkodok c, szerzodes sz \n"
-                + "where sz.cpvkod=c.cpvid and c.cpvid=\n"
-        + listCpvId.get(listCpv.indexOf(cpv))+ "' ";
-        sqlcpv += "group by c.cpvkod";        
+        sqlcpv = "select c.cpvkod, sum(sz.bertek) as osszeg \n"
+                + "from cpvkodok c, kozbeszerzes sz \n"
+                + "where sz.cpvkod=c.cpvid and c.cpvid='"
+        + listCpvId.get(listCpv.indexOf(cpv))+ "' and year(sz.kozbeszkezdete) = " + ev;
+        sqlcpv += " group by c.cpvkod";
+        
         System.out.println(sqlcpv);
         
         ArrayList<DataEgybentartas> dataEgybentartasLista=null;
         try {
-            Registry myRegistry= LocateRegistry.getRegistry("127.0.0.1",1099);
-            KnyrInterface serverImpl = (KnyrInterface)myRegistry.lookup("knyr");
+            
             dataEgybentartasLista=serverImpl.cpvEgybOsszes(sqlcpv);
+            System.out.println(dataEgybentartasLista.get(0).getErtek());
+             if (dataEgybentartasLista == null){
+              
+              DataEgybentartas uj = new DataEgybentartas(cpv,BecsErtekKozbesz.getText());
+              dataEgybentartasLista.add(uj);
+          } else{
+              DataEgybentartas uj = dataEgybentartasLista.get(0);
+              System.out.println(dataEgybentartasLista.get(0).getErtek());
+              int eredeti = Integer.parseInt(dataEgybentartasLista.get(0).getErtek());
+              Integer teljes = eredeti + Integer.parseInt(BecsErtekKozbesz.getText());
+              uj.setErtek(teljes.toString());
+              dataEgybentartasLista.set(0,uj);
+          }
             CpvTable.setItems(FXCollections.observableArrayList(dataEgybentartasLista));
             //KnyrInterface knyrInterface = (KnyrInterface) Naming.lookup("almafa");
         } catch (Exception e) {

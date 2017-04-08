@@ -38,17 +38,17 @@
             <Line endX="850.0" layoutX="150.0" layoutY="101.0" startX="-50.0" AnchorPane.leftAnchor="40.0" />
             <Label layoutX="45.0" layoutY="111.0" text="Közbeszerzés" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="111.0" />
             <Label layoutX="119.0" layoutY="128.0" prefHeight="48.0" prefWidth="139.0" text="Közbeszerzési ejárás azonosítója" wrapText="true" AnchorPane.leftAnchor="119.0" AnchorPane.topAnchor="128.0" />
-            <TextField fx:id="KozbeszAzon" editable="false" layoutX="279.0" layoutY="140.0" AnchorPane.leftAnchor="279.0" AnchorPane.topAnchor="140.0" />
+            <TextField fx:id="KozbeszAzon" editable="false" layoutX="279.0" layoutY="140.0" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="140.0" />
             <Label layoutX="545.0" layoutY="143.0" text="Becsült érték" AnchorPane.leftAnchor="545.0" AnchorPane.topAnchor="143.0" />
             <TextField fx:id="BecsErtek" editable="false" layoutX="705.0" layoutY="140.0" AnchorPane.leftAnchor="705.0" AnchorPane.topAnchor="140.0" />
             <Label layoutX="118.0" layoutY="191.0" styleClass="textinputcontrol" text="Közbeszerzési eljárás fajtája" wrapText="true" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="191.0" />
-            <ChoiceBox fx:id="KozbeszfajtSzerz" layoutX="278.0" layoutY="188.0" prefWidth="150.0" AnchorPane.leftAnchor="278.0" AnchorPane.topAnchor="188.0" />
+            <TextField fx:id="KozbeszfajtSzerz" editable="false" layoutX="281.0" layoutY="187.0" AnchorPane.leftAnchor="280.0" />
             <Label layoutX="548.0" layoutY="191.0" styleClass="textinputcontrol" text="Szerződés fajtája" AnchorPane.leftAnchor="548.0" AnchorPane.topAnchor="191.0" />
-            <ChoiceBox fx:id="SzerzFajtSzerz" layoutX="708.0" layoutY="188.0" prefWidth="150.0" AnchorPane.leftAnchor="708.0" AnchorPane.topAnchor="188.0" />
+            <TextField fx:id="SzerzFajtSzerz" editable="false" layoutX="705.0" layoutY="187.0" AnchorPane.leftAnchor="705.0" />
             <Label layoutX="118.0" layoutY="241.0" styleClass="textinputcontrol" text="CPV kód" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="241.0" />
-            <ChoiceBox fx:id="CpvSzerz" layoutX="278.0" layoutY="238.0" prefWidth="150.0" AnchorPane.leftAnchor="278.0" AnchorPane.topAnchor="238.0" />
+            <TextField fx:id="CpvSzerz" editable="false" layoutX="279.0" layoutY="237.0" AnchorPane.leftAnchor="280.0" />
             <Label layoutX="548.0" layoutY="241.0" styleClass="textinputcontrol" text="Projekt" AnchorPane.leftAnchor="548.0" AnchorPane.topAnchor="241.0" />
-            <ChoiceBox fx:id="ProjektSzerz" layoutX="708.0" layoutY="238.0" prefWidth="150.0" AnchorPane.leftAnchor="708.0" AnchorPane.topAnchor="238.0" />
+            <TextField fx:id="ProjektSzerz" editable="false" layoutX="705.0" layoutY="237.0" AnchorPane.leftAnchor="705.0" />
             <Label layoutX="118.0" layoutY="291.0" text="Közbeszerési eljárás  kezdete" wrapText="true" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="291.0" />
             <DatePicker fx:id="KozbeszKezd" editable="false" layoutX="278.0" layoutY="288.0" AnchorPane.leftAnchor="278.0" AnchorPane.topAnchor="288.0" />
             <Label layoutX="548.0" layoutY="291.0" text="Közbeszerzési eljárás vége" wrapText="true" AnchorPane.leftAnchor="548.0" AnchorPane.topAnchor="291.0" />

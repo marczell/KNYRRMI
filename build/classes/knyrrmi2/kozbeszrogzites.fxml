@@ -54,20 +54,20 @@
             <Label layoutX="548.0" layoutY="291.0" text="Közbeszerzési eljárás vége" wrapText="true" AnchorPane.leftAnchor="548.0" AnchorPane.topAnchor="291.0" />
             <DatePicker fx:id="KozbeszVegeKozbesz" layoutX="708.0" layoutY="288.0" AnchorPane.leftAnchor="705.0" AnchorPane.topAnchor="288.0" />
             <Line endX="850.0" layoutX="90.0" layoutY="350.0" startX="-50.0" AnchorPane.leftAnchor="39.5" AnchorPane.topAnchor="349.5" />
-            <Button fx:id="CtrlEgybeszamitas" alignment="CENTER" contentDisplay="CENTER" layoutX="791.0" layoutY="400.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" styleClass="buttonbase" text="Egybeszámítás" textAlignment="CENTER">
+            <Button fx:id="CtrlEgybeszamitas" alignment="CENTER" contentDisplay="CENTER" layoutX="791.0" layoutY="400.0" mnemonicParsing="false" onAction="#egybeszamitasAction" prefHeight="30.0" prefWidth="139.0" styleClass="buttonbase" text="Egybeszámítás" textAlignment="CENTER">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font>
             </Button>
-            <Label layoutX="40.0" layoutY="400.0" text="Projekt egybeszámítás eredménye" />
-            <TableView fx:id="ProjektTable" layoutX="43.0" layoutY="430.0" prefHeight="48.0" prefWidth="250.0">
+            <Label layoutX="40.0" layoutY="400.0" text="Projekt egybeszámítás eredménye" AnchorPane.leftAnchor="40.0" />
+            <TableView fx:id="ProjektTable" layoutX="43.0" layoutY="430.0" prefHeight="62.0" prefWidth="250.0">
               <columns>
                 <TableColumn fx:id="Projekt" prefWidth="143.0" text="Projekt" />
                 <TableColumn fx:id="ProjektOsszeg" prefWidth="106.0" text="Összeg" />
               </columns>
             </TableView>
-            <Label layoutX="40.0" layoutY="495.0" text="CPV egybeszámítás eredménye" />
-            <TableView fx:id="CpvTable" layoutX="43.0" layoutY="523.0" prefHeight="48.0" prefWidth="250.0">
+            <Label layoutX="13.0" layoutY="515.0" text="CPV egybeszámítás eredménye" AnchorPane.leftAnchor="40.0" />
+            <TableView fx:id="CpvTable" layoutX="43.0" layoutY="549.0" prefHeight="62.0" prefWidth="250.0">
               <columns>
                 <TableColumn fx:id="Cpv" prefWidth="143.0" text="CPV" />
                 <TableColumn fx:id="CpvOsszeg" prefWidth="106.0" text="Összeg" />

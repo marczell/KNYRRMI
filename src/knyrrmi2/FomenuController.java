@@ -8,13 +8,7 @@ package knyrrmi2;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -44,19 +37,11 @@ public class FomenuController implements Initializable {
     @FXML
     private Button CtrlKeres;
     @FXML
-    private Button CtrlErtek;
+    private Button CtrlErtek;    
     @FXML
     private Button CtrlKozbesz;
     @FXML
     private Button CtrlSzerzmod;
-    @FXML
-    private Label uzenet;
-    @FXML
-    private TextField FelhNev;
-    @FXML
-    private PasswordField Password;
-    @FXML
-    private Button CtrlBelepes;
     
  
     /**
@@ -156,5 +141,5 @@ public class FomenuController implements Initializable {
         scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
         stage.setScene(scene);
         stage.show();
-    }    
+    }   
 }

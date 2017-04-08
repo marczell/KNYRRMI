@@ -14,6 +14,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,6 +35,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Kozbeszerzes;
 import model.SerializableResultSet;
 
 /**
@@ -58,13 +60,13 @@ public class SzerzrogzitesController implements Initializable {
     @FXML
     private TextField BecsErtek;
     @FXML
-    private ChoiceBox<?> KozbeszfajtSzerz;
+    private TextField KozbeszfajtSzerz;
     @FXML
-    private ChoiceBox<?> SzerzFajtSzerz;
+    private TextField SzerzFajtSzerz;
     @FXML
-    private ChoiceBox<?> CpvSzerz;
+    private TextField CpvSzerz;
     @FXML
-    private ChoiceBox<?> ProjektSzerz;
+    private TextField ProjektSzerz;
     @FXML
     private DatePicker KozbeszKezd;
     @FXML
@@ -107,7 +109,7 @@ public class SzerzrogzitesController implements Initializable {
         try {
             SerializableResultSet rs = (SerializableResultSet) serverImpl.adatbazisReport(sql);
             while (rs.next()) {
-                int s = Integer.parseInt(rs.getObject(0).toString());
+                int s = Integer.parseInt(rs.getObject(1).toString());
                 int x = s + 1;
                 String sorszam = Integer.toString(x);
                 SzerzAzonSzerz.setText(sorszam);
@@ -150,7 +152,18 @@ public class SzerzrogzitesController implements Initializable {
             }
         }
     }    
-
+public void initData(Kozbeszerzes kozbesz) {
+    txtBeszSorszam.setText(kozbesz.getSorszam());
+    SzerzNevSzerz.setText(kozbesz.getBesznev());
+    KozbeszAzon.setText(kozbesz.getKeljarasazon());
+    BecsErtek.setText(kozbesz.getBertek());
+    KozbeszfajtSzerz.setText(kozbesz.getKozbeszerzesieljarasfajta());
+    SzerzFajtSzerz.setText(kozbesz.getSzerzodesfajtaja());
+    CpvSzerz.setText(kozbesz.getCpvkod());
+    ProjektSzerz.setText(kozbesz.getProjekt());
+    KozbeszKezd.setValue(LocalDate.parse(kozbesz.getKozbeszkezdete()));
+    KozbeszVege.setValue(LocalDate.parse(kozbesz.getKozbeszvege()));
+  }
     @FXML
     private void mentesAction(ActionEvent event) {
         if (SzerzfelSzerz.getSelectionModel().getSelectedItem() != null
