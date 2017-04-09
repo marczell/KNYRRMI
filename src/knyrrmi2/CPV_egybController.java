@@ -26,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -58,6 +59,10 @@ public class CPV_egybController implements Initializable {
     @FXML
     private Label hibaLabel;
     KnyrInterface serverImpl;
+    @FXML
+    private MenuItem menuKijelentkezes;
+    @FXML
+    private MenuItem menuBezaras;
 
     /**
      * Initializes the controller class.
@@ -82,14 +87,14 @@ public class CPV_egybController implements Initializable {
             hibaLabel.setText("");
         }
         String sql;
-        sql = "select c.cpvkod, sum(sz.szerzodeserteke) as osszeg \n"
-                + "from cpvkodok c, szerzodes sz \n"
+        sql = "select c.cpvkod, sum(sz.bertek) as osszeg \n"
+                + "from cpvkodok c, kozbeszerzes sz \n"
                 + "where sz.cpvkod=c.cpvid ";
         if (CtrlCpvTol.getValue() != null && CtrlCpvTol.getValue() != null) {
-            sql += "and sz.szerzodeskotesdatuma >= '" + CtrlCpvTol.getValue() + "' ";
+            sql += "and sz.kozbeszkezdete >= '" + CtrlCpvTol.getValue() + "' ";
         }
         if (CtrlCpvIg.getValue() != null) {
-            sql += "and sz.szerzodeskotesdatuma <= '" + CtrlCpvIg.getValue() + "' ";
+            sql += "and sz.kozbeszkezdete <= '" + CtrlCpvIg.getValue() + "' ";
         }
         sql += "group by c.cpvkod";        
         System.out.println(sql);

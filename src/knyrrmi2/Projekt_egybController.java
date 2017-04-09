@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -100,14 +99,14 @@ public class Projekt_egybController implements Initializable {
             hibaLabel.setText("");
         }
         String sql;
-        sql = "select p.projekt, sum(sz.szerzodeserteke) as osszeg \n"
-                + "from projektek p, szerzodes sz \n"
+        sql = "select p.projekt, sum(sz.bertek) as osszeg \n"
+                + "from projektek p, kozbeszerzes sz \n"
                 + "where sz.projekt=p.projektid \n";
         if (PrEgybeTol.getValue() != null) {
-            sql += "and sz.szerzodeskotesdatuma >= '" + PrEgybeTol.getValue() + "' ";
+            sql += "and sz.kozbeszkezdete >= '" + PrEgybeTol.getValue() + "' ";
         }
         if (PrEgybeIg.getValue() != null) {
-            sql += "and sz.szerzodeskotesdatuma <= '" + PrEgybeIg.getValue() + "' ";
+            sql += "and sz.kozbeszkezdete <= '" + PrEgybeIg.getValue() + "' ";
         }
         sql += "group by sz.projekt";
         System.out.println(sql);

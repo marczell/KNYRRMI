@@ -164,7 +164,7 @@ public class KozbeszKeresesKontroller implements Initializable{
     
 });
         
-        String sql1 = "SELECT KEJID, KOZBESZERZESIELJARASFAJTAI FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
+        String sql1 = "SELECT KEJID, KOZBESZERZESIELJARASFAJTAI FROM KOZBESZERZESIELJARASFAJTAI";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql1);
             ObservableList obListKej = FXCollections.observableArrayList();
@@ -188,7 +188,7 @@ public class KozbeszKeresesKontroller implements Initializable{
                 Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        String sql2 = "SELECT SZERZODESFAJTAID, SZERZODESFAJTA FROM SZERZODESFAJTAI WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
+        String sql2 = "SELECT SZERZODESFAJTAID, SZERZODESFAJTA FROM SZERZODESFAJTAI";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql2);
             ObservableList obListSzerzF = FXCollections.observableArrayList();
@@ -213,7 +213,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             
         }
         //meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
-        String sql3 = "SELECT CPVID, CPVKOD FROM CPVKODOK WHERE LATHATO=TRUE";
+        String sql3 = "SELECT CPVID, CPVKOD FROM CPVKODOK";
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql3);
             ObservableList obListCpv = FXCollections.observableArrayList();
@@ -237,7 +237,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             }
             
         }
-        String sql4 = "SELECT PROJEKTID, PROJEKT FROM PROJEKTEK WHERE LATHATO=TRUE";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
+        String sql4 = "SELECT PROJEKTID, PROJEKT FROM PROJEKTEK";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql4);
             ObservableList obListProjekt = FXCollections.observableArrayList();
