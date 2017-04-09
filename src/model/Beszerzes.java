@@ -13,10 +13,10 @@ import javax.persistence.Id;
  *
  * @author zsofi
  */
-@Entity
+
 public class Beszerzes implements Serializable {
 
-    @Id
+    
     private String sorszam;
    
     private String besznev;

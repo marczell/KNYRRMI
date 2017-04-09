@@ -256,9 +256,8 @@ if (SzerzKotTolKereses.getValue() != null && SzerzKotTolKereses.getValue().isAft
                 + "and sz.kozbeszerzesieljarasfajta=kef.kejid "
                 + "and sz.cpvkod=c.cpvid\n ";
 
-        if (BeszNesKereses.getText() != null && !SzerzNevKereses.getText().equals("")) {
-            sql += "and szerzodesneve = '" + SzerzNevKereses.getText() + "' ";
-        }
+      
+        
         if (SzerzFelKereses.getValue() != null) {
             sql += "and szerzodofel = '" + SzerzFelKereses.getId() + "' ";
         }
@@ -266,9 +265,7 @@ if (SzerzKotTolKereses.getValue() != null && SzerzKotTolKereses.getValue().isAft
         if (KozbeszFajtKereses.getValue() != null) {
             sql += "and kozbeszerzesieljarasfajta <= '" + KozbeszFajtKereses.getValue() + "' ";
         }
-        if (SzerzFajtKereses.getValue() != null) {
-            sql += "and szerzodesfajtaja <= '" + SzerzKotIgKereses.getValue() + "' ";
-        }
+       
         if (CPVKereses.getValue() != null) {
             sql += "and cpvkod = '" + CPVKereses.getValue() + "' ";
         }
@@ -299,12 +296,12 @@ if (SzerzKotTolKereses.getValue() != null && SzerzKotTolKereses.getValue().isAft
             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        projektEgybentartasLista.add(new ProjektEgybentartas("projekt neve", "15"));
-        SzerzodesekTable.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
+        //Beszerzes.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
     }
 
     @FXML
     private void keresesVissza(ActionEvent event) throws IOException {
-        Stage stage = (Stage) CtrlKeresesVissza.getScene().getWindow();
+        Stage stage = (Stage) CtrlKozbeszKeresesVissza.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("fomenu.fxml"));
         Scene scene = new Scene(root);
         File f = new File("alkfejl.css");
