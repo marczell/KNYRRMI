@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -44,6 +45,10 @@ public class KereseOsszesEredmenyController {
     private TableColumn<?, ?> KozbeszVegeKozbeszKereses;
     @FXML
     private TableColumn<?, ?> BecsultErtKozbeszKereses;
+    @FXML
+    private MenuItem menuKijelentkezes;
+    @FXML
+    private MenuItem menuBezaras;
 
     @FXML
     private void keresesVissza(ActionEvent event) {

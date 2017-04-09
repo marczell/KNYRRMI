@@ -27,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -108,6 +109,10 @@ public class SzerzfelrogzitesController implements Initializable {
     private TableColumn<SzerzodoFel, String> tblAdoszam;
     @FXML
     private TableColumn<SzerzodoFel, String> tblKapcstarto;
+    @FXML
+    private MenuItem menuKijelentkezes;
+    @FXML
+    private MenuItem menuBezaras;
 
     /**
      * Initializes the controller class.

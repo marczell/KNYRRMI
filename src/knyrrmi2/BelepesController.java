@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -49,6 +52,8 @@ public class BelepesController implements Initializable{
     private Button CtrlBelepes;
     
     KnyrInterface serverImpl;
+    @FXML
+    private MenuItem menuBezaras;
 
    
     @Override
@@ -104,11 +109,18 @@ public class BelepesController implements Initializable{
         scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
         stage.setScene(scene);
         stage.show();
-        
-        
         }
         else {
             uzenet.setText("Hibás jelszó.");
             Password.clear();
         }
-}}
+}
+//        @FXML
+//      private void closeAction(ActionEvent event){
+//     Platform.exit();
+////        // get a handle to the stage
+////        Stage stage = (Stage) menuKilepes.getScene().getWindow();
+////        // do what you have to do
+////        stage.close();
+//}
+}

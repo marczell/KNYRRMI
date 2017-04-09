@@ -46,10 +46,6 @@ import model.SerializableResultSet;
 public class SzerzrogzitesController implements Initializable {
 
     @FXML
-    private MenuItem menuKilepes;
-    @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private Label uzenet;
     @FXML
     private Label txtBeszSorszam;
@@ -82,8 +78,6 @@ public class SzerzrogzitesController implements Initializable {
     @FXML
     private DatePicker SzerzlezarSzerz;
     @FXML
-    private Button CtrlSzerzMentes;
-    @FXML
     private Button CtrlSzerzVissza;
     @FXML
     private Label SzerzAzonSzerz;
@@ -92,6 +86,12 @@ public class SzerzrogzitesController implements Initializable {
     
     List<String> listSzerzFel = new ArrayList<>();
     List<String> listSzerzFelId = new ArrayList<>();
+    @FXML
+    private MenuItem menuBezaras;
+    @FXML
+    private MenuItem menuKiijelentkezes;
+    @FXML
+    private Button CtrlSzerzMentes;
 
     /**
      * Initializes the controller class.

@@ -30,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -107,6 +108,10 @@ public class KozbeszKeresesKontroller implements Initializable{
     ArrayList<ErtekLista> listSzerzF = new ArrayList<>();
     ArrayList<ErtekLista> listCpv = new ArrayList<>();
     ArrayList<ErtekLista> listProjekt = new ArrayList<>();
+    @FXML
+    private MenuItem menuKijelentkezes;
+    @FXML
+    private MenuItem menuBezaras;
 
     
     

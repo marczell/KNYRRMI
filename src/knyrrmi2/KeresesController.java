@@ -30,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -100,6 +101,10 @@ public class KeresesController implements Initializable {
     ArrayList<ErtekLista> listCpv = new ArrayList<>();
     ArrayList<ErtekLista> listProjekt = new ArrayList<>();
     ArrayList<ErtekLista> listSzerzFel = new ArrayList<>();
+    @FXML
+    private MenuItem menuKijelentkezes;
+    @FXML
+    private MenuItem menuBezaras;
    
     /**
      * Initializes the controller class.
@@ -193,22 +198,22 @@ public class KeresesController implements Initializable {
         "FROM szerzodes sz, szerzodo_fel szf\n" +
         "WHERE  sz.szerzodofel= szf.szfid";
 
-       if (sorszamKereses.getText() != null) {
+       if (!sorszamKereses.getText().isEmpty()) {
             sql += "and sorszam = '" + sorszamKereses.getText() + "' ";
         }
-        if (SzerzAzonKereses.getText() != null) {
+        if (!SzerzAzonKereses.getText().isEmpty()) {
             sql += "and szerzazon = '" + SzerzAzonKereses.getText() + "' ";
         }
         if (SzerzFelKereses.getValue() != null) {
             sql += "and szerzodofel = '" + SzerzFelKereses.getValue() + "' ";
         }
-        if (SzerztargyKereses.getText() != null) {
+        if (!SzerztargyKereses.getText().isEmpty()) {
             sql += "and szerztargy = '" + SzerztargyKereses.getText() + "' ";
         }
-         if (SzerzMinErtekKereses.getText() != null) {
+         if (!SzerzMinErtekKereses.getText().isEmpty()) {
             sql += "and sz.szerzodeserteke >= '" + SzerzMinErtekKereses.getText() + "' ";
         }
-        if (SzerzMaxErtekKereses.getText() != null) {
+        if (!SzerzMaxErtekKereses.getText().isEmpty()) {
             sql += "and sz.szerzodeserteke <= '" + SzerzMaxErtekKereses.getText() + "' ";
         }
         if (SzerzKotTolKereses.getValue() != null) {
@@ -224,7 +229,7 @@ public class KeresesController implements Initializable {
         if (SzerzLezarIgKereses.getValue() != null) {
             sql += "and sz.szerzodestervezettlezarasa <= '" + SzerzLezarIgKereses.getValue() + "' ";
         }
-        sql += "group by szerzazon";
+        sql += " group by szerzazon";
         System.out.println(sql);
         ArrayList<Szerzodes> szerzodesLista = null;
         try {

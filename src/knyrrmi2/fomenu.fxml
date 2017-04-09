@@ -13,9 +13,10 @@
    <children>
       <MenuBar prefHeight="25.0" prefWidth="1000.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Kilépés">
+          <Menu mnemonicParsing="false" text="Fájl">
             <items>
-              <MenuItem mnemonicParsing="false" text="Bezárás" />
+              <MenuItem fx:id="menuKijelentkezes" mnemonicParsing="false" text="Kijelentkezés" />
+                  <MenuItem fx:id="menuBezaras" mnemonicParsing="false" text="Bezárás" />
             </items>
           </Menu>
         </menus>
@@ -38,7 +39,17 @@
             <String fx:value="buttonbase" />
          </styleClass>
       </Button>
+      <Button fx:id="CtrlKozbesz" layoutX="75.0" layoutY="170.0" mnemonicParsing="false" onAction="#kozbeszRogzitesAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Közbeszerzés rögzítése" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="170.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
       <Button fx:id="CtrlSzerz" layoutX="75.0" layoutY="203.0" mnemonicParsing="false" onAction="#szerzodesRogziteseAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Szerződés rögzítése" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="220.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="CtrlSzerzmod" layoutX="75.0" layoutY="239.0" mnemonicParsing="false" onAction="#SzerzModRogzitesAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Szerződésmódosítás rögzítése" AnchorPane.topAnchor="270.0">
          <font>
             <Font name="Verdana" size="14.0" />
          </font>
@@ -68,15 +79,5 @@
             <Font name="Verdana" size="14.0" />
          </font>
       </TextArea>
-      <Button fx:id="CtrlKozbesz" layoutX="75.0" layoutY="170.0" mnemonicParsing="false" onAction="#kozbeszRogzitesAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Közbeszerzés rögzítése" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="170.0">
-         <font>
-            <Font name="Verdana" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="CtrlSzerzmod" layoutX="75.0" layoutY="239.0" mnemonicParsing="false" onAction="#SzerzModRogzitesAction" prefHeight="30.0" prefWidth="240.0" styleClass="buttonbase" text="Szerződésmódosítás rögzítése" AnchorPane.topAnchor="270.0">
-         <font>
-            <Font name="Verdana" size="14.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

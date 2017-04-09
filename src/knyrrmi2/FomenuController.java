@@ -17,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -42,6 +44,11 @@ public class FomenuController implements Initializable {
     private Button CtrlKozbesz;
     @FXML
     private Button CtrlSzerzmod;
+    private MenuButton menuKilepes;
+    @FXML
+    private MenuItem menuKijelentkezes;
+    @FXML
+    private MenuItem menuBezaras;
     
  
     /**
@@ -141,5 +148,13 @@ public class FomenuController implements Initializable {
         scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
         stage.setScene(scene);
         stage.show();
-    }   
+    } 
+     private void closeAction(ActionEvent event){
+//     Platform.exit();
+////        // get a handle to the stage
+        Stage stage = (Stage) menuKilepes.getScene().getWindow();
+////        // do what you have to do
+        stage.close();
+}
+    
 }

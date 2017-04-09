@@ -33,6 +33,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -116,6 +117,10 @@ public class KeresesOsszesController implements Initializable {
     private TextField BecsultErtekMaxKozbeszKereses;
     @FXML
     private TextField KozbeszSorszamKozbeszKereses;
+    @FXML
+    private MenuItem menuKijelentkezes;
+    @FXML
+    private MenuItem menuBezaras;
 
 
     /**

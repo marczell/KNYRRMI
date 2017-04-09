@@ -32,8 +32,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -66,6 +69,10 @@ public class Erteklista_modController implements Initializable {
     
     String tabla = new String();
     String oszlop = new String();
+    @FXML
+    private MenuItem menuKijelentkezes;
+    @FXML
+    private MenuItem menuBezaras;
     
 
     /**
@@ -251,6 +258,10 @@ break;
     }   
 
     @FXML
-    private void listaKivalasztasAction(ContextMenuEvent event) {
+    private void listaKivalasztasAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void listaKivalasztasAction(ScrollEvent event) {
     }
      }

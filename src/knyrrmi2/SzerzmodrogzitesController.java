@@ -24,13 +24,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Kozbeszerzes;
 import model.SerializableResultSet;
 import model.Szerzodes;
 
@@ -41,8 +39,6 @@ import model.Szerzodes;
  */
 public class SzerzmodrogzitesController implements Initializable {
 
-    @FXML
-    private MenuItem menuKilepes;
     @FXML
     private MenuItem menuKijelentkezes;
     @FXML
@@ -78,6 +74,8 @@ public class SzerzmodrogzitesController implements Initializable {
     private Button CtrlSzerzModVissza;
 
      KnyrInterface serverImpl;
+    @FXML
+    private MenuItem menuBezaras;
     
     /**
      * Initializes the controller class.
@@ -91,7 +89,7 @@ public class SzerzmodrogzitesController implements Initializable {
             Logger.getLogger(SzerzmodrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String sql = "SELECT MAX(`szerzodesmodositas`.`szerzmodazon`) as szerzmodazon FROM `adattar`.`szerzodesmodositas`";
+        String sql = "SELECT MAX(`szerzmodositas`.`szerzmodazon`) as szerzmodazon FROM `adattar`.`szerzmodositas`";
         try {
             SerializableResultSet rs = (SerializableResultSet) serverImpl.adatbazisReport(sql);
             while (rs.next()) {
@@ -131,42 +129,36 @@ public class SzerzmodrogzitesController implements Initializable {
                 || SzerzlezarSzerzMod.getValue()!= null) {
             
           
-            String sql = "INSERT INTO `adattar`.`szerzodesmodositas` (`szerzazon`,\n" +
+            String sql = "INSERT INTO `adattar`.`szerzmodositas` (`szerzazon`,\n" +
                 "`szerzmodertek`,\n" +
                 "`szerzmodtargy`,\n" +
                 "`szerzmoddatum`,\n" +
                 "`szerzmodvege`)\n"
-            + " VALUES ('"+ SzerzAzonszerz.getText();
+            + " VALUES ('"+ SzerzAzonszerz.getText()+"'";
             if (SzerzertekMod.getText() != null) {
-            sql += "'" + SzerzertekMod.getText() + "' ";
+            sql += ", '" + SzerzertekMod.getText() + "'";
             } else {
-            sql += "'null' ";
+            sql += ", 'null'";
              }
              if (SzerzTargyaMod.getText() != null) {
-            sql += "'" + SzerzTargyaMod.getText() + "' ";
+            sql += ", '" + SzerzTargyaMod.getText() + "'";
             } else {
-            sql += "'null' ";
+            sql += ", 'null',";
              }
-            sql += "'"+ SzerzkotSzerzMod.getValue() +"' ";
+            sql += ", '"+ SzerzkotSzerzMod.getValue() +"'";
              if (SzerzlezarSzerzMod.getValue()!= null) {
-            sql += "'" + SzerzlezarSzerzMod.getValue() + "' ";
+            sql += " '" + SzerzlezarSzerzMod.getValue() + "'";
             } else {
-            sql += "'null' ";
+            sql += ", NULL";
              }
-            sql+= "')";
+            sql+= ")";
             System.out.println(sql);
             try {
                 serverImpl.adatbazisbaInsertalas(sql);
               
                 uzenet.setText("Sikeres mentése a " + SzerzModAzonMod.getText() + " azonosítójú szerződésmódosításnak!");
-               
-            } catch (SQLException ex) {
-                Logger.getLogger(SzerzmodrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
-                uzenet.setText("Hiba a mentés során!");
-            } catch (RemoteException ex) {
-                Logger.getLogger(SzerzmodrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
                 
+                   
                 String sql_uj = "SELECT MAX(`szerzodes`.`szerzazon`) as szerzazon FROM `adattar`.`szerzmodositas`";
         try {
             SerializableResultSet rs = (SerializableResultSet) serverImpl.adatbazisReport(sql_uj);
@@ -187,12 +179,18 @@ public class SzerzmodrogzitesController implements Initializable {
             } catch (RemoteException ex) {
                 Logger.getLogger(SzerzmodrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
             }
-                
                 SzerzertekMod.clear();
                 SzerzTargyaMod.clear();
                 SzerzkotSzerzMod.getEditor().clear();
                 SzerzlezarSzerzMod.getEditor().clear();
-        }     
+        }                
+            } catch (SQLException ex) {
+                Logger.getLogger(SzerzmodrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                uzenet.setText("Hiba a mentés során!");
+            } catch (RemoteException ex) {
+                Logger.getLogger(SzerzmodrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                 
             }
         } else {
             uzenet.setText("Ellenőrize a mezők kitöltöttségét!");
@@ -202,7 +200,7 @@ public class SzerzmodrogzitesController implements Initializable {
     @FXML
     private void visszaAction(ActionEvent event) throws IOException {
          Stage stage = (Stage) CtrlSzerzModVissza.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("kereses.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("szerzkereses.fxml"));
         Scene scene = new Scene(root);
         File f = new File("alkfejl.css");
         scene.getStylesheets().clear();

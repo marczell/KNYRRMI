@@ -71,10 +71,6 @@ public class KozbeszrogzitesController implements Initializable {
      */
     KnyrInterface serverImpl;
     @FXML
-    private MenuItem menuKilepes;
-    @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private TextField SzerzNevKozbesz;
     @FXML
     private Label txtBeszSorszamKozbesz;
@@ -112,6 +108,10 @@ public class KozbeszrogzitesController implements Initializable {
     private Button CtrlSzerzMentes;
     @FXML
     private Button CtrlSzerzVissza;
+    @FXML
+    private MenuItem menuKiljelentkezes;
+    @FXML
+    private MenuItem menuBezaras;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
