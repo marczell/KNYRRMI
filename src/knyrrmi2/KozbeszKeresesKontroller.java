@@ -185,7 +185,7 @@ public class KozbeszKeresesKontroller implements Initializable{
          try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         String sql2 = "SELECT SZERZODESFAJTAID, SZERZODESFAJTA FROM SZERZODESFAJTAI";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
@@ -208,7 +208,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
@@ -233,7 +233,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
@@ -257,7 +257,7 @@ public class KozbeszKeresesKontroller implements Initializable{
             try {
                 serverImpl.closeConnection();
             } catch (RemoteException ex) {
-                Logger.getLogger(KozbeszrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KozbeszKeresesKontroller.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
@@ -268,14 +268,10 @@ public class KozbeszKeresesKontroller implements Initializable{
     private void kereses(ActionEvent event) {
         if (KozbeszTolKozbeszKereses.getValue() != null && KozbeszTolKozbeszKereses.getValue().isAfter(KozbeszIgKozbeszKereses.getValue())) {
             uzenet.setText("Az -ig dátum nem lehet nagyobb a -tól dátumnál!");
-        } else {
-            uzenet.setText("");
-        }
+        } 
         if (KozbeszLezarTolKozbeszKereses.getValue() != null && KozbeszLezarTolKozbeszKereses.getValue().isAfter(KozbeszLezarIgKozbeszKereses.getValue())) {
             uzenet.setText("Az -ig dátum nem lehet nagyobb a -tól dátumnál!");
-        } else {
-            uzenet.setText("");
-        }
+        } 
         
         String sql;
         sql = "SELECT `kozbeszerzes`.`sorszam`,\n" +

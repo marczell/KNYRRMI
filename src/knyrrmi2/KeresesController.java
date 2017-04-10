@@ -39,7 +39,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import model.ErtekLista;
-import model.Kozbeszerzes;
 import model.Szerzodes;
 
 /**
@@ -147,7 +146,11 @@ public class KeresesController implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            
+            try {
+                  serverImpl.closeConnection();
+              } catch (RemoteException ex) {
+                  Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
+              }
         }
            SzerzodesekTable.setRowFactory(tv -> {
            TableRow<Szerzodes> row = new TableRow<>();
@@ -185,14 +188,10 @@ public class KeresesController implements Initializable {
 //        System.out.println(idKereso(ertekListaLista));
         if (SzerzKotTolKereses.getValue() != null && SzerzKotTolKereses.getValue().isAfter(SzerzKotIgKereses.getValue())) {
             uzenet.setText("Az -ig dátum nem lehet nagyobb a -tól dátumnál!");
-        } else {
-            uzenet.setText("");
-        }
+        } 
         if (SzerzLezarTolKereses.getValue() != null && SzerzLezarTolKereses.getValue().isAfter(SzerzLezarIgKereses.getValue())) {
             uzenet.setText("Az -ig dátum nem lehet nagyobb a -tól dátumnál!");
-        } else {
-            uzenet.setText("");
-        }
+        } 
         String sql;
         sql = "SELECT sz.sorszam, sz.szerzazon, szf.szerzodofel, sz.szerzodeserteke, sz.szerztargy, sz.szerzodeskotesdatuma, sz.szerzodestervezettlezarasa\n" +
         "FROM szerzodes sz, szerzodo_fel szf\n" +

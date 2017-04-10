@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -56,10 +59,18 @@ public class FomenuController implements Initializable {
      * @param url
      * @param rb
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+    
+//    menuBezaras.setOnAction(new EventHandler<ActionEvent>() {
+//      @Override
+//      public void handle(ActionEvent event) {
+//        Platform.exit();
+//      }
+//    });   
     }
+     
 
     @FXML
     private void szerzodoFelRogziteseAction(ActionEvent event) throws IOException {
@@ -149,12 +160,24 @@ public class FomenuController implements Initializable {
         stage.setScene(scene);
         stage.show();
     } 
-     private void closeAction(ActionEvent event){
-//     Platform.exit();
-////        // get a handle to the stage
-        Stage stage = (Stage) menuKilepes.getScene().getWindow();
-////        // do what you have to do
-        stage.close();
-}
     
-}
+   @FXML
+    public void kilepesAction(ActionEvent event) throws IOException{
+        Stage stage = (Stage) menuKilepes.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("belepes.fxml"));
+        Scene scene = new Scene(root);
+        File f = new File("alkfejl.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        stage.setScene(scene);    
+        stage.show();
+    } 
+    @FXML
+    public void bezarasAction(ActionEvent event) throws IOException{
+        menuBezaras.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+        Platform.exit();
+      }
+    });
+
+}}

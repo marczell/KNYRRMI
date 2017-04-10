@@ -123,7 +123,11 @@ public class Erteklista_modController implements Initializable {
                 } catch (RemoteException ex) {
               Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
           } finally {
-                   
+              try {
+                  serverImpl.closeConnection();
+              } catch (RemoteException ex) {
+                  Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+              }
                 }
 break;
             case "Közbeszerzési eljárás fajta": sql = "SELECT KOZBESZERZESIELJARASFAJTAI FROM KOZBESZERZESIELJARASFAJTAI WHERE LATHATO=TRUE";
@@ -141,7 +145,11 @@ break;
                 } catch (RemoteException ex) {
               Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
           } finally {
-                    
+                    try {
+                  serverImpl.closeConnection();
+              } catch (RemoteException ex) {
+                  Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+              }
                 }
 break;
             case "Projekt":   sql = "SELECT PROJEKT FROM PROJEKTEK WHERE LATHATO=TRUE";
@@ -159,7 +167,11 @@ break;
                 } catch (RemoteException ex) {
               Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
           } finally {
-                    
+                    try {
+                  serverImpl.closeConnection();
+              } catch (RemoteException ex) {
+                  Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+              }
                 }
 break;
             case "Szerződés fajta":   sql = "SELECT SZERZODESFAJTA FROM SZERZODESFAJTAI WHERE LATHATO=TRUE";
@@ -177,7 +189,11 @@ break;
                 } catch (RemoteException ex) {
               Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
           } finally {
-                   
+                  try {
+                  serverImpl.closeConnection();
+              } catch (RemoteException ex) {
+                  Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+              } 
                 } 
                 break;
           }
@@ -185,9 +201,7 @@ break;
         ObservableList obList2 = FXCollections.observableList(list2);
         OsszesErtek.getItems().clear();
         OsszesErtek.setItems(obList2);
-      }
-
-            
+      }    
       });
     }
     

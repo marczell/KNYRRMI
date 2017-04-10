@@ -7,7 +7,6 @@ package knyrrmi2;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -16,8 +15,6 @@ import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,13 +31,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Beszerzes;
 import model.ErtekLista;
-import model.Szerzodes;
 
 /**
  * FXML Controller class
@@ -143,7 +137,11 @@ public class KeresesOsszesController implements Initializable {
             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
             uzenet.setText("Hiba az értékkeresés során!");
         } finally {
-           
+            try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         String sql2 = "SELECT SZERZODESFAJTAID, SZERZODESFAJTA FROM SZERZODESFAJTAI";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
         try {
@@ -161,16 +159,21 @@ public class KeresesOsszesController implements Initializable {
             uzenet.setText("Hiba az értékkeresés során!");// kell a felületre egy hibaüzenet label
         } catch (RemoteException ex) {
             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {  
+        } finally { 
+            try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        String sql3 = "SELECT CPVID, CPVKOD FROM CPVKODOK";
+       String sql3 = "SELECT CPVID, CPVKOD FROM CPVKODOK";
         try {
             ResultSet rs = serverImpl.adatbazisReport(sql3);
             ObservableList obListCpv = FXCollections.observableArrayList();
             while (rs.next()) {
-                listCpv.add(new ErtekLista(rs.getString(1),
-                        rs.getString(2)));
-                obListCpv.add(rs.getString(2));
+                listCpv.add(new ErtekLista(rs.getObject(1).toString(),
+                       rs.getObject(2).toString()));
+                obListCpv.add(rs.getObject(2).toString());
             }
             CPVKereses.getItems().clear();
             CPVKereses.setItems(FXCollections.observableList(obListCpv));
@@ -180,6 +183,11 @@ public class KeresesOsszesController implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+            try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
         String sql4 = "SELECT PROJEKTID, PROJEKT FROM PROJEKTEK";//meg kell nézni , hogy az oszlopot valóban lathatónak hívják e
@@ -199,7 +207,11 @@ public class KeresesOsszesController implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-           
+           try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         String sql5 = "SELECT SZFID, SZERZODOFEL FROM SZERZODO_FEL";
         try {
@@ -218,86 +230,162 @@ public class KeresesOsszesController implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            
+           try {
+                serverImpl.closeConnection();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
+            } 
         }
     }
+    @FXML
     private void kereses(ActionEvent event) {
 //        System.out.println(KozbeszFajtKereses.getId());
 //        System.out.println(idKereso(ertekListaLista));
         if (KozbeszKezdetTolKereses.getValue() != null && KozbeszKezdetTolKereses.getValue().isAfter(KozbeszKezdetIgKereses.getValue())) {
             uzenet.setText("A közbeszerzése kezdete -ig dátum nem lehet nagyobb a -tól dátumnál!");
-        } else {
-            uzenet.setText("");
-        }
+        } 
         if (KozbeszVegeTolKereses.getValue() != null && KozbeszVegeTolKereses.getValue().isAfter(KozbeszVegeIgKereses.getValue())) {
             uzenet.setText("A közbeszerzés vége -ig dátum nem lehet nagyobb a -tól dátumnál!");
-        } else {
-            uzenet.setText("");
-        }        
-if (SzerzKotTolKereses.getValue() != null && SzerzKotTolKereses.getValue().isAfter(SzerzKotIgKereses.getValue())) {
+        }       
+        if (SzerzKotTolKereses.getValue() != null && SzerzKotTolKereses.getValue().isAfter(SzerzKotIgKereses.getValue())) {
             uzenet.setText("A szerződéskötés -ig dátum nem lehet nagyobb a -tól dátumnál!");
-        } else {
-            uzenet.setText("");
-        }
+        } 
         if (SzerzLezarTolKereses.getValue() != null && SzerzLezarTolKereses.getValue().isAfter(SzerzLezarIgKereses.getValue())) {
             uzenet.setText("A szerződés tervezett lezárása -ig dátum nem lehet nagyobb a -tól dátumnál!");
-        } else {
-            uzenet.setText("");
-        }
+        } 
+ //       if (BecsultErtekMinKereses!=null && BecsultErtekMaxKereses !=null && (Integer.parseInt(BecsultErtekMinKereses.getText())>Integer.parseInt(BecsultErtekMaxKereses.getText()))){
+  //      uzenet.setText("A becsült érték minimum összege nem lehet nagyobb a maximum összegnél.");
+  //      } 
+//        if (SzerzErtekMinKereses!=null && SzerzErtekMaxKereses !=null && (Integer.parseInt(SzerzErtekMinKereses.getText())>Integer.parseInt(SzerzErtekMaxKereses.getText()))){
+//        uzenet.setText("A szerződött érték minimum összege nem lehet nagyobb a maximum összegnél.");
+//        } 
         String sql;
-        sql = "select sorszam, szerzodesneve, szf.szerzodofel, kef.kozbeszerzesieljarasfajtai, "
-                + "szfaj.szerzodesfajta, c.cpvkod, p.projekt, sz.szerzodeskotesdatuma, "
-                + "sz.szerzodestervezettlezarasa, sz.szerzodeserteke \n"
-                + "from szerzodes sz, projektek p, szerzodo_fel szf, szerzodesfajtai szfaj, "
-                + "kozbeszerzesieljarasfajtai kef, cpvkodok c\n"
-                + "where sz.projekt=p.projektid "
-                + "and sz.szerzodofel= szf.szfid "
-                + "and sz.szerzodesfajtaja=szfaj.szerzodesfajtaid "
-                + "and sz.kozbeszerzesieljarasfajta=kef.kejid "
-                + "and sz.cpvkod=c.cpvid\n ";
-
-      
-        
-        if (SzerzFelKereses.getValue() != null) {
-            sql += "and szerzodofel = '" + SzerzFelKereses.getId() + "' ";
+        sql = "SELECT\n" +
+        "    k.sorszam,\n" +
+        "    k.besznev,\n" +
+        "    k.keljarasazon,\n" +
+        "    k.bertek,\n" +
+        "    kef.kozbeszerzesieljarasfajtai,\n" +
+        "    szf.szerzodesfajta,\n" +
+        "    c.cpvkod,\n" +
+        "    p.projekt,\n" +
+        "    k.kozbeszkezdete,\n" +
+        "    k.kozbeszvege,\n" +
+        "    sz.szerzazon,\n" +
+        "    sz.szerzodeserteke,\n" +
+        "    sz.szerztargy,\n" +
+        "    sz.szerzodeskotesdatuma,\n" +
+        "    sz.szerzodestervezettlezarasa,\n" +
+        "    szef.szerzodofel,\n" +
+        "    szm.szerzmodazon,\n" +
+        "    szm.szerzmodertek,\n" +
+        "    szm.szerzmodtargy,\n" +
+        "    szm.szerzmoddatum,\n" +
+        "    szm.szerzmodvege\n" +
+        "FROM\n" +
+        "    kozbeszerzes k\n" +
+        "        INNER JOIN\n" +
+        "    kozbeszerzesieljarasfajtai kef ON kef.kejid = k.kozbeszerzesieljarasfajta\n" +
+        "        INNER JOIN\n" +
+        "    szerzodesfajtai szf ON szf.szerzodesfajtaid = k.szerzodesfajtaja\n" +
+        "        INNER JOIN\n" +
+        "    cpvkodok c ON c.cpvid = k.cpvkod\n" +
+        "        INNER JOIN\n" +
+        "    projektek p ON p.projektid = k.projekt\n" +
+        "        LEFT JOIN\n" +
+        "    szerzodes sz\n" +
+        "        INNER JOIN\n" +
+        "    szerzodo_fel szef ON szef.szfid = sz.szerzodofel ON k.sorszam = sz.sorszam\n" +
+        "        LEFT JOIN\n" +
+        "    szerzmodositas szm ON sz.szerzazon = szm.szerzazon WHERE k.sorszam IS NOT NULL";
+       if (!BesznevKereses.getText().isEmpty()) {
+            sql += " and k.besznev = '" + BesznevKereses.getText()+ "'";
         }
-
+        if (!SorszamKereses.getText().isEmpty()) {
+            sql += " and k.sorszam = '" + SorszamKereses.getText()+ "'";
+        }
+        if (!KozbeszAzonKereses.getText().isEmpty()) {
+            sql += " and k.keljarasazon = '" + KozbeszAzonKereses.getText()+ "'";
+        }
         if (KozbeszFajtKereses.getValue() != null) {
-            sql += "and kozbeszerzesieljarasfajta <= '" + KozbeszFajtKereses.getValue() + "' ";
+            sql += " and kef.kozbeszerzesieljarasfajtai = '" + KozbeszFajtKereses.getValue() + "'";
         }
-       
-        if (CPVKereses.getValue() != null) {
-            sql += "and cpvkod = '" + CPVKereses.getValue() + "' ";
+         if (SzerzFajtaKereses.getValue() != null) {
+            sql += " and szf.szerzodesfajta = '" + SzerzFajtaKereses.getValue() + "'";
+        }
+         if (CPVKereses.getValue() != null) {
+            sql += " and c.cpvkod = '" + CPVKereses.getValue() + "'";
         }
         if (ProjektKereses.getValue() != null) {
-            sql += "and projekt = '" + ProjektKereses.getValue() + "' ";
+            sql += " and p.projekt = '" + ProjektKereses.getValue() + "'";
         }
-
+        if (KozbeszKezdetTolKereses.getValue() != null) {
+            sql += " and k.kozbeszkezdete >= '" + KozbeszKezdetTolKereses.getValue() + "'";
+        }
+        if (KozbeszKezdetIgKereses.getValue() != null) {
+            sql += " and k.kozbeszkezdete <= '" + KozbeszKezdetIgKereses.getValue() + "'";
+        }
+        if (KozbeszVegeTolKereses.getValue() != null) {
+            sql += " and k.kozbeszvege >= '" + KozbeszVegeTolKereses.getValue() + "'";
+        }
+        if (KozbeszVegeIgKereses.getValue() != null) {
+            sql += " and k.kozbeszvege <= '" + KozbeszVegeIgKereses.getValue() + "'";
+        }
+        if (!BecsultErtekMinKereses.getText().isEmpty()) {
+            sql += " and k.bertek >= '" + BecsultErtekMinKereses.getText() + "'";
+        }
+        if (!BecsultErtekMaxKereses.getText().isEmpty()) {
+            sql += " and k.bertek <= '" + BecsultErtekMaxKereses.getText() + "'";
+        }
+        if (SzerzFelKereses.getValue() != null) {
+            sql += " and szef.szerzodofel = '" + SzerzFelKereses.getId() + "'";
+        }
+        if (!SzerzazonKereses.getText().isEmpty()) {
+            sql += " and sz.szerzazon = '" + SzerzazonKereses.getText()+ "'";
+        }
         if (SzerzKotTolKereses.getValue() != null) {
-            sql += "and sz.szerzodeskotesdatuma >= '" + SzerzKotTolKereses.getValue() + "' ";
+            sql += " and sz.szerzodeskotesdatuma >= '" + SzerzKotTolKereses.getValue() + "'";
         }
         if (SzerzKotIgKereses.getValue() != null) {
-            sql += "and sz.szerzodeskotesdatuma <= '" + SzerzKotIgKereses.getValue() + "' ";
+            sql += " and sz.szerzodeskotesdatuma <= '" + SzerzKotIgKereses.getValue() + "'";
         }
-
         if (SzerzLezarTolKereses.getValue() != null) {
-            sql += "and sz.szezodeskotesdatuma >= '" + SzerzLezarTolKereses.getValue() + "' ";
+            sql += " and sz.szerzodestervezettlezarasa>= '" + SzerzLezarTolKereses.getValue() + "'";
         }
         if (SzerzLezarIgKereses.getValue() != null) {
-            sql += "and sz.szerzodeskotesdatuma <= '" + SzerzLezarIgKereses.getValue() + "' ";
+            sql += " and sz.szerzodestervezettlezarasa <= '" + SzerzLezarIgKereses.getValue() + "'";
         }
-        sql += "group by sorszam";
+        if (!SzerzErtekMinKereses.getText().isEmpty()) {
+            sql += " and sz.szerzodeserteke >= '" + SzerzErtekMinKereses.getText() + "'";
+        }
+        if (!SzerzErtekMaxKereses.getText().isEmpty()) {
+            sql += " and sz.szerzodeserteke <= '" + SzerzErtekMaxKereses.getText() + "'";
+        }
+        
         System.out.println(sql);
-        ArrayList<Szerzodes> projektEgybentartasLista = null;
+        ArrayList<Beszerzes> beszerzesLista = null;
         try {
-            projektEgybentartasLista = //new ArrayList<>();
-                    serverImpl.szerzodesKereses(sql);
+            beszerzesLista =  serverImpl.beszerzesKereses(sql);
         } catch (RemoteException ex) {
             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        projektEgybentartasLista.add(new ProjektEgybentartas("projekt neve", "15"));
-        //Beszerzes.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
-    }
+        Stage stage = (Stage) CtrlKereses.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        Parent  root=null;
+         try {
+             root = loader.load(getClass().getResource("keresesosszes_eredmeny.fxml").openStream());
+         } catch (IOException ex) {
+             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         KereseOsszesEredmenyController osszescon = (KereseOsszesEredmenyController)loader.getController();
+         osszescon.initData(beszerzesLista);
+        Scene scene = new Scene(root);
+         File f = new File("alkfejl.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        stage.setScene(scene);
+        stage.show();
+}
 
     @FXML
     private void keresesVissza(ActionEvent event) throws IOException {

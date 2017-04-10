@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Beszerzes;
 import model.DataEgybentartas;
 import model.Kozbeszerzes;
 import model.ProjektEgybentartas;
@@ -103,7 +104,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
         System.out.println(sql);
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println("lekérdezés");
-      //  closeConnection();
+   //     closeConnection();
         return new SerializableResultSet(rs);
     }
     
@@ -247,5 +248,35 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
         return data;
     }
     
+     @Override
+    public ArrayList<Beszerzes> beszerzesKereses(String sql) throws RemoteException {
+        createConnection();
+        ArrayList<Beszerzes> data = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            String[] colnames = new String[rsmd.getColumnCount()];
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                colnames[i] = rsmd.getColumnName(i + 1);
+            }
+            while (rs.next()) {
+                Beszerzes beszerzes
+                        = new Beszerzes(rs.getObject(1).toString(),rs.getObject(2).toString(),
+                            rs.getObject(3).toString(), rs.getObject(4).toString(),
+                            rs.getObject(5).toString(), rs.getObject(6).toString(), rs.getObject(7).toString()
+                        , rs.getObject(8).toString(), rs.getObject(9).toString(), rs.getObject(10).toString()
+                        , (rs.getObject(11) == null ? "null" : rs.getObject(11).toString()), (rs.getObject(12) == null ? "null" : rs.getObject(12).toString()), (rs.getObject(13) == null ? "null" : rs.getObject(13).toString())
+                        , (rs.getObject(14) == null ? "null" : rs.getObject(14).toString()), (rs.getObject(15) == null ? "null" : rs.getObject(15).toString()), (rs.getObject(16) == null ? "null" : rs.getObject(16).toString())
+                        , (rs.getObject(17) == null ? "null" : rs.getObject(17).toString()), (rs.getObject(18) == null ? "null" : rs.getObject(18).toString()), (rs.getObject(19) == null ? "null" : rs.getObject(19).toString())
+                        , (rs.getObject(20) == null ? "null" : rs.getObject(20).toString()), (rs.getObject(21) == null ? "null" : rs.getObject(21).toString()));
+                data.add(beszerzes);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeConnection();
+        }
+        return data;
+    }
     
 }

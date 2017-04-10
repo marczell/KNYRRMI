@@ -30,7 +30,7 @@
                </font>
             </Label>
             <Label layoutX="176.0" layoutY="28.0" styleClass="textinputcontrol" text="KÖZBESZERZÉS RÖGZÍTÉSE" />
-            <Label fx:id="uzenet" layoutX="468.0" layoutY="26.0" prefHeight="17.0" prefWidth="250.0" styleClass="textinputcontrol" text="" textFill="RED" />
+            <Label fx:id="uzenet" layoutX="375.0" layoutY="28.0" prefHeight="17.0" prefWidth="250.0" styleClass="textinputcontrol" text="" textFill="RED" />
             <Label layoutX="120.0" layoutY="63.0" styleClass="textinputcontrol" text="Beszerzés sorszáma" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="63.0" />
             <Label fx:id="txtBeszSorszamKozbesz" layoutX="280.0" layoutY="63.0" styleClass="textinputcontrol" text="Label" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="63.0" />
             <Label layoutX="548.0" layoutY="63.0" styleClass="textinputcontrol" text="Beszerzés neve" AnchorPane.leftAnchor="548.0" AnchorPane.topAnchor="63.0" />
