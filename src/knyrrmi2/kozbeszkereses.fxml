@@ -19,7 +19,7 @@
                    <items>
    
                            <MenuItem fx:id="menuKijelentkezes" mnemonicParsing="false" text="Kijelentkezés" />
-                           <MenuItem fx:id="menuBezaras" mnemonicParsing="false" text="Bezárás" />
+                           <MenuItem fx:id="menuBezaras" mnemonicParsing="false" onAction="#bezarasAction" text="Bezárás" />
                    </items>
                 </Menu>
             </menus>

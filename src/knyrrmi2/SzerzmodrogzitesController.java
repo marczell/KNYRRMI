@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -74,6 +75,7 @@ public class SzerzmodrogzitesController implements Initializable {
     private Button CtrlSzerzModVissza;
 
      KnyrInterface serverImpl;
+     Registry myRegistry;
     @FXML
     private MenuItem menuBezaras;
     
@@ -83,7 +85,7 @@ public class SzerzmodrogzitesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(SzerzmodrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
@@ -208,5 +210,21 @@ public class SzerzmodrogzitesController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+        @FXML
+    public void bezarasAction(ActionEvent event) throws IOException{
+        menuBezaras.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+        System.exit(0);
+          try {
+              myRegistry.unbind("knyr");
+          } catch (RemoteException ex) {
+              Logger.getLogger(SzerzmodrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (NotBoundException ex) {
+              Logger.getLogger(SzerzmodrogzitesController.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        
+      }
+    });
+
+}
 }

@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -121,5 +122,13 @@ public class KereseOsszesEredmenyController {
         stage.setScene(scene);
         stage.show();
     }
-    
+    @FXML
+    public void bezarasAction(ActionEvent event) throws IOException{
+        menuBezaras.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+        System.exit(0);
+      }
+    });
+
+}
 }

@@ -24,6 +24,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -66,6 +67,7 @@ public class Erteklista_modController implements Initializable {
     
     KnyrInterface serverImpl;
 
+    Registry myRegistry;
     
     String tabla = new String();
     String oszlop = new String();
@@ -84,7 +86,7 @@ public class Erteklista_modController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         try {
-            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
@@ -271,11 +273,21 @@ break;
         stage.show();
     }   
 
-    @FXML
-    private void listaKivalasztasAction(MouseEvent event) {
-    }
+        @FXML
+    public void bezarasAction(ActionEvent event) throws IOException{
+        menuBezaras.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+        System.exit(0);
+          try {
+              myRegistry.unbind("knyr");
+          } catch (RemoteException ex) {
+              Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (NotBoundException ex) {
+              Logger.getLogger(Erteklista_modController.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        
+      }
+    });
 
-    @FXML
-    private void listaKivalasztasAction(ScrollEvent event) {
-    }
+}
      }

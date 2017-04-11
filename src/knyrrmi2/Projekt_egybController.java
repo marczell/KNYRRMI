@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -59,6 +60,7 @@ public class Projekt_egybController implements Initializable {
     private Label hibaLabel;
     
     KnyrInterface serverImpl;
+    Registry myRegistry;
     @FXML
     private MenuItem menuKijelentkezes;
     @FXML
@@ -70,7 +72,7 @@ public class Projekt_egybController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(Projekt_egybController.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,18 +112,25 @@ public class Projekt_egybController implements Initializable {
         }
         sql += "group by sz.projekt";
         System.out.println(sql);
-        ArrayList<ProjektEgybentartas> projektEgybentartasLista = //new ArrayList<>();
-                serverImpl.projektEgybOsszes(sql);
-//        projektEgybentartasLista.add(new ProjektEgybentartas("projekt neve", "15"));
+        ArrayList<ProjektEgybentartas> projektEgybentartasLista = serverImpl.projektEgybOsszes(sql);
+
         TablePrEgybe.setItems(FXCollections.observableArrayList(projektEgybentartasLista));
     }
-
     @FXML
-    private void tolValasztas(ActionEvent event) {
-    }
+    public void bezarasAction(ActionEvent event) throws IOException{
+        menuBezaras.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+        System.exit(0);
+          try {
+              myRegistry.unbind("knyr");
+          } catch (RemoteException ex) {
+              Logger.getLogger(Projekt_egybController.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (NotBoundException ex) {
+              Logger.getLogger(Projekt_egybController.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        
+      }
+    });
 
-    @FXML
-    private void igValasztas(ActionEvent event) {
-    }
-
+}
 }

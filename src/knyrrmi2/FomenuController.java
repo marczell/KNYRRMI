@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,12 +17,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -63,12 +59,6 @@ public class FomenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     
-//    menuBezaras.setOnAction(new EventHandler<ActionEvent>() {
-//      @Override
-//      public void handle(ActionEvent event) {
-//        Platform.exit();
-//      }
-//    });   
     }
      
 
@@ -176,7 +166,7 @@ public class FomenuController implements Initializable {
     public void bezarasAction(ActionEvent event) throws IOException{
         menuBezaras.setOnAction(new EventHandler<ActionEvent>() {
       public void handle(ActionEvent event) {
-        Platform.exit();
+        System.exit(0);
       }
     });
 

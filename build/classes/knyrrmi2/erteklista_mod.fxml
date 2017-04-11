@@ -22,7 +22,7 @@
           </Menu>
         </menus>
       </MenuBar>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onScrollFinished="#listaKivalasztasAction" prefHeight="700.0" prefWidth="1000.0" styleClass="region" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="region" VBox.vgrow="ALWAYS">
       <children>
             <Label layoutX="23.0" layoutY="14.0" prefHeight="48.0" prefWidth="164.0" text="KNYR RENDSZER">
                <font>
@@ -50,7 +50,7 @@
             <Line endX="850.0" layoutX="92.0" layoutY="318.0" startX="-50.0" strokeWidth="2.0" styleClass="shape" AnchorPane.topAnchor="317.0" />
             <Label layoutX="50.0" layoutY="327.0" styleClass="textinputcontrol" text="Értéklista elem törlése" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="327.0" />
             <Label layoutX="92.0" layoutY="463.0" styleClass="textinputcontrol" text="Értéklista" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="400.0" />
-            <ChoiceBox fx:id="ErtekLista2" layoutX="231.0" layoutY="347.0" onMouseClicked="#listaKivalasztasAction" onMouseReleased="#listaKivalasztasAction" onScrollFinished="#listaKivalasztasAction" prefWidth="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="395.0" />
+            <ChoiceBox fx:id="ErtekLista2" layoutX="231.0" layoutY="347.0" prefWidth="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="395.0" />
             <Label layoutX="392.0" layoutY="465.0" styleClass="textinputcontrol" text="Inaktiválandó elem" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0" />
             <ChoiceBox fx:id="OsszesErtek" layoutX="172.0" layoutY="356.0" prefWidth="200.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="395.0" />
             <Button fx:id="CtrlErtekTorles" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="508.0" mnemonicParsing="false" onAction="#ertekTorlesAction" prefHeight="30.0" prefWidth="120.0" styleClass="buttonbase" text="Inaktiválás" textAlignment="CENTER" AnchorPane.leftAnchor="830.0" AnchorPane.topAnchor="480.0">

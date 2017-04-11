@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -92,6 +93,7 @@ public class KeresesController implements Initializable {
     @FXML
     private TextField SzerztargyKereses;
     KnyrInterface serverImpl;
+    Registry myRegistry;
  
    
 
@@ -112,7 +114,7 @@ public class KeresesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         try {
-            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             serverImpl = (KnyrInterface) myRegistry.lookup("knyr");
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
@@ -252,5 +254,21 @@ public class KeresesController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    public void bezarasAction(ActionEvent event) throws IOException{
+        menuBezaras.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+        System.exit(0);
+          try {
+              myRegistry.unbind("knyr");
+          } catch (RemoteException ex) {
+              Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (NotBoundException ex) {
+              Logger.getLogger(KeresesController.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        
+      }
+    });
 
+}
 }

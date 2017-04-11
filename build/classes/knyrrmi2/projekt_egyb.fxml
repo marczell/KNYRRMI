@@ -17,7 +17,7 @@
         <Menu mnemonicParsing="false" text="Fájl">
           <items>
             <MenuItem fx:id="menuKijelentkezes" mnemonicParsing="false" text="Kijelentkezés" />
-            <MenuItem fx:id="menuBezaras" mnemonicParsing="false" text="Bezárás" />
+            <MenuItem fx:id="menuBezaras" mnemonicParsing="false" onAction="#bezarasAction" text="Bezárás" />
           </items>
         </Menu>
       </menus>
@@ -42,9 +42,9 @@
                </font>
             </Button>
             <Label layoutX="72.0" layoutY="401.0" styleClass="textinputcontrol" text="Időszak" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="100.0" />
-            <DatePicker fx:id="PrEgybeTol" layoutX="232.0" layoutY="406.0" onAction="#tolValasztas" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="95.0" />
+            <DatePicker fx:id="PrEgybeTol" layoutX="232.0" layoutY="406.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="95.0" />
             <Label layoutX="447.0" layoutY="303.0" styleClass="textinputcontrol" text="-tól" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="100.0" />
-            <DatePicker fx:id="PrEgybeIg" layoutX="503.0" layoutY="316.0" onAction="#igValasztas" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="95.0" />
+            <DatePicker fx:id="PrEgybeIg" layoutX="503.0" layoutY="316.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="95.0" />
             <Label layoutX="698.0" layoutY="300.0" styleClass="textinputcontrol" text="-ig" AnchorPane.leftAnchor="530.0" AnchorPane.topAnchor="100.0" />
             <TableView fx:id="TablePrEgybe" layoutX="9.0" layoutY="173.0" prefHeight="400.0" prefWidth="500.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="170.0">
               <columns>
