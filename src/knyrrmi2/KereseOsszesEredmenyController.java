@@ -107,6 +107,7 @@ public class KereseOsszesEredmenyController {
   }
   
     public void initData(ArrayList<Beszerzes> beszerzesek) {
+        System.out.println(beszerzesek.get(0).getBesznev());
         SzerzodesekTable.setItems(FXCollections.observableArrayList(beszerzesek));
     
   }

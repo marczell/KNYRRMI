@@ -270,6 +270,7 @@ public class KnyrImpl extends UnicastRemoteObject implements KnyrInterface {
                         , (rs.getObject(17) == null ? "null" : rs.getObject(17).toString()), (rs.getObject(18) == null ? "null" : rs.getObject(18).toString()), (rs.getObject(19) == null ? "null" : rs.getObject(19).toString())
                         , (rs.getObject(20) == null ? "null" : rs.getObject(20).toString()), (rs.getObject(21) == null ? "null" : rs.getObject(21).toString()));
                 data.add(beszerzes);
+           //     System.out.println(beszerzes.getBesznev());
             }
         } catch (SQLException ex) {
             Logger.getLogger(KnyrImpl.class.getName()).log(Level.SEVERE, null, ex);

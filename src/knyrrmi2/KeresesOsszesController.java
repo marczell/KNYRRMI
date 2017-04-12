@@ -129,9 +129,9 @@ public class KeresesOsszesController implements Initializable {
             }
             ObservableList obListKej = FXCollections.observableArrayList();
             while (rs.next()) {
-                listKej.add(new ErtekLista(rs.getString(1),
+                listKej.add(new ErtekLista(rs.getObject(1).toString(),
                         rs.getString(2)));
-                obListKej.add(rs.getString(2));
+                obListKej.add(rs.getObject(2).toString());
             }
             KozbeszFajtKereses.getItems().clear();
             KozbeszFajtKereses.setItems(FXCollections.observableList(obListKej));
@@ -150,9 +150,9 @@ public class KeresesOsszesController implements Initializable {
             ResultSet rs = serverImpl.adatbazisReport(sql2);
             ObservableList obListSzerzF = FXCollections.observableArrayList();
             while (rs.next()) {
-                listSzerzF.add(new ErtekLista(rs.getString(1),
+                listSzerzF.add(new ErtekLista(rs.getObject(1).toString(),
                         rs.getString(2)));
-                obListSzerzF.add(rs.getString(2));
+                obListSzerzF.add(rs.getObject(2).toString());
             }
             SzerzFajtaKereses.getItems().clear();
             SzerzFajtaKereses.setItems(FXCollections.observableList(obListSzerzF));
@@ -197,8 +197,8 @@ public class KeresesOsszesController implements Initializable {
             ResultSet rs = serverImpl.adatbazisReport(sql4);
             ObservableList obListProjekt = FXCollections.observableArrayList();
             while (rs.next()) {
-                listProjekt.add(new ErtekLista(rs.getString(1),
-                        rs.getString(2)));
+                listProjekt.add(new ErtekLista(rs.getObject(1).toString(),
+                        rs.getObject(2).toString()));
                 obListProjekt.add(rs.getString(2));
             }
             ProjektKereses.getItems().clear();
@@ -220,9 +220,9 @@ public class KeresesOsszesController implements Initializable {
             ResultSet rs = serverImpl.adatbazisReport(sql5);
             ObservableList obListSzerzFel = FXCollections.observableArrayList();
             while (rs.next()) {
-                listSzerzFel.add(new ErtekLista(rs.getString(1),
+                listSzerzFel.add(new ErtekLista(rs.getObject(1).toString(),
                         rs.getString(2)));
-                obListSzerzFel.add(rs.getString(2));
+                obListSzerzFel.add(rs.getObject(2).toString());
             }
             SzerzFelKereses.getItems().clear();
             SzerzFelKereses.setItems(FXCollections.observableList(obListSzerzFel));
@@ -368,6 +368,7 @@ public class KeresesOsszesController implements Initializable {
         ArrayList<Beszerzes> beszerzesLista = null;
         try {
             beszerzesLista =  serverImpl.beszerzesKereses(sql);
+      //      System.out.println(beszerzesLista.get(0).getBesznev());
         } catch (RemoteException ex) {
             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
         }
