@@ -41,7 +41,7 @@
                         <Font name="Verdana" size="14.0" />
                     </font>
                 </Button>
-                <Label layoutX="99.0" layoutY="104.0" styleClass="textinputcontrol" text="Beszerzés azonosítója" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="105.0" />
+                <Label layoutX="99.0" layoutY="104.0" styleClass="textinputcontrol" text="Beszerzés sorszáma" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="105.0" />
                 <TextField fx:id="sorszamKereses" layoutX="317.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="100.0" />
             <Label layoutX="570.0" layoutY="105.0" styleClass="textinputcontrol" text="Szerződés azonosítója" AnchorPane.leftAnchor="570.0" AnchorPane.topAnchor="105.0" />
             <TextField fx:id="SzerzAzonKereses" layoutX="750.0" layoutY="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="100.0" />

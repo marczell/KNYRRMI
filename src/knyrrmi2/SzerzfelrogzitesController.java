@@ -14,7 +14,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -171,18 +170,18 @@ public class SzerzfelrogzitesController implements Initializable {
     private void mentesAction(ActionEvent event) throws RemoteException {
        String sql;
         //a szerződő fél adatainak ellenőrzése
-                if (SzerzFel.getText().length() <= 100
-                        && Varos.getText().length() <= 50
+                if (SzerzFel.getText().length() <= 100 &&  SzerzFel.getText().length() >= 1   
+                        && Varos.getText().length() <= 50 && Varos.getText().length() >= 1
                         && Irszam.getText().matches("[0-9]{4}")
-                        && Kozterulet.getText().length() <= 100
+                        && Kozterulet.getText().length() <= 100  && Kozterulet.getText().length() >= 1
                         && Hazszam.getText().matches("[0-9]{1,3}")
-                        && Telszam.getText().length() <= 25
-                        && Faxszam.getText().length() <= 25
+                        && Telszam.getText().length() <= 25 && Telszam.getText().length() >= 1
+                        && Faxszam.getText().length() <= 25 && Faxszam.getText().length() >= 1
                         && Email.getText().matches(EMAIL_PATTERN)
                         && Cegjszam.getText().matches("[0-9]{2}-[0-9]{2}-[0-9]{6}")//2-2-6
                         && Adoszam.getText().matches("[0-9]{8}-[0-9]{1}-[0-9]{2}")//8-1-2
-                        && Kapcstartnev.getText().length() <= 100
-                        && Kapcstarttelszam.getText().length() <= 25
+                        && Kapcstartnev.getText().length() <= 100 && Kapcstartnev.getText().length() >= 100
+                        && Kapcstarttelszam.getText().length() <= 25 && Kapcstarttelszam.getText().length() >= 25
                         && Kapcstartemail.getText().matches(EMAIL_PATTERN)) {
                      if (szerzfelid.getText().equals("")){
 
