@@ -116,7 +116,7 @@ public class Erteklista_modController implements Initializable {
                     oszlop = "CPVKOD";
                     ResultSet rs = serverImpl.adatbazisReport(sql); 
                     while (rs.next()) {
-                        String s = rs.getString("CPVKOD");
+                        String s = rs.getObject(1).toString();
                         list2.add(s);
                     }
                 } catch (SQLException ex) {
@@ -138,7 +138,7 @@ break;
                     oszlop = "KOZBESZERZESIELJARASFAJTAI";
                     ResultSet rs = serverImpl.adatbazisReport(sql); 
                     while (rs.next()) {
-                        String s = rs.getString("KOZBESZERZESIELJARASFAJTAI");
+                        String s = rs.getObject(1).toString();
                         list2.add(s);
                     }
                 } catch (SQLException ex) {
@@ -160,7 +160,7 @@ break;
                      oszlop = "PROJEKT";
                     ResultSet rs = serverImpl.adatbazisReport(sql); 
                     while (rs.next()) {
-                        String s = rs.getString("PROJEKT");
+                        String s = rs.getObject(1).toString();
                         list2.add(s);
                     }
                 } catch (SQLException ex) {
@@ -182,7 +182,7 @@ break;
                     oszlop = "SZERZODESFAJTA";
                     ResultSet rs = serverImpl.adatbazisReport(sql); 
                     while (rs.next()) {
-                        String s = rs.getString("SZERZODESFAJTA");
+                        String s = rs.getObject(1).toString();
                         list2.add(s);
                     }
                 } catch (SQLException ex) {

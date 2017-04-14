@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,7 +35,7 @@ import model.Beszerzes;
  *
  * @author zsofi
  */
-public class KereseOsszesEredmenyController {
+public class KereseOsszesEredmenyController implements Initializable {
 
     @FXML
     private Label uzenet;
@@ -66,6 +67,7 @@ public class KereseOsszesEredmenyController {
     private TableColumn<Beszerzes, String> tblSzerzmodDatum;
     
     
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
       
         tblSorszam.setCellValueFactory(new PropertyValueFactory<Beszerzes, String>("sorszam"));
@@ -107,7 +109,7 @@ public class KereseOsszesEredmenyController {
   }
   
     public void initData(ArrayList<Beszerzes> beszerzesek) {
-        System.out.println(beszerzesek.get(0).getBesznev());
+//        System.out.println(beszerzesek.get(0).getBesznev());
         SzerzodesekTable.setItems(FXCollections.observableArrayList(beszerzesek));
     
   }

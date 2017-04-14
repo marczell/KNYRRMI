@@ -9,11 +9,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -43,8 +46,7 @@ public class FomenuController implements Initializable {
     private Button CtrlKozbesz;
     @FXML
     private Button CtrlSzerzmod;
-    private MenuButton menuKilepes;
-    @FXML
+   @FXML
     private MenuItem menuKijelentkezes;
     @FXML
     private MenuItem menuBezaras;
@@ -153,15 +155,14 @@ public class FomenuController implements Initializable {
     
    @FXML
     public void kilepesAction(ActionEvent event) throws IOException{
-        Stage stage = (Stage) menuKilepes.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("belepes.fxml"));
-        Scene scene = new Scene(root);
-        File f = new File("alkfejl.css");
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-        stage.setScene(scene);    
-        stage.show();
-    } 
+      menuKijelentkezes.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+       
+      }
+    });
+
+}
+   
     @FXML
     public void bezarasAction(ActionEvent event) throws IOException{
         menuBezaras.setOnAction(new EventHandler<ActionEvent>() {

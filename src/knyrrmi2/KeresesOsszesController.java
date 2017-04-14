@@ -372,6 +372,10 @@ public class KeresesOsszesController implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        catch (NullPointerException e){
+            Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, e);
+            uzenet.setText("Nincs ilyen beszerzés!");
+        }
         Stage stage = (Stage) CtrlKereses.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         Parent  root=null;
@@ -380,6 +384,8 @@ public class KeresesOsszesController implements Initializable {
          } catch (IOException ex) {
              Logger.getLogger(KeresesOsszesController.class.getName()).log(Level.SEVERE, null, ex);
          }
+         
+         
          KereseOsszesEredmenyController osszescon = (KereseOsszesEredmenyController)loader.getController();
          osszescon.initData(beszerzesLista);
         Scene scene = new Scene(root);
