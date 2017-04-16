@@ -91,8 +91,6 @@ public class SzerzrogzitesController implements Initializable {
     @FXML
     private MenuItem menuBezaras;
     @FXML
-    private MenuItem menuKiijelentkezes;
-    @FXML
     private Button CtrlSzerzMentes;
 
     /**

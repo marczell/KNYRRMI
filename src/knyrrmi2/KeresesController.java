@@ -103,8 +103,6 @@ public class KeresesController implements Initializable {
     ArrayList<ErtekLista> listProjekt = new ArrayList<>();
     ArrayList<ErtekLista> listSzerzFel = new ArrayList<>();
     @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private MenuItem menuBezaras;
    
     /**

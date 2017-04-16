@@ -62,8 +62,6 @@ public class Projekt_egybController implements Initializable {
     KnyrInterface serverImpl;
     Registry myRegistry;
     @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private MenuItem menuBezaras;
 
     /**

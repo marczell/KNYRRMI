@@ -29,8 +29,6 @@ import model.Beszerzes;
 public class AdatlapController {
 
     @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private MenuItem menuBezaras;
     @FXML
     private Label uzenet;

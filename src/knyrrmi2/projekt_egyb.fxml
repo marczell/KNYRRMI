@@ -16,13 +16,12 @@
       <menus>
         <Menu mnemonicParsing="false" text="Fájl">
           <items>
-            <MenuItem fx:id="menuKijelentkezes" mnemonicParsing="false" text="Kijelentkezés" />
             <MenuItem fx:id="menuBezaras" mnemonicParsing="false" onAction="#bezarasAction" text="Bezárás" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="region" stylesheets="@../alkfejl.css" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="region" VBox.vgrow="ALWAYS">
       <children>
             <Label layoutX="23.0" layoutY="14.0" prefHeight="48.0" prefWidth="164.0" text="KNYR RENDSZER">
                <font>

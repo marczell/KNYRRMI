@@ -109,8 +109,6 @@ public class KozbeszrogzitesController implements Initializable {
     @FXML
     private Button CtrlSzerzVissza;
     @FXML
-    private MenuItem menuKiljelentkezes;
-    @FXML
     private MenuItem menuBezaras;
     
     Registry myRegistry;

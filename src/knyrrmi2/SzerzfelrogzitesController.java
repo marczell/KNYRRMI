@@ -110,8 +110,6 @@ public class SzerzfelrogzitesController implements Initializable {
     @FXML
     private TableColumn<SzerzodoFel, String> tblKapcstarto;
     @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private MenuItem menuBezaras;
 
     /**

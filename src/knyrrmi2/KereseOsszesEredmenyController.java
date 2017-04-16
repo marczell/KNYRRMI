@@ -40,8 +40,6 @@ public class KereseOsszesEredmenyController implements Initializable {
     @FXML
     private Label uzenet;
     @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private MenuItem menuBezaras;
     @FXML
     private Button CtrlKeresesVissza;

@@ -61,8 +61,6 @@ public class CPV_egybController implements Initializable {
     private Label hibaLabel;
     KnyrInterface serverImpl;
     @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private MenuItem menuBezaras;
     
     Registry myRegistry;

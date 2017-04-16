@@ -97,8 +97,6 @@ public class KeresesOsszesController implements Initializable {
     @FXML
     private Button CtrlKozbeszKeresesVissza;
     @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private MenuItem menuBezaras;
 
     ArrayList<ErtekLista> listKej = new ArrayList<>();

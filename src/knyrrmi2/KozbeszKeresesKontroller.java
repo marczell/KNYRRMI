@@ -111,8 +111,6 @@ public class KozbeszKeresesKontroller implements Initializable{
     ArrayList<ErtekLista> listCpv = new ArrayList<>();
     ArrayList<ErtekLista> listProjekt = new ArrayList<>();
     @FXML
-    private MenuItem menuKijelentkezes;
-    @FXML
     private MenuItem menuBezaras;
 
     
